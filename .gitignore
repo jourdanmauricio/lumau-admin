@@ -1,6 +1,5 @@
 .env
 package-lock.json
-dist
 
 # Logs
 logs
