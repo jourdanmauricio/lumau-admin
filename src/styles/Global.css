@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --lumau-input-error-border: #ef4444;
+  --lumau-input-error-color: #ef4444;
+
+  /* --lumau-input-border-color
+  --lumau-input-text-color
+  --lumau-input-background-color
+  --lumau-input-disabled-background-color
+  --lumau-input-text-color
+  --lumau-input-error-border
+  --lumau-input-error-color */
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 1400px;
+  min-height: 100vh;
+}
+
+.login__input {
+  --lumau-input-background-color: #334155;
+  --lumau-input-border-color: #6b7280;
+  --lumau-input-text-color: #d1d5db;
+  --lumau-input-padding-y: 0.8rem;
+}
+
+.animation {
+  animation: popup 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
