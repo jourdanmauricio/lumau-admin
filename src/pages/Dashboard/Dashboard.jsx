@@ -1,21 +1,14 @@
-import { useUserStore } from '@/store/user';
-import { useNavigate } from 'react-router-dom';
+import Layout from '@/components/Layout/layout';
+// import Tabs from './Tabs/Tabs';
 
 const Dashboard = () => {
-  const logout = useUserStore((state) => state.logout);
-  let navigate = useNavigate();
-
-  const handleLogout = () => {
-    logout();
-    navigate('/');
-  };
-
   return (
-    <div>
-      <h1 className="text-red-500">Dashboard</h1>
-
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+    <>
+      <Layout>
+        <h1 className="text-gray-900 dark:text-slate-100">Dashborad</h1>
+        {/* <Tabs /> */}
+      </Layout>
+    </>
   );
 };
 

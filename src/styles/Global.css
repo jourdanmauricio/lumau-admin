@@ -41,13 +41,70 @@ body {
   min-height: 100vh;
 }
 
-.login__input {
+.dark {
   --lumau-input-background-color: #334155;
   --lumau-input-border-color: #6b7280;
   --lumau-input-text-color: #d1d5db;
+}
+
+.light {
+  --lumau-input-background-color: #f1f5f9;
+  --lumau-input-border-color: #111827;
+  --lumau-input-text-color: #111827;
+}
+
+.lumau-input[light] {
+  --lumau-input-background-color: #f1f5f9;
+  --lumau-input-border-color: #111827;
+  --lumau-input-text-color: #111827;
+}
+
+.lumau-input[large] {
+  --lumau-input-padding-y: 1rem;
+}
+
+.lumau-input[medium] {
   --lumau-input-padding-y: 0.8rem;
+}
+
+.lumau-input[small] {
+  --lumau-input-padding-y: 0.5rem;
 }
 
 .animation {
   animation: popup 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.transition-width {
+  transition: width 0.5s;
+}
+
+.transition-height {
+  transition: height 0.8s;
+}
+
+.grid-layout {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.dropdown-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: 0.3s;
+}
+
+.dropdown-menu.inactive {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: 0.3s;
+}
+
+.btn-cancel {
+  @apply text-gray-900 dark:text-slate-100 bg-slate-200 dark:bg-gray-800 p-2 hover:bg-gray-300 dark:hover:bg-gray-700 rounded transition ease-in-out delay-100;
+}
+
+.btn-confirm {
+  @apply p-2 bg-violet-800 rounded text-slate-100 transition ease-in-out delay-100 hover:bg-purple-800/70 hover:cursor-pointer;
 }

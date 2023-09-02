@@ -1,5 +1,7 @@
 .env
+.env.production
 package-lock.json
+GUIA.txt
 
 # Logs
 logs

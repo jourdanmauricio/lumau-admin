@@ -32,7 +32,9 @@ const Login = () => {
         {/* disabled readonly selectOnFocus  */}
         <div className="w-full mt-4">
           <lumau-input
-            class="login__input"
+            class="lumau-input"
+            dark
+            medium
             id="url"
             label="User (web)"
             name="url"
@@ -46,7 +48,9 @@ const Login = () => {
 
         <div className="w-full mt-8">
           <lumau-input
-            class="login__input"
+            class="lumau-input"
+            dark
+            medium
             controlType="password"
             id="password"
             label="Password"

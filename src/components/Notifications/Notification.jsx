@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import styles from './notifications.module.css';
 
@@ -5,8 +6,6 @@ const Notification = (props) => {
   const [exit, setExit] = useState(false);
   const [width, setWidth] = useState(0);
   const [intervalId, setIntervalId] = useState(null);
-
-  console.log('message', props.type, props.message);
 
   const handleStartTimer = () => {
     const id = setInterval(() => {
@@ -56,9 +55,6 @@ const Notification = (props) => {
       } ${exit ? styles.exit : ''}`}
     >
       <p>{props.message}</p>
-      {/* <button onClick={() => setExit(true)}>
-        X
-      </button> */}
       <div
         className={styles.bar}
         style={{ width: `${width}%` }}

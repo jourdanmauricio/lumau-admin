@@ -1,4 +1,6 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
+import { useUserStore } from '@/store/user';
 import { NavLink } from 'react-router-dom';
 import {
   FaCog,
@@ -10,12 +12,10 @@ import {
   FaThList,
 } from 'react-icons/fa';
 
-import Nav from '../Nav/nav';
-import { useSelector } from 'react-redux';
+import Nav from '../Nav/Nav';
 
 const Layout = (props) => {
-  let user = useSelector((state) => state.user.user);
-
+  const user = useUserStore((state) => state.user);
   const [minItems, setMinItems] = useState(false);
 
   const handleMinItems = () => {
@@ -26,23 +26,27 @@ const Layout = (props) => {
       <Nav />
       <main className="flex w-full">
         <div
-          className={`hidden sm:inline-block h-full top-12 left-0 bg-slate-100 overflow-x-hidden pt-5 whitespace-nowrap transition-width 
+          className={`hidden sm:inline-block h-full left-0 bg-slate-100 dark:bg-slate-950 overflow-x-hidden whitespace-nowrap transition-width text-gray-900 dark:text-slate-100
           ${minItems ? 'w-52' : 'w-12'}
 					`}
         >
           <button
             onClick={handleMinItems}
-            className="h-8 w-full hover:text-purple-500 text-center"
+            className="py-4 w-full hover:text-purple-500 text-xl"
           >
-            <div className="text-xl pl-4 ">
-              {minItems ? <FaAngleLeft /> : <FaAngleRight />}
-            </div>
+            {minItems ? (
+              <FaAngleLeft className="m-auto" />
+            ) : (
+              <FaAngleRight className="m-auto" />
+            )}
           </button>
+
+          <hr className="mb-4" />
 
           <NavLink
             to="/perfil"
             className={({ isActive }) =>
-              `py-4 pl-4 pr-[14px] no-underline text-lg block text-left hover:text-purple-500 ${
+              ` py-2 pl-4 pr-[14px] no-underline text-lg block text-left hover:text-purple-500 ${
                 isActive ? 'text-purple-700' : ''
               } `
             }
@@ -53,7 +57,7 @@ const Layout = (props) => {
           <NavLink
             to="/dashboard"
             className={({ isActive }) =>
-              `py-5 pl-4 pr-[14px] no-underline text-lg block text-left hover:text-purple-500 ${
+              `py-2 pl-4 pr-[14px] no-underline text-lg block text-left hover:text-purple-500 ${
                 isActive ? 'text-purple-700' : ''
               } `
             }
@@ -63,7 +67,7 @@ const Layout = (props) => {
           </NavLink>
           <NavLink
             className={({ isActive }) =>
-              `py-4 pl-4 pr-[14px] no-underline text-lg block text-left hover:text-purple-500 ${
+              `py-2 pl-4 pr-[14px] no-underline text-lg block text-left hover:text-purple-500 ${
                 isActive ? 'text-purple-700' : ''
               } `
             }
@@ -82,7 +86,7 @@ const Layout = (props) => {
                   } `
                 }
               >
-                <FaCog className="mr-4 inline-block" />
+                <FaCog className="mr-4 inline-block text-gray-900" />
                 <span className="align-middle">Configuración</span>
               </NavLink>
             </>
@@ -97,15 +101,14 @@ const Layout = (props) => {
                 } `
               }
             >
-              <FaThList className="mr-4 inline-block" />
+              <FaThList className="mr-4 inline-block text-gray-900" />
               <span className="align-middle">Secciones</span>
             </NavLink>
           )}
         </div>
 
         <section
-          className={`w-full ml-0 py-4 px-4 bg-slate-50 transform transition duration-500 ease-in-out border-l border-solid border-slate-300 
-          `}
+          className={`w-full ml-0 py-4 px-4 bg-slate-100 dark:bg-gray-800 transform transition duration-500 ease-in-out border-l border-solid border-slate-300 dark:border-slate-700`}
         >
           {props.children}
         </section>

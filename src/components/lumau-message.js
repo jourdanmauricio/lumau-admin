@@ -24,6 +24,7 @@ class LumauMessage extends LitElement {
       transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
       transition-duration: 1000ms;
       opacity: 1;
+      z-index:10;
     }
 
     .error__msg {
