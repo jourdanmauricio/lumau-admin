@@ -1,7 +1,6 @@
 import Axios from 'axios';
 import { create } from 'zustand';
-// import { persist, createJSONStorage } from 'zustand/middleware';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
 import { config } from '@/config/config';
 
 export const useUserStore = create(
@@ -37,7 +36,7 @@ export const useUserStore = create(
     }),
     {
       name: 'user-storage',
-      // storage: createJSONStorage(() => sessionStorage),
+      storage: createJSONStorage(() => sessionStorage),
     }
   )
 );

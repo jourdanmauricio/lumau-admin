@@ -13,6 +13,7 @@ const AuthRoute = (props) => {
 
 const AuthRouteLogin = (props) => {
   const isLogged = useUserStore((state) => state.isLogged);
+  console.log('isLogged', isLogged);
   if (isLogged) {
     return (
       <Navigate
