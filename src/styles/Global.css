@@ -53,6 +53,12 @@ body {
   --lumau-input-text-color: #111827;
 }
 
+.lumau-input[dark] {
+  --lumau-input-background-color: #334155;
+  --lumau-input-border-color: #6b7280;
+  --lumau-input-text-color: #d1d5db;
+}
+
 .lumau-input[light] {
   --lumau-input-background-color: #f1f5f9;
   --lumau-input-border-color: #111827;
