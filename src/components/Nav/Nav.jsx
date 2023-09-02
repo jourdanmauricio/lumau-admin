@@ -14,16 +14,22 @@ import MenuMobile from './MenuMobile';
 
 const Nav = () => {
   const [theme, setTheme] = useState(() => {
-    if (
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      document.documentElement.classList.add('dark');
-      return 'dark';
+    if (!('theme' in localStorage)) {
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+        return 'dark';
+      } else {
+        document.documentElement.classList.add('light');
+        return 'light';
+      }
     } else {
-      document.documentElement.classList.add('light');
-      return 'light';
+      if (localStorage.theme === 'dark') {
+        document.documentElement.classList.add('dark');
+        return 'dark';
+      } else {
+        document.documentElement.classList.add('light');
+        return 'light';
+      }
     }
   });
   const [isOpenModal, openModal, closeModal] = useModal(false);
@@ -43,9 +49,11 @@ const Nav = () => {
   const handleMode = () => {
     if (theme === 'dark') {
       setTheme('light');
+      localStorage.theme = 'light';
       document.documentElement.classList.remove('dark');
     } else {
       setTheme('dark');
+      localStorage.theme = 'dark';
       document.documentElement.classList.add('dark');
     }
   };
