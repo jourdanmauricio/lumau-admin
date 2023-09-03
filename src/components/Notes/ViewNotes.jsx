@@ -3,7 +3,7 @@ import ViewNote from './ViewNote';
 const ViewNotes = ({ notes, onChangeAction, onDelete, onUpdate, onDetail }) => {
   return (
     <>
-      <section className="flex flex-col min-h-[320px] text-gray-900 dark:text-slate-100 bg-slate-100 dark:bg-gray-900 p-2">
+      <section className="flex flex-col min-h-[320px] bg-text-color p-2">
         <div className="relative">
           <lumau-message
             id="form-error"

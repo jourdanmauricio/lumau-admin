@@ -5,6 +5,7 @@ const NewEditNote = ({ onSubmit, action, onChangeAction, editData }) => {
     <form
       onSubmit={onSubmit}
       noValidate
+      id="notes-form"
     >
       <div className="relative">
         <lumau-message

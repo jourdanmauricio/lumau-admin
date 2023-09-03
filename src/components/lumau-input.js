@@ -135,7 +135,7 @@ class LumauInput extends LitElement {
       position: absolute;
       font-size: 1rem;
       top: calc(var(--lumau-input-padding-y, 0.5rem) + 1.5rem);
-      left: 92%;
+      right: 1rem;
       color: var(--lumau-input-text-color, #334155);
       border: none;
       background: none;
@@ -253,6 +253,18 @@ class LumauInput extends LitElement {
       if (regex.exec(this.value) === null) {
         this.internals_.setValidity({ customError: true }, this.patternerror);
         return;
+      }
+
+      // En caso de que el id sea confirm-password levanto el password de document y lo valido
+      if (this.id === 'confirm-password') {
+        const password = document.getElementById('password');
+        if (password.value !== this.value) {
+          this.internals_.setValidity(
+            { customError: true },
+            'La confirmación no coincide'
+          );
+          return;
+        }
       }
     }
 

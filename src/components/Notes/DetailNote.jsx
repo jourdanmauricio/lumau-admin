@@ -2,7 +2,7 @@
 const DetailNote = ({ note, onChangeAction }) => {
   return (
     <>
-      <section className="flex gap-4 flex-col justify-start items-center min-h-[320px] text-gray-900 dark:text-slate-100 bg-slate-100 dark:bg-gray-900 p-4">
+      <section className="flex gap-4 flex-col justify-start items-center min-h-[320px] bg-text-color p-4">
         <h3>{note.name}</h3>
         <div className="w-full">
           <lumau-text-area

@@ -38,7 +38,6 @@ class LumauMessage extends LitElement {
   }
 
   render() {
-    // return html`<span>${this.errorForm}</span>`;
     return html`<span
       class="form__error ${!this.errorForm ? 'error__msg' : ''}"
     >

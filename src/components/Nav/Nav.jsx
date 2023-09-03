@@ -11,6 +11,7 @@ import { useModal } from '@/hooks/useModal';
 import { Modal } from '@/components/Modal/Modal';
 import Notes from '@/components/Notes/Notes';
 import MenuMobile from './MenuMobile';
+// import '@/components/lumau-spinner.js';
 
 const Nav = () => {
   const [theme, setTheme] = useState(() => {
@@ -61,6 +62,7 @@ const Nav = () => {
   return (
     <>
       <nav className="sticky top-0 h-12 bg-slate-100 dark:bg-slate-950 shadow-[0_0_9px_3px_rgba(41,41,41,0.25)] z-10 py-0 px-6 flex items-center justify-around">
+        {/* <lumau-spinner id="lumau-spinner"></lumau-spinner> */}
         <MenuMobile />
         <div className="flex w-full justify-center text-gray-900">
           <h1 className="text-2xl font-bold text-violet-900 tracking-tighter">

@@ -22,7 +22,7 @@ const Notes = () => {
 
   return (
     <>
-      <h2 className="text-gray-950 mt-2 text-center text-xl font-bold">
+      <h2 className="text-gray-950 bg-slate-100 mt-2 text-center text-xl font-bold">
         {action === 'VIEW' && 'Notas'}
         {action === 'NEW' && 'Nueva nota'}
         {action === 'EDIT' && 'Edit nota'}

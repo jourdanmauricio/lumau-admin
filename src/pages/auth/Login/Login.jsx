@@ -13,6 +13,7 @@ const Login = () => {
     <main className="inline-block h-screen w-full bg-slate-900">
       {/* animation */}
       <form
+        id="login-form"
         className="flex flex-col max-w-md mt-24 m-auto px-8 pb-4 pt-2 text-center bg-slate-800 rounded border border-gray-700"
         onSubmit={handleSubmit}
         noValidate

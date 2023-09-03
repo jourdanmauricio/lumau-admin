@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { getAllNotes } from '@/services/api/notes.api';
 import { createNote, deleteNote, updateNote } from '@/services/api/notes.api';
 import { useNotification } from '@/components/Notifications/NotificationProvider';
+import checkForm from '@/utils/checkForm';
 
 const INITIAL_DATA = {
   name: '',
@@ -45,24 +46,8 @@ const useNotes = () => {
   };
 
   const onSubmit = async (e) => {
-    e.preventDefault();
-
-    const fieldsToValidate = document.querySelectorAll('[required], [pattern]');
-
-    let error = false;
-    for (let i = 0; i < fieldsToValidate.length; i++) {
-      if (!fieldsToValidate[i].checkValidity()) {
-        fieldsToValidate[i].setAttribute(
-          'error',
-          fieldsToValidate[i].validationMessage
-        );
-        error = true;
-      }
-    }
-    if (error) return;
-
-    const data = Object.fromEntries(new FormData(e.target));
-    // const loading = document.getElementById('lumau-spinner');
+    const { data } = checkForm(e);
+    if (!data) return;
 
     try {
       // loading.setAttribute('loading', true);

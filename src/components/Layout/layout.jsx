@@ -11,6 +11,7 @@ import {
   FaRegImages,
   FaThList,
 } from 'react-icons/fa';
+import '@/components/lumau-spinner.js';
 
 import Nav from '../Nav/Nav';
 
@@ -110,6 +111,7 @@ const Layout = (props) => {
         <section
           className={`w-full ml-0 py-4 px-4 bg-slate-100 dark:bg-gray-800 transform transition duration-500 ease-in-out border-l border-solid border-slate-300 dark:border-slate-700`}
         >
+          <lumau-spinner id="lumau-spinner"></lumau-spinner>
           {props.children}
         </section>
       </main>

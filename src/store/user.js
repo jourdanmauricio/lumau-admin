@@ -3,6 +3,7 @@ import { create } from 'zustand';
 // import { persist, createJSONStorage } from 'zustand/middleware';
 import { persist } from 'zustand/middleware';
 import { config } from '@/config/config';
+import { putUser } from '../services/api/users.api';
 
 export const useUserStore = create(
   persist(
@@ -25,6 +26,14 @@ export const useUserStore = create(
         } catch (error) {
           throw 'Verifique el username o contraseña';
         }
+      },
+
+      updateUser: async (data) => {
+        const user = await putUser(data);
+        set({
+          user,
+        });
+        return { status: 'SUCCESS', message: 'Usuario modificado!' };
       },
       logout: () => {
         set({

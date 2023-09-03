@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '@/store/user';
 import { useNotification } from '@/components/Notifications/NotificationProvider';
+import checkForm from '@/utils/checkForm';
 
 const useLogin = () => {
   const dispatchNotif = useNotification();
@@ -15,23 +16,9 @@ const useLogin = () => {
   }, [isLogged]);
 
   async function handleSubmit(e) {
-    e.preventDefault();
+    const { data } = checkForm(e);
+    if (!data) return;
 
-    const fieldsToValidate = document.querySelectorAll('[required], [pattern]');
-
-    let error = false;
-    for (let i = 0; i < fieldsToValidate.length; i++) {
-      if (!fieldsToValidate[i].checkValidity()) {
-        fieldsToValidate[i].setAttribute(
-          'error',
-          fieldsToValidate[i].validationMessage
-        );
-        error = true;
-      }
-    }
-    if (error) return;
-
-    const data = Object.fromEntries(new FormData(e.target));
     // const loading = document.getElementById('lumau-spinner');
 
     try {
