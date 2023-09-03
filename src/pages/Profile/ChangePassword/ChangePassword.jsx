@@ -27,7 +27,6 @@ const ChangePassword = ({ handleCancel }) => {
           <div className="w-full mt-8">
             <lumau-input
               class="lumau-input"
-              dark
               medium
               controlType="password"
               id="password"
@@ -51,7 +50,6 @@ const ChangePassword = ({ handleCancel }) => {
           <div className="w-full mt-8">
             <lumau-input
               class="lumau-input"
-              dark
               medium
               controlType="password"
               id="confirm-password"
