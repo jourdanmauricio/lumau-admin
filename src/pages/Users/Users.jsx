@@ -1,10 +1,12 @@
 import Layout from '@/components/Layout/layout';
 import useUsers from './useUsers';
 import NewEditUser from './NewEditUser';
-import '@/styles/dataTableThemes';
 import DataTable from 'react-data-table-component';
-import { Modal } from '../../components/Modal/Modal';
+import { Modal } from '@/components/Modal/Modal';
 import DeleteUser from './DeleteUser';
+import '@/components/lumau-message.js';
+import '@/styles/dataTableThemes';
+
 const Users = () => {
   const {
     users,
@@ -14,11 +16,9 @@ const Users = () => {
     action,
     currentData,
     onSubmit,
-    //onChangeAction,
     onCancelDelete,
     onDelete,
     isOpenModal,
-    resetPaginationToggle,
   } = useUsers();
 
   return (
@@ -41,7 +41,6 @@ const Users = () => {
               theme={theme}
               actions={actionsMenu}
               pagination
-              paginationResetDefaultPage={resetPaginationToggle}
             />
           )}
           {(action === 'NEW' || action === 'EDIT') && (

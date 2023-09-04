@@ -14,6 +14,8 @@ const RecoveryPassword = React.lazy(() =>
 const Dashboard = React.lazy(() => import('@/pages/Dashboard/Dashboard'));
 // const Profile = React.lazy(() => import('@/pages/Profile/Tabs'));
 const Profile = React.lazy(() => import('@/pages/Profile/Profile'));
+const Subscribers = React.lazy(() => import('@/pages/Subscribers/Subscribers'));
+const Contacts = React.lazy(() => import('@/pages/Contacts/Contacts'));
 const Users = React.lazy(() => import('@/pages/Users/Users'));
 // const Settings = React.lazy(() => import('@/pages/Settings/Settings'));
 // const Media = React.lazy(() => import('@/pages/Media/Media'));
@@ -32,7 +34,6 @@ function AppRoutes() {
               </AuthRouteLogin>
             }
           />
-
           <Route
             path="/forgot-password"
             element={<ForgotPassword />}
@@ -63,6 +64,22 @@ function AppRoutes() {
               <AdminRoute>
                 <Users />
               </AdminRoute>
+            }
+          />
+          <Route
+            path="/subscribers"
+            element={
+              <AuthRoute>
+                <Subscribers />
+              </AuthRoute>
+            }
+          />
+          <Route
+            path="/contacts"
+            element={
+              <AuthRoute>
+                <Contacts />
+              </AuthRoute>
             }
           />
           {/*    <Route

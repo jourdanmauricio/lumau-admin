@@ -8,9 +8,11 @@ import {
   FaAngleRight,
   FaTh,
   FaUserCog,
-  FaRegImages,
+  // FaRegImages,
+  FaComment,
   FaThList,
   FaUsers,
+  FaTelegramPlane,
 } from 'react-icons/fa';
 import '@/components/lumau-spinner.js';
 
@@ -89,11 +91,36 @@ const Layout = (props) => {
                 isActive ? 'text-purple-700' : ''
               } `
             }
+            to="/subscribers"
+          >
+            <FaTelegramPlane className="mr-4 inline-block" />
+            <span className="align-middle">Suscriptores</span>
+          </NavLink>
+
+          <NavLink
+            className={({ isActive }) =>
+              `py-2 pl-4 pr-[14px] no-underline text-lg block text-left hover:text-purple-500 ${
+                isActive ? 'text-purple-700' : ''
+              } `
+            }
+            to="/contacts"
+          >
+            <FaComment className="mr-4 inline-block" />
+            <span className="align-middle">Contactos</span>
+          </NavLink>
+
+          {/* <NavLink
+            className={({ isActive }) =>
+              `py-2 pl-4 pr-[14px] no-underline text-lg block text-left hover:text-purple-500 ${
+                isActive ? 'text-purple-700' : ''
+              } `
+            }
             to="/media"
           >
             <FaRegImages className="mr-4 inline-block" />
             <span className="align-middle">Media</span>
-          </NavLink>
+          </NavLink> */}
+
           {user.role === 'superadmin' && (
             <>
               <NavLink

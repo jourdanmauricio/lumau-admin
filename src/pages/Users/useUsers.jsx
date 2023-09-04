@@ -9,7 +9,6 @@ import { useModal } from '../../hooks/useModal';
 
 const useUsers = () => {
   const [users, setUsers] = useState(null);
-  const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
   const [action, setAction] = useState('VIEW');
   const [currentData, setCurrentData] = useState({});
   const [isOpenModal, openModal, closeModal] = useModal(false);
@@ -105,7 +104,6 @@ const useUsers = () => {
       });
       closeModal();
       onChangeAction('VIEW');
-      setResetPaginationToggle(!resetPaginationToggle);
     } catch (error) {
       let message = 'Error eliminando el usuario';
       if (error.response)
@@ -188,7 +186,6 @@ const useUsers = () => {
     onCancelDelete,
     onDelete,
     isOpenModal,
-    resetPaginationToggle,
   };
 };
 export default useUsers;
