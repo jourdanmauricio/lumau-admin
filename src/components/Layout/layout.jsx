@@ -10,6 +10,7 @@ import {
   FaUserCog,
   FaRegImages,
   FaThList,
+  FaUsers,
 } from 'react-icons/fa';
 import '@/components/lumau-spinner.js';
 
@@ -17,6 +18,7 @@ import Nav from '../Nav/Nav';
 
 const Layout = (props) => {
   const user = useUserStore((state) => state.user);
+
   const [minItems, setMinItems] = useState(false);
 
   const handleMinItems = () => {
@@ -66,6 +68,21 @@ const Layout = (props) => {
             <FaTh className="mr-4 inline-block" />
             <span className="align-middle">Dashboard</span>
           </NavLink>
+
+          {user.role === 'admin' && (
+            <NavLink
+              to="/users"
+              className={({ isActive }) =>
+                `py-2 pl-4 pr-[14px] no-underline text-lg block text-left hover:text-purple-500 ${
+                  isActive ? 'text-purple-700' : ''
+                } `
+              }
+            >
+              <FaUsers className="mr-4 inline-block" />
+              <span className="align-middle">Usuarios</span>
+            </NavLink>
+          )}
+
           <NavLink
             className={({ isActive }) =>
               `py-2 pl-4 pr-[14px] no-underline text-lg block text-left hover:text-purple-500 ${
@@ -109,7 +126,7 @@ const Layout = (props) => {
         </div>
 
         <section
-          className={`w-full ml-0 py-4 px-4 bg-slate-100 dark:bg-gray-800 transform transition duration-500 ease-in-out border-l border-solid border-slate-300 dark:border-slate-700`}
+          className={`w-full ml-0 py-4 px-4 transform transition duration-500 ease-in-out border-l border-solid border-slate-300 dark:border-slate-700 bg-text-color`}
         >
           <lumau-spinner id="lumau-spinner"></lumau-spinner>
           {props.children}

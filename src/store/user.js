@@ -3,7 +3,7 @@ import { create } from 'zustand';
 // import { persist, createJSONStorage } from 'zustand/middleware';
 import { persist } from 'zustand/middleware';
 import { config } from '@/config/config';
-import { putUser } from '../services/api/users.api';
+import { updateUser } from '../services/api/users.api';
 
 export const useUserStore = create(
   persist(
@@ -12,7 +12,18 @@ export const useUserStore = create(
       token: null,
       isLogged: false,
       role: null,
+      theme: null,
 
+      setTheme: (theme) => {
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('light');
+        } else {
+          document.documentElement.classList.add('light');
+          document.documentElement.classList.remove('dark');
+        }
+        set({ theme });
+      },
       login: async (data) => {
         try {
           const response = await Axios.post(`${config.auth}/login`, data);
@@ -29,7 +40,7 @@ export const useUserStore = create(
       },
 
       updateUser: async (data) => {
-        const user = await putUser(data);
+        const user = await updateUser(data);
         set({
           user,
         });
@@ -40,6 +51,7 @@ export const useUserStore = create(
           user: {},
           token: null,
           isLogged: false,
+          // theme: null,
           role: null,
         });
       },

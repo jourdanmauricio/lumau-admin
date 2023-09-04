@@ -1,29 +1,31 @@
-import { putUser } from '@/services/api/users.api';
+import { updateUser } from '@/services/api/users.api';
 import { useNotification } from '@/components/Notifications/NotificationProvider';
-import { useUserStore } from '@/store/user';
 import checkForm from '@/utils/checkForm';
 
-const useChangePassword = ({ handleCancel }) => {
+const useChangePassword = ({ handleCancel, userId }) => {
   const dispatchNotif = useNotification();
-  let user = useUserStore((state) => state.user);
 
   const handleSubmit = async (e) => {
     const { data } = checkForm(e);
     if (!data) return;
 
     try {
-      data.id = user.id;
+      data.id = userId;
       delete data.confirmPassword;
 
-      await putUser(data);
+      await updateUser(data);
       dispatchNotif({
         type: 'SUCCESS',
         message: 'Contraseña modificada',
       });
       handleCancel();
     } catch (error) {
+      let message = 'Error  modificando la contraseña';
+      if (error.response)
+        message = `${error.response.status}: ${error.response.statusText}`;
+
       const formError = document.getElementById('form-error-change-pass');
-      formError.setAttribute('errorForm', 'Error modificando la contraseña');
+      formError.setAttribute('errorForm', message);
     }
   };
 

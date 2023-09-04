@@ -11,13 +11,13 @@ const useProfile = () => {
 
   const handleSubmit = async (e) => {
     const { data } = checkForm(e);
+
     if (!data) return;
 
     data.id = user.id;
     const formError = document.getElementById('form-error');
     const loading = document.getElementById('lumau-spinner');
 
-    console.log('Data', data);
     try {
       loading.setAttribute('loading', true);
       const user = await updateUser(data);
@@ -28,7 +28,11 @@ const useProfile = () => {
       });
       formError.removeAttribute('errorForm');
     } catch (error) {
-      formError.setAttribute('errorForm', error);
+      let message = 'Error  modificando';
+      if (error.response)
+        message = `${error.response.status}: ${error.response.statusText}`;
+
+      formError.setAttribute('errorForm', message);
     } finally {
       loading.removeAttribute('loading');
     }

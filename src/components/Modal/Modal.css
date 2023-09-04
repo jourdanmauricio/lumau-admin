@@ -14,7 +14,8 @@
 
 .modal-container {
   position: relative;
-  background-color: #fff;
+  /* background-color: #fff; */
+  background-color: var(--header-bg-color);
   min-width: 320px;
   /* max-width: 480px; */
   width: 90%;

@@ -90,7 +90,6 @@ const useNotes = () => {
   };
 
   const onDetail = (note) => {
-    console.log(note);
     setAction('DETAIL');
     setEditData(note);
   };

@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from '@/pages/auth/Login/Login';
-import { AuthRouteLogin, AuthRoute } from '@/utils/auth';
+import { AuthRouteLogin, AuthRoute, AdminRoute } from '@/utils/auth';
 import Spinner from '@/components/Spinner/Spinner';
 
 const ForgotPassword = React.lazy(() =>
@@ -14,6 +14,7 @@ const RecoveryPassword = React.lazy(() =>
 const Dashboard = React.lazy(() => import('@/pages/Dashboard/Dashboard'));
 // const Profile = React.lazy(() => import('@/pages/Profile/Tabs'));
 const Profile = React.lazy(() => import('@/pages/Profile/Profile'));
+const Users = React.lazy(() => import('@/pages/Users/Users'));
 // const Settings = React.lazy(() => import('@/pages/Settings/Settings'));
 // const Media = React.lazy(() => import('@/pages/Media/Media'));
 // const Sections = React.lazy(() => import('@/pages/Sections/Sections'));
@@ -54,6 +55,14 @@ function AppRoutes() {
               <AuthRoute>
                 <Profile />
               </AuthRoute>
+            }
+          />
+          <Route
+            path="/users"
+            element={
+              <AdminRoute>
+                <Users />
+              </AdminRoute>
             }
           />
           {/*    <Route

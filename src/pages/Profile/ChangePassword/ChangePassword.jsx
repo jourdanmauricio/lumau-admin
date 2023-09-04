@@ -2,13 +2,11 @@
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
 import useChangePassword from './useChangePassword';
 
-const ChangePassword = ({ handleCancel }) => {
-  const { handleSubmit } = useChangePassword({ handleCancel });
+const ChangePassword = ({ handleCancel, userId }) => {
+  const { handleSubmit } = useChangePassword({ handleCancel, userId });
   return (
     <>
-      <h2 className="text-gray-950 mt-2 text-center text-xl font-bold">
-        Cambiar password
-      </h2>
+      <h2 className="title-modal">Cambiar password</h2>
       <hr className="mt-1" />
       <form
         className="bg-slate-100 p-5 flex flex-col bg-text-color min-h-[320px]"

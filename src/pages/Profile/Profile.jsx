@@ -13,7 +13,6 @@ const Profile = () => {
     closeModalPass,
     handleCancel,
   } = useProfile();
-  console.log('user', user);
   return (
     <Layout>
       <div className="w-full bg-text-color min-w-[300px] p-4 rounded shadow-[0_1px_4px_rgba(0,0,0,0.16)]">
@@ -48,7 +47,10 @@ const Profile = () => {
         isOpenModal={isOpenModalPass}
         closeModal={closeModalPass}
       >
-        <ChangePassword handleCancel={handleCancel} />
+        <ChangePassword
+          handleCancel={handleCancel}
+          userId={user.id}
+        />
       </Modal>
     </Layout>
   );

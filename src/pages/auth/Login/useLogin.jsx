@@ -20,7 +20,6 @@ const useLogin = () => {
     if (!data) return;
 
     // const loading = document.getElementById('lumau-spinner');
-
     try {
       // loading.setAttribute('loading', true);
       const user = await login(data);
