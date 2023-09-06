@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNotification } from '@/components/Notifications/NotificationProvider';
+import { useUserStore } from '@/store/user';
 import { useModal } from '@/hooks/useModal';
 import {
   deleteSubscriber,
@@ -11,7 +12,7 @@ const useSubscribers = () => {
   const [subscribers, setSubscribers] = useState([]);
   const [currentData, setCurrentData] = useState({});
   const dispatchNotif = useNotification();
-
+  const theme = useUserStore((state) => state.theme);
   const [isOpenModal, openModal, closeModal] = useModal(false);
 
   useEffect(() => {
@@ -100,12 +101,9 @@ const useSubscribers = () => {
     subscribers,
     SUBSCRIBERS_COLUMNS,
     currentData,
-    // action,
-    // onSubmit,
-    // onChangeAction,
-    // onCancelDelete,
     onDelete,
     isOpenModal,
+    theme,
   };
 };
 export default useSubscribers;

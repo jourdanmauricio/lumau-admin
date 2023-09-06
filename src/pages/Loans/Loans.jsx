@@ -1,12 +1,11 @@
-import Layout from '../../components/Layout/layout';
 import DataTable from 'react-data-table-component';
+import { Modal } from '@/components/Modal/Modal';
+import Layout from '@/components/Layout/layout';
+import NewEditLoan from './NewEditLoan';
+import DeleteLoan from './DeleteLoan';
+import useLoans from './useLoans';
 import '@/components/lumau-message.js';
 import '@/styles/dataTableThemes';
-import useLoans from './useLoans';
-import '@/styles/dataTableThemes';
-import NewEditLoan from './NewEditLoan';
-import { Modal } from '../../components/Modal/Modal';
-import DeleteLoan from './DeleteLoan';
 
 const Loans = () => {
   const {

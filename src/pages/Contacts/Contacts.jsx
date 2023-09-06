@@ -1,10 +1,10 @@
-import Layout from '@/components/Layout/layout';
 import DataTable from 'react-data-table-component';
-import '@/components/lumau-message.js';
-import '@/styles/dataTableThemes';
 import { Modal } from '@/components/Modal/Modal';
+import Layout from '@/components/Layout/layout';
 import DeleteContact from './DeleteContact';
 import useContacts from './useContacts';
+import '@/components/lumau-message.js';
+import '@/styles/dataTableThemes';
 
 const Subscribers = () => {
   const {
@@ -27,7 +27,7 @@ const Subscribers = () => {
       <div>
         {contacts && (
           <DataTable
-            dense
+            // dense
             title="Contactos"
             columns={CONTACTS_COLUMNS}
             data={contacts}

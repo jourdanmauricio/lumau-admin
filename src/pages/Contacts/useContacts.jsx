@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNotification } from '@/components/Notifications/NotificationProvider';
+import { useUserStore } from '@/store/user';
 import { useModal } from '@/hooks/useModal';
 import { deleteContact, getContacts } from '@/services/api/contacts.api';
 import { FaRegTrashAlt } from 'react-icons/fa';
@@ -9,6 +10,7 @@ const useContacts = () => {
   const [currentData, setCurrentData] = useState({});
   const dispatchNotif = useNotification();
   const [isOpenModal, openModal, closeModal] = useModal(false);
+  const theme = useUserStore((state) => state.theme);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -99,10 +101,7 @@ const useContacts = () => {
     contacts,
     CONTACTS_COLUMNS,
     currentData,
-    // action,
-    // onSubmit,
-    // onChangeAction,
-    // onCancelDelete,
+    theme,
     onDelete,
     isOpenModal,
   };

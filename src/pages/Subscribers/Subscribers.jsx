@@ -27,7 +27,7 @@ const Subscribers = () => {
       <div>
         {subscribers && (
           <DataTable
-            dense
+            //dense
             title="Suscriptores"
             columns={SUBSCRIBERS_COLUMNS}
             data={subscribers}
