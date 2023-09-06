@@ -70,7 +70,7 @@ const NewEditLoan = ({ onSubmit, action, onCancelDelete, currentData }) => {
               id="rate"
               label="Tasa de interés"
               name="rate"
-              placeholder="7,8"
+              placeholder="7.8"
               pattern="^[0-9.]{0,8}$"
               patternerror="Ingrese solo los números"
               value={currentData.rate}
