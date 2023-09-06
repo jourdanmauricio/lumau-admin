@@ -2,21 +2,10 @@
 import { useState } from 'react';
 import { useUserStore } from '@/store/user';
 import { NavLink } from 'react-router-dom';
-import {
-  FaCog,
-  FaAngleLeft,
-  FaAngleRight,
-  FaTh,
-  FaUserCog,
-  // FaRegImages,
-  FaComment,
-  FaThList,
-  FaUsers,
-  FaTelegramPlane,
-} from 'react-icons/fa';
-import '@/components/lumau-spinner.js';
-
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import Nav from '../Nav/Nav';
+import { menuItems } from '@/utils/menuItems';
+import '@/components/lumau-spinner.js';
 
 const Layout = (props) => {
   const user = useUserStore((state) => state.user);
@@ -32,7 +21,7 @@ const Layout = (props) => {
       <main className="flex w-full">
         <div
           className={`hidden sm:inline-block h-full left-0 bg-slate-100 dark:bg-slate-950 overflow-x-hidden whitespace-nowrap transition-width text-gray-900 dark:text-slate-100
-          ${minItems ? 'w-52' : 'w-12'}
+          ${minItems ? 'w-56' : 'w-12'}
 					`}
         >
           <button
@@ -48,107 +37,23 @@ const Layout = (props) => {
 
           <hr className="mb-4" />
 
-          <NavLink
-            to="/perfil"
-            className={({ isActive }) =>
-              ` py-2 pl-4 pr-[14px] no-underline text-lg block text-left hover:text-purple-500 ${
-                isActive ? 'text-purple-700' : ''
-              } `
-            }
-          >
-            <FaUserCog className="mr-4 inline-block" />
-            <span className="align-middle">Perfil</span>
-          </NavLink>
-          <NavLink
-            to="/dashboard"
-            className={({ isActive }) =>
-              `py-2 pl-4 pr-[14px] no-underline text-lg block text-left hover:text-purple-500 ${
-                isActive ? 'text-purple-700' : ''
-              } `
-            }
-          >
-            <FaTh className="mr-4 inline-block" />
-            <span className="align-middle">Dashboard</span>
-          </NavLink>
-
-          {user.role === 'admin' && (
-            <NavLink
-              to="/users"
-              className={({ isActive }) =>
-                `py-2 pl-4 pr-[14px] no-underline text-lg block text-left hover:text-purple-500 ${
-                  isActive ? 'text-purple-700' : ''
-                } `
-              }
-            >
-              <FaUsers className="mr-4 inline-block" />
-              <span className="align-middle">Usuarios</span>
-            </NavLink>
-          )}
-
-          <NavLink
-            className={({ isActive }) =>
-              `py-2 pl-4 pr-[14px] no-underline text-lg block text-left hover:text-purple-500 ${
-                isActive ? 'text-purple-700' : ''
-              } `
-            }
-            to="/subscribers"
-          >
-            <FaTelegramPlane className="mr-4 inline-block" />
-            <span className="align-middle">Suscriptores</span>
-          </NavLink>
-
-          <NavLink
-            className={({ isActive }) =>
-              `py-2 pl-4 pr-[14px] no-underline text-lg block text-left hover:text-purple-500 ${
-                isActive ? 'text-purple-700' : ''
-              } `
-            }
-            to="/contacts"
-          >
-            <FaComment className="mr-4 inline-block" />
-            <span className="align-middle">Contactos</span>
-          </NavLink>
-
-          {/* <NavLink
-            className={({ isActive }) =>
-              `py-2 pl-4 pr-[14px] no-underline text-lg block text-left hover:text-purple-500 ${
-                isActive ? 'text-purple-700' : ''
-              } `
-            }
-            to="/media"
-          >
-            <FaRegImages className="mr-4 inline-block" />
-            <span className="align-middle">Media</span>
-          </NavLink> */}
-
-          {user.role === 'superadmin' && (
-            <>
-              <NavLink
-                to="/configuracion"
-                className={({ isActive }) =>
-                  `py-4 pl-4 pr-[14px] no-underline text-lg block text-left hover:text-purple-500 ${
-                    isActive ? 'text-purple-700' : ''
-                  } `
-                }
-              >
-                <FaCog className="mr-4 inline-block text-gray-900" />
-                <span className="align-middle">Configuración</span>
-              </NavLink>
-            </>
-          )}
-
-          {user.role === 'superadmin' && (
-            <NavLink
-              to="/secciones"
-              className={({ isActive }) =>
-                `py-4 pl-4 pr-[14px] no-underline text-lg block text-left hover:text-purple-500 ${
-                  isActive ? 'text-purple-700' : ''
-                } `
-              }
-            >
-              <FaThList className="mr-4 inline-block text-gray-900" />
-              <span className="align-middle">Secciones</span>
-            </NavLink>
+          {menuItems.map(
+            (feature) =>
+              feature.role.includes(user.role) &&
+              user.attributes.includes(feature.name) && (
+                <NavLink
+                  key={feature.id}
+                  to={feature.route}
+                  className={({ isActive }) =>
+                    ` py-2 pl-4 pr-[14px] no-underline text-lg block text-left hover:text-purple-500 ${
+                      isActive ? 'text-purple-700' : ''
+                    } `
+                  }
+                >
+                  <feature.icon className="mr-4 inline-block" />
+                  <span className="align-middle">{feature.name}</span>
+                </NavLink>
+              )
           )}
         </div>
 

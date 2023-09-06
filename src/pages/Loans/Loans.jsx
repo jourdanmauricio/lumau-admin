@@ -1,61 +1,53 @@
-import Layout from '@/components/Layout/layout';
-import useUsers from './useUsers';
-import NewEditUser from './NewEditUser';
+import Layout from '../../components/Layout/layout';
 import DataTable from 'react-data-table-component';
-import { Modal } from '@/components/Modal/Modal';
-import DeleteUser from './DeleteUser';
 import '@/components/lumau-message.js';
 import '@/styles/dataTableThemes';
+import useLoans from './useLoans';
+import '@/styles/dataTableThemes';
+import NewEditLoan from './NewEditLoan';
+import { Modal } from '../../components/Modal/Modal';
+import DeleteLoan from './DeleteLoan';
 
-const Users = () => {
+const Loans = () => {
   const {
-    users,
-    USERS_COLUMNS,
+    loans,
+    action,
+    LOAN_COLUMNS,
     theme,
     actionsMenu,
-    action,
     currentData,
     onSubmit,
     onCancelDelete,
-    onDelete,
     isOpenModal,
-    isOpenModalPass,
-    openModalPass,
-    closeModalPass,
-    menuItems,
-  } = useUsers();
-
+    onDelete,
+  } = useLoans();
   return (
     <Layout>
       <div className="relative">
         <lumau-message
-          id="form-error-users"
+          id="form-error-loans"
           errorForm=""
         ></lumau-message>
       </div>
-      <div>
-        {action === 'VIEW' && users && (
+
+      <div className="h-full">
+        {action === 'VIEW' && loans && (
           <DataTable
-            dense
-            // selectableRows
-            title="Usuarios"
-            columns={USERS_COLUMNS}
-            data={users}
+            // dense
+            title="Préstamos"
+            columns={LOAN_COLUMNS}
+            data={loans}
             theme={theme}
             actions={actionsMenu}
             pagination
           />
         )}
         {(action === 'NEW' || action === 'EDIT') && (
-          <NewEditUser
+          <NewEditLoan
             currentData={currentData}
             action={action}
             onSubmit={onSubmit}
             onCancelDelete={onCancelDelete}
-            isOpenModalPass={isOpenModalPass}
-            openModalPass={openModalPass}
-            closeModalPass={closeModalPass}
-            menuItems={menuItems}
           />
         )}
         {isOpenModal && (
@@ -63,7 +55,7 @@ const Users = () => {
             isOpenModal={isOpenModal}
             closeModal={onCancelDelete}
           >
-            <DeleteUser
+            <DeleteLoan
               currentData={currentData}
               onDelete={onDelete}
               onCancelDelete={onCancelDelete}
@@ -74,4 +66,4 @@ const Users = () => {
     </Layout>
   );
 };
-export default Users;
+export default Loans;

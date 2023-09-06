@@ -34,10 +34,15 @@ const checkForm = (e) => {
       let options = [];
       for (let i = 0; i < element.length; i++) {
         if (element.options[i].selected) {
-          options.push[element.options[i].value];
+          options.push(element.options[i].value);
         }
+        console.log('name', data[element.name]);
       }
       data[element.name] = options;
+    }
+
+    if (element.nodeName === 'INPUT' && element.type === 'hidden') {
+      data[element.name] = element.getAttribute('data-custom').split(',');
     }
   }
   return { data };

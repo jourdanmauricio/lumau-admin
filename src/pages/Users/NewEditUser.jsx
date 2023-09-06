@@ -1,18 +1,28 @@
 /* eslint-disable react/prop-types */
+import { FaEyeSlash, FaEye } from 'react-icons/fa';
+import { Modal } from '@/components/Modal/Modal';
+import ChangePassword from '../Profile/ChangePassword/ChangePassword';
 import '@/components/lumau-input.js';
 import '@/components/lumau-message.js';
-import { FaEyeSlash, FaEye } from 'react-icons/fa';
-import { Modal } from '../../components/Modal/Modal';
-import ChangePassword from '../Profile/ChangePassword/ChangePassword';
-import { useModal } from '../../hooks/useModal';
 
-const NewEditUser = ({ onSubmit, action, onCancelDelete, editData }) => {
-  const [isOpenModalPass, openModalPass, closeModalPass] = useModal(false);
-  const attributes = ['contact', 'subscribers', 'post'];
+import Features from './Features';
+import useNewEditUser from './useNewEditUser';
 
-  const handleCancel = () => {
-    closeModalPass();
-  };
+const NewEditUser = ({
+  onSubmit,
+  action,
+  onCancelDelete,
+  currentData,
+  menuItems,
+}) => {
+  const {
+    isOpenModalPass,
+    openModalPass,
+    handleCancel,
+    attributes,
+    setAttributes,
+    // menuItems,
+  } = useNewEditUser({ currentData });
 
   return (
     <>
@@ -40,7 +50,7 @@ const NewEditUser = ({ onSubmit, action, onCancelDelete, editData }) => {
               placeholder="https://example.com"
               pattern="^(https?://)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"
               patternerror="The URL is not valid"
-              value={editData.url}
+              value={currentData.url}
               selectOnFocus
             ></lumau-input>
           </div>
@@ -91,7 +101,7 @@ const NewEditUser = ({ onSubmit, action, onCancelDelete, editData }) => {
                 placeholder="John Doe"
                 pattern="^[A-Za-z ñáéíóúÑÁÉÍÓÚ]{0,150}$"
                 patternerror="El nombre no es válido"
-                value={editData.name}
+                value={currentData.name}
                 selectOnFocus
                 required
               ></lumau-input>
@@ -105,7 +115,7 @@ const NewEditUser = ({ onSubmit, action, onCancelDelete, editData }) => {
                 placeholder="xxxxxxxx"
                 pattern="^[0-9]{0,8}$"
                 patternerror="Ingrese solo los números"
-                value={editData.dni}
+                value={currentData.dni}
                 selectOnFocus
                 required
               ></lumau-input>
@@ -123,7 +133,7 @@ const NewEditUser = ({ onSubmit, action, onCancelDelete, editData }) => {
                 placeholder="johndoe@example.com"
                 pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-ñ]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
                 patternerror="El email no es válido"
-                value={editData.email}
+                value={currentData.email}
                 selectOnFocus
                 required
               ></lumau-input>
@@ -137,7 +147,7 @@ const NewEditUser = ({ onSubmit, action, onCancelDelete, editData }) => {
                 placeholder="01199999999"
                 pattern="^[0-9()-]{0,50}$"
                 patternerror="El teléfono no es válido"
-                value={editData.phone}
+                value={currentData.phone}
                 selectOnFocus
                 required
               ></lumau-input>
@@ -155,18 +165,18 @@ const NewEditUser = ({ onSubmit, action, onCancelDelete, editData }) => {
                 placeholder="Git Hub Pages"
                 pattern="^[A-Za-z ñáéíóúÑÁÉÍÓÚ]{0,150}$"
                 patternerror="El servidor no es válido"
-                value={editData.deploy}
+                value={currentData.deploy}
                 selectOnFocus
                 required
               ></lumau-input>
             </div>
-            <div className=" w-full sm:w-1/2">
+            <div className="w-full sm:w-1/2">
               <lumau-input
                 small
                 id="role"
                 label="Role"
                 name="role"
-                value={editData.role === 'admin' ? 'admin' : 'user'}
+                value={currentData.role === 'admin' ? 'admin' : 'user'}
                 selectOnFocus
                 readonly
               ></lumau-input>
@@ -174,7 +184,7 @@ const NewEditUser = ({ onSubmit, action, onCancelDelete, editData }) => {
           </div>
 
           {/* Features */}
-          <div className="flex flex-col sm:flex-row gap-4 w-full">
+          {/* <div className="flex flex-col sm:flex-row gap-4 w-full">
             <div className=" w-full sm:w-1/2">
               <label
                 className="border-b border-solid border-slate-100 w-full block text-center"
@@ -187,6 +197,12 @@ const NewEditUser = ({ onSubmit, action, onCancelDelete, editData }) => {
                 name="attributes"
                 id="attributes"
                 multiple
+                defaultValue={editData.attributes}
+                onChange={(e) => {
+                  const options = [...e.target.selectedOptions];
+                  const values = options.map((option) => option.value);
+                  handleFeatures(values);
+                }}
               >
                 {attributes.map((attribute) => (
                   <option
@@ -198,7 +214,26 @@ const NewEditUser = ({ onSubmit, action, onCancelDelete, editData }) => {
                 ))}
               </select>
             </div>
-          </div>
+            {features && (
+              <div className="w-full sm:w-1/2 text-center">
+                <button
+                  type="button"
+                  onClick={() => openModalFeatures()}
+                  className="btn-confirm"
+                >
+                  Cambiar caracteríscas
+                </button>
+              </div>
+            )}
+          </div> */}
+        </div>
+
+        <div className="flex justify-around items-center mt-8">
+          <Features
+            attributes={attributes}
+            setAttributes={setAttributes}
+            menuItems={menuItems}
+          />
         </div>
 
         {/* Controles */}
@@ -217,16 +252,23 @@ const NewEditUser = ({ onSubmit, action, onCancelDelete, editData }) => {
             {action === 'NEW' ? 'Crear' : 'Editar'}
           </button>
         </div>
+
+        <input
+          type="hidden"
+          id="attributes"
+          name="attributes"
+          data-custom={attributes}
+        ></input>
       </form>
 
       <Modal
         width="md"
         isOpenModal={isOpenModalPass}
-        closeModal={closeModalPass}
+        closeModal={handleCancel}
       >
         <ChangePassword
           handleCancel={handleCancel}
-          userId={editData.id}
+          userId={currentData.id}
         />
       </Modal>
     </>

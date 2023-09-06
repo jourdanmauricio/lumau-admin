@@ -1,18 +1,20 @@
 import { useEffect, useMemo, useState } from 'react';
-import { getUsers } from '@/services/api/users.api';
-import { useUserStore } from '@/store/user';
+import { useUserStore } from '../../store/user';
 import { useNotification } from '@/components/Notifications/NotificationProvider';
-import { createUser, updateUser, deleteUser } from '@/services/api/users.api';
-import checkForm from '@/utils/checkForm';
-import { FaEdit, FaPlus, FaRegTrashAlt } from 'react-icons/fa';
+import {
+  createLoan,
+  deleteLoan,
+  getLoans,
+  updateLoan,
+} from '../../services/api/loans.api';
 import { useModal } from '../../hooks/useModal';
-import { menuItems } from '@/utils/menuItems';
-// import { createFeature } from '../../services/api/features.api';
+import { FaEdit, FaPlus, FaRegTrashAlt } from 'react-icons/fa';
+import checkForm from '../../utils/checkForm';
 
-const useUsers = () => {
-  const [users, setUsers] = useState(null);
+const useLoans = () => {
   const [action, setAction] = useState('VIEW');
-  const [currentData, setCurrentData] = useState({ attributes: [] });
+  const [loans, setLoans] = useState([]);
+  const [currentData, setCurrentData] = useState({});
   const [isOpenModal, openModal, closeModal] = useModal(false);
   const theme = useUserStore((state) => state.theme);
   const dispatchNotif = useNotification();
@@ -20,10 +22,10 @@ const useUsers = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await getUsers();
-        setUsers(data);
+        const data = await getLoans();
+        setLoans(data);
       } catch (error) {
-        let message = 'Error obteniendo usuarios';
+        let message = 'Error obteniendo tipo de préstamos';
         if (error.response)
           message = `${error.response.status}: ${error.response.statusText}`;
 
@@ -34,25 +36,25 @@ const useUsers = () => {
     fetchData();
   }, []);
 
-  const USERS_COLUMNS = [
+  const LOAN_COLUMNS = [
     {
-      name: 'Web',
-      selector: (row) => row.url,
+      name: 'Tipo',
+      selector: (row) => row.type,
       sortable: true,
     },
     {
-      name: 'Nombre',
-      selector: (row) => row.name,
+      name: 'Max cuotas',
+      selector: (row) => row.maxQuantityQuotes,
       sortable: true,
     },
     {
-      name: 'Deploy',
-      selector: (row) => row.deploy,
+      name: 'Monto max',
+      selector: (row) => row.maxAmount,
       sortable: true,
     },
     {
-      name: 'Role',
-      selector: (row) => row.role,
+      name: 'Tasa %',
+      selector: (row) => row.rate,
       // sortable: true,
     },
     {
@@ -95,17 +97,16 @@ const useUsers = () => {
     openModal();
   };
 
-  const onDelete = async (userId) => {
+  const onDelete = async (loanId) => {
     try {
-      const { id } = await deleteUser(userId);
-      const newUsers = users.filter((user) => user.id !== parseInt(id));
-      setUsers(newUsers);
+      const { id } = await deleteLoan(loanId);
+      const newLoans = loans.filter((loan) => loan.id !== parseInt(id));
+      setLoans(newLoans);
       dispatchNotif({
         type: 'SUCCESS',
-        message: 'Usuario eliminado',
+        message: 'Tipo de préstamo eliminado',
       });
-      closeModal();
-      onChangeAction('VIEW');
+      onCancelDelete();
     } catch (error) {
       let message = 'Error eliminando el usuario';
       if (error.response)
@@ -114,6 +115,12 @@ const useUsers = () => {
       const formError = document.getElementById('form-error-delete-users');
       formError.setAttribute('errorForm', message);
     }
+  };
+
+  const onChangeAction = (action) => {
+    setAction(action);
+    const formError = document.getElementById('form-error-loans');
+    formError.removeAttribute('errorForm');
   };
 
   const onEdit = (row) => {
@@ -125,44 +132,31 @@ const useUsers = () => {
     const { data } = checkForm(e);
     if (!data) return;
 
+    data.maxAmount = parseFloat(data.maxAmount);
+    data.maxQuantityQuotes = parseInt(data.maxQuantityQuotes);
+    data.rate = parseFloat(data.rate);
+
     try {
       if (action === 'NEW') {
-        const resp = await createUser(data);
+        const resp = await createLoan(data);
 
-        setUsers([...users, resp]);
+        setLoans([...loans, resp]);
         dispatchNotif({
           type: 'SUCCESS',
-          message: 'Usuario creado!',
+          message: 'Préstamo creado!',
         });
       } else {
         data.id = currentData.id;
-        const updUser = await updateUser(data);
+        const updUser = await updateLoan(data);
 
-        // updUser.attributes.map(async (attrib) => {
-        //   const feature = menuItems.find(
-        //     (item) => item.name === attrib && item.feature === true
-        //   );
-        //   if (feature) {
-        //     console.log('feature', feature);
-        //     const obj = {
-        //       name: feature.name,
-        //       value: [],
-        //       userId: currentData.id,
-        //       description: feature.description,
-        //     };
-        //     const resp = await createFeature(obj);
-        //     console.log('RESP feature', resp);
-        //   }
-        // });
-
-        const newUsers = users.map((user) =>
+        const newUsers = loans.map((user) =>
           user.id === updUser.id ? updUser : user
         );
-        setUsers(newUsers);
+        setLoans(newUsers);
 
         dispatchNotif({
           type: 'SUCCESS',
-          message: 'Usuario modificado!',
+          message: 'Préstamo modificado!',
         });
       }
       setCurrentData({});
@@ -170,21 +164,15 @@ const useUsers = () => {
     } catch (error) {
       let message = `Error ${
         action === 'NEW' ? 'creando' : 'modificando'
-      } el usuario`;
+      } el préstamo`;
       if (error.response)
         message = `${error.response.status}: ${error.response.statusText}`;
 
-      const formError = document.getElementById('form-error-users');
+      const formError = document.getElementById('form-error-loans');
       formError.setAttribute('errorForm', message);
     } finally {
       // loading.removeAttribute('loading');
     }
-  };
-
-  const onChangeAction = (action) => {
-    setAction(action);
-    const formError = document.getElementById('form-error-users');
-    formError.removeAttribute('errorForm');
   };
 
   const onCancelDelete = () => {
@@ -194,18 +182,17 @@ const useUsers = () => {
   };
 
   return {
-    users,
-    USERS_COLUMNS,
+    loans,
+    LOAN_COLUMNS,
+    action,
     theme,
     actionsMenu,
-    action,
+    handleDelete,
     currentData,
-    onSubmit,
-    onChangeAction,
-    onCancelDelete,
     onDelete,
     isOpenModal,
-    menuItems,
+    onCancelDelete,
+    onSubmit,
   };
 };
-export default useUsers;
+export default useLoans;

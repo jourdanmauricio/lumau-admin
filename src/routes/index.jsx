@@ -17,6 +17,7 @@ const Profile = React.lazy(() => import('@/pages/Profile/Profile'));
 const Subscribers = React.lazy(() => import('@/pages/Subscribers/Subscribers'));
 const Contacts = React.lazy(() => import('@/pages/Contacts/Contacts'));
 const Users = React.lazy(() => import('@/pages/Users/Users'));
+const Loans = React.lazy(() => import('@/pages/Loans/Loans'));
 // const Settings = React.lazy(() => import('@/pages/Settings/Settings'));
 // const Media = React.lazy(() => import('@/pages/Media/Media'));
 // const Sections = React.lazy(() => import('@/pages/Sections/Sections'));
@@ -51,7 +52,7 @@ function AppRoutes() {
             }
           />
           <Route
-            path="/perfil"
+            path="/profile"
             element={
               <AuthRoute>
                 <Profile />
@@ -82,31 +83,14 @@ function AppRoutes() {
               </AuthRoute>
             }
           />
-          {/*    <Route
-                path="/media"
-                element={
-                  <AuthRoute>
-                    <Media />
-                  </AuthRoute>
-                }
-              />
-              <Route
-                path="/configuracion"
-                element={
-                  <AuthRoute>
-                    <Settings />
-                  </AuthRoute>
-                }
-              />
-
-              <Route
-                path="/secciones"
-                element={
-                  <AuthRoute>
-                    <Sections />
-                  </AuthRoute>
-                }
-              /> */}
+          <Route
+            path="/loans"
+            element={
+              <AuthRoute>
+                <Loans />
+              </AuthRoute>
+            }
+          />
         </Routes>
       </Suspense>
     </Router>
