@@ -18,11 +18,12 @@ const useLoans = () => {
   const [isOpenModal, openModal, closeModal] = useModal(false);
   const theme = useUserStore((state) => state.theme);
   const dispatchNotif = useNotification();
+  const user = useUserStore((state) => state.user);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getLoans();
+        const data = await getLoans(user);
         setLoans(data);
       } catch (error) {
         let message = 'Error obteniendo tipo de préstamos';
@@ -34,7 +35,7 @@ const useLoans = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [user]);
 
   const LOAN_COLUMNS = [
     {

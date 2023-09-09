@@ -1,7 +1,9 @@
 import { axiosApi } from '../api';
 
-export const getLoans = async () => {
-  const response = await axiosApi.get('/loans');
+export const getLoans = async (user) => {
+  const response = await axiosApi.get('/loans', {
+    headers: { 'Content-Type': 'application/json', url: user.url },
+  });
   return response.data;
 };
 
