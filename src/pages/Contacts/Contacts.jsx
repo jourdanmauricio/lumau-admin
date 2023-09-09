@@ -15,6 +15,7 @@ const Subscribers = () => {
     isOpenModal,
     onCancelDelete,
     currentData,
+    ExpandedComponent,
   } = useContacts();
   return (
     <Layout>
@@ -31,6 +32,8 @@ const Subscribers = () => {
             title="Contactos"
             columns={CONTACTS_COLUMNS}
             data={contacts}
+            expandableRows
+            expandableRowsComponent={ExpandedComponent}
             theme={theme}
             pagination
           />

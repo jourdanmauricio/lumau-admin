@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import { useNotification } from '@/components/Notifications/NotificationProvider';
 import { useUserStore } from '@/store/user';
@@ -32,32 +33,31 @@ const useContacts = () => {
   const CONTACTS_COLUMNS = [
     {
       name: 'id',
+      width: '10%',
       selector: (row) => row.id,
       sortable: true,
     },
     {
       name: 'Nombre',
+      width: '20%',
       selector: (row) => row.name,
       sortable: true,
     },
     {
       name: 'Email',
+      width: '30%',
       selector: (row) => row.email,
       sortable: true,
     },
     {
-      name: 'Teléfono',
-      selector: (row) => row.phone,
+      name: 'Fecha creación',
+      width: '20%',
+      selector: (row) => row.createdAt,
       sortable: true,
     },
     {
-      name: 'Fecha creación',
-      selector: (row) => row.createdAt,
-      // sortable: true,
-    },
-    {
       name: 'Acciones',
-      width: '15%',
+      width: '10%',
       center: true,
       cell: (row) => (
         <div className="flex gap-2">
@@ -71,6 +71,16 @@ const useContacts = () => {
       ),
     },
   ];
+
+  const ExpandedComponent = ({ data }) => (
+    <div className="p-4">
+      <p>Nombre: {data.name} </p>
+      <p>Email: {data.email}</p>
+      <p>Telefono: {data.phone}</p>
+      <p>Mensaje: {data.comment}</p>
+    </div>
+    // <pre>{JSON.stringify(data, null, 2)}</pre>
+  );
 
   const handleDelete = (row) => {
     setCurrentData(row);
@@ -104,6 +114,7 @@ const useContacts = () => {
     theme,
     onDelete,
     isOpenModal,
+    ExpandedComponent,
   };
 };
 export default useContacts;
