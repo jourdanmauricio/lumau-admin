@@ -18,3 +18,8 @@ export const login = async (data) => {
     throw message;
   }
 };
+
+export const regeneratePage = async (repo) => {
+  const response = await axiosApi.post('/auth/regenerate-page', repo);
+  return response;
+};
