@@ -85,9 +85,9 @@ const EditProfile = ({ user, handleSubmit }) => {
           <div className="w-full mt-4">
             <lumau-input
               small
-              id="userName"
+              id="username"
               label="Username"
-              name="userName"
+              name="username"
               placeholder="example.com"
               value={user.username}
               selectOnFocus
