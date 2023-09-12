@@ -81,6 +81,11 @@ const useLoans = () => {
     },
   ];
 
+  const onNew = () => {
+    setAction('NEW');
+    setCurrentData({});
+  };
+
   const actionsMenu = useMemo(() => {
     return (
       <div
@@ -96,11 +101,6 @@ const useLoans = () => {
   const handleDelete = (row) => {
     setCurrentData(row);
     openModal();
-  };
-
-  const onNew = () => {
-    setAction('NEW');
-    setCurrentData({});
   };
 
   const onDelete = async (loanId) => {
