@@ -1,31 +1,50 @@
 import { axiosApi } from '../api';
 
-export const getAllImages = async () => {
+export const getImages = async (user) => {
+  console.log('getImages');
+  const response = await axiosApi.get('/images', {
+    headers: { 'Content-Type': 'application/json', url: user.url },
+  });
+  return response.data;
+};
+
+export const createImage = async (image) => {
+  const response = await axiosApi.post('/images', image);
+  return response.data;
+};
+
+export const createCloudImage = async (file) => {
+  const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dbep4ggne/image/upload`;
+
+  file.public_id = file.name;
+
+  const formData = new FormData();
+  formData.append('upload_preset', 'ngjumjti');
+  formData.append('file', file);
+
   try {
-    const response = await axiosApi.get('/images');
-    return response.data;
+    const res = await fetch(cloudinaryUrl, {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data;
   } catch (error) {
-    let message = '';
-    console.log('error', error.response.data);
-    message = error.response.data
-      ? `${error.response.data.statusCode}: ${error.response.data.message}`
-      : 'Error obteniendo imágenes 😞';
-    throw message;
+    return null;
   }
 };
 
+export const updateImage = async (image) => {
+  const data = Object.assign({}, image);
+  const id = data.id;
+  delete data.id;
+  const response = await axiosApi.put(`/services/${id}`, data);
+  return response.data;
+};
+
 export const deleteImage = async (id) => {
-  try {
-    const response = await axiosApi.delete(`/images`, {
-      data: { public_id: id },
-    });
-    return response.data;
-  } catch (error) {
-    let message = '';
-    console.log('error', error.response.data);
-    message = error.response.data
-      ? `${error.response.data.statusCode}: ${error.response.data.message}`
-      : 'Error eliminado imagen 😞';
-    throw message;
-  }
+  const response = await axiosApi.delete(`/images/${id}`);
+  return response.data;
 };

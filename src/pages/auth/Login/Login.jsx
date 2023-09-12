@@ -1,10 +1,8 @@
 import { Link } from 'react-router-dom';
 import useLogin from './useLogin';
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
-
 import '@/components/lumau-input.js';
 import '@/components/lumau-message.js';
-// import '@/components/lumau-spinner.js';
 
 const Login = () => {
   const { handleSubmit } = useLogin();
@@ -36,12 +34,12 @@ const Login = () => {
             class="lumau-input"
             dark
             medium
-            id="url"
-            label="User (web)"
-            name="url"
-            placeholder="https://example.com.ar"
-            pattern="^(https?://)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"
-            patternerror="The URL is not valid"
+            id="username"
+            label="Username"
+            name="username"
+            placeholder="example.com.ar"
+            pattern="[A-Z0-9a-zñáéíóúÑÁÉÍÓÚ]$"
+            patternerror="The username is not valid"
             selectOnFocus
             required
           ></lumau-input>

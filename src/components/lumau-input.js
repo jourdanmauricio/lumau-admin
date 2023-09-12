@@ -183,6 +183,7 @@ class LumauInput extends LitElement {
           ?required="${this.required}"
           @keypress="${this._lookForEnter}"
           @input="${this._input}"
+          @change="${this._input}"
           @blur="${this.doBlur}"
           @focus="${this.doFocus}"
         />
@@ -234,6 +235,14 @@ class LumauInput extends LitElement {
     this._validate();
     this.internals_.setFormValue(this.value);
   }
+  updated(changedProperties) {
+    if (
+      changedProperties.has('value') &&
+      changedProperties.get('value') === ''
+    ) {
+      this._validate();
+    }
+  }
 
   _validate() {
     if (
@@ -243,7 +252,7 @@ class LumauInput extends LitElement {
     ) {
       this.internals_.setValidity(
         { customError: true },
-        'This value is required.'
+        'This value is required'
       );
       return;
     }
@@ -334,11 +343,11 @@ class LumauInput extends LitElement {
 
   // // Form controls usually expose a "value" property
   // get value() {
-  //   // return this.input_.value;
-  //   return this.shadowRoot.querySelector('input');
+  //   return this._input.value;
+  //   // return this.shadowRoot.querySelector('input');
   // }
   // set value(v) {
-  //   this.input_.value = v;
+  //   this._input.value = v;
   // }
   get validity() {
     return this.internals_.validity;

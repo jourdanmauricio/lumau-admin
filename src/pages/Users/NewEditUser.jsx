@@ -39,59 +39,59 @@ const NewEditUser = ({
         onSubmit={onSubmit}
         noValidate
       >
-        {/* User y pass */}
-        <div className="flex flex-col sm:flex-row gap-4 w-full justify-center items-center">
-          <div className=" w-full sm:w-1/2">
-            <lumau-input
-              small
-              id="url"
-              label="Username (Web)"
-              name="url"
-              placeholder="https://example.com"
-              pattern="^(https?://)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"
-              patternerror="The URL is not valid"
-              value={currentData.url}
-              selectOnFocus
-            ></lumau-input>
-          </div>
-          {action === 'NEW' ? (
+        <div className="flex flex-col gap-4">
+          {/* User y pass */}
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-8 w-full justify-center items-center">
             <div className=" w-full sm:w-1/2">
               <lumau-input
                 small
-                controlType="password"
-                id="password"
-                label="Password"
-                name="password"
-                placeholder="********"
-                pattern="^.{8,255}$"
-                patternerror="Must contain at least 8 chars"
-                required
-                togglePassword
-              >
-                <span slot="show-password-icon">
-                  <FaEye />
-                </span>
-                <span slot="hide-password-icon">
-                  <FaEyeSlash />
-                </span>
-              </lumau-input>
+                id="username"
+                label="Username"
+                name="username"
+                placeholder="example.com"
+                pattern="[A-Za-zñáéíóúÑÁÉÍÓÚ]$"
+                patternerror="The username is not valid"
+                value={currentData.username}
+                selectOnFocus
+              ></lumau-input>
             </div>
-          ) : (
-            <div className=" w-full sm:w-1/2 text-center">
-              <button
-                type="button"
-                onClick={() => openModalPass()}
-                className="btn-confirm"
-              >
-                Cambiar contraseña
-              </button>
-            </div>
-          )}
-        </div>
+            {action === 'NEW' ? (
+              <div className=" w-full sm:w-1/2">
+                <lumau-input
+                  small
+                  controlType="password"
+                  id="password"
+                  label="Password"
+                  name="password"
+                  placeholder="********"
+                  pattern="^.{8,255}$"
+                  patternerror="Must contain at least 8 chars"
+                  required
+                  togglePassword
+                >
+                  <span slot="show-password-icon">
+                    <FaEye />
+                  </span>
+                  <span slot="hide-password-icon">
+                    <FaEyeSlash />
+                  </span>
+                </lumau-input>
+              </div>
+            ) : (
+              <div className=" w-full sm:w-1/2 text-center">
+                <button
+                  type="button"
+                  onClick={() => openModalPass()}
+                  className="btn-confirm"
+                >
+                  Cambiar contraseña
+                </button>
+              </div>
+            )}
+          </div>
 
-        {/* Nombre / DNI */}
-        <div className="flex flex-col gap-5">
-          <div className="flex flex-col sm:flex-row gap-4 w-full">
+          {/* Nombre / DNI */}
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-8 w-full">
             <div className="w-full sm:w-1/2">
               <lumau-input
                 small
@@ -99,7 +99,7 @@ const NewEditUser = ({
                 label="Nombre"
                 name="name"
                 placeholder="John Doe"
-                pattern="^[A-Za-z ñáéíóúÑÁÉÍÓÚ]{0,150}$"
+                pattern="[A-Za-z ñáéíóúÑÁÉÍÓÚ]{0,150}$"
                 patternerror="El nombre no es válido"
                 value={currentData.name}
                 selectOnFocus
@@ -123,7 +123,7 @@ const NewEditUser = ({
           </div>
 
           {/* Email / phone */}
-          <div className="flex flex-col sm:flex-row gap-4 w-full">
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-8 w-full">
             <div className=" w-full sm:w-1/2">
               <lumau-input
                 small
@@ -155,7 +155,7 @@ const NewEditUser = ({
           </div>
 
           {/* Deploy / Role */}
-          <div className="flex flex-col sm:flex-row gap-4 w-full">
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-8 w-full">
             <div className=" w-full sm:w-1/2">
               <lumau-input
                 small
@@ -183,57 +183,80 @@ const NewEditUser = ({
             </div>
           </div>
 
-          {/* Features */}
-          {/* <div className="flex flex-col sm:flex-row gap-4 w-full">
-            <div className=" w-full sm:w-1/2">
-              <label
-                className="border-b border-solid border-slate-100 w-full block text-center"
-                htmlFor="attributes"
-              >
-                Características:
-              </label>
-              <select
-                className="w-full bg-[#f1f5f9] dark:bg-[#334155]  p-2 border-none outline-none"
-                name="attributes"
-                id="attributes"
-                multiple
-                defaultValue={editData.attributes}
-                onChange={(e) => {
-                  const options = [...e.target.selectedOptions];
-                  const values = options.map((option) => option.value);
-                  handleFeatures(values);
-                }}
-              >
-                {attributes.map((attribute) => (
-                  <option
-                    key={attribute}
-                    value={attribute}
-                  >
-                    {attribute}
-                  </option>
-                ))}
-              </select>
-            </div>
-            {features && (
-              <div className="w-full sm:w-1/2 text-center">
-                <button
-                  type="button"
-                  onClick={() => openModalFeatures()}
-                  className="btn-confirm"
-                >
-                  Cambiar caracteríscas
-                </button>
-              </div>
-            )}
-          </div> */}
-        </div>
+          {/* web */}
+          <div className="w-full">
+            <lumau-input
+              small
+              id="url"
+              label="Web"
+              name="url"
+              placeholder="https://example.com"
+              value={currentData.url}
+              selectOnFocus
+            ></lumau-input>
+          </div>
 
-        <div className="flex justify-around items-center mt-8">
-          <Features
-            attributes={attributes}
-            setAttributes={setAttributes}
-            menuItems={menuItems}
-          />
+          {/* cloudname / cloudfolder */}
+          <div className="flex flex-col md:flex-row gap-4 md:gap-8">
+            <div className="w-full">
+              <lumau-input
+                small
+                id="cloudName"
+                label="Cloudinary Name"
+                name="cloudName"
+                placeholder=" "
+                value={currentData.cloudName}
+                selectOnFocus
+              ></lumau-input>
+            </div>
+            <div className="w-full">
+              <lumau-input
+                small
+                id="cloudFolder"
+                label="Cloudinary Folder"
+                name="cloudFolder"
+                placeholder=" "
+                value={currentData.cloudFolder}
+                selectOnFocus
+              ></lumau-input>
+            </div>
+          </div>
+
+          {/* cloud Api key / Cloud preset */}
+          <div className="flex flex-col md:flex-row gap-4 md:gap-8">
+            <div className="w-full">
+              <lumau-input
+                small
+                id="cloudApiKey"
+                label="Cloudinary Api Key"
+                name="cloudApiKey"
+                placeholder=" "
+                value={currentData.cloudApiKey}
+                selectOnFocus
+              ></lumau-input>
+            </div>
+
+            <div className="w-full">
+              <lumau-input
+                small
+                id="cloudPreset"
+                label="Cloudinary Preset"
+                name="cloudPreset"
+                placeholder=" "
+                value={currentData.cloudPreset}
+                selectOnFocus
+              ></lumau-input>
+            </div>
+          </div>
+
+          {/* Attributes   */}
+          <div className="flex justify-around items-center mt-8">
+            <Features
+              attributes={attributes}
+              setAttributes={setAttributes}
+              menuItems={menuItems}
+            />
+          </div>
         </div>
 
         {/* Controles */}

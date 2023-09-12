@@ -133,3 +133,64 @@ body {
 .title-modal {
   @apply text-text-color pt-2 text-center text-xl font-bold shadow-md shadow-slate-800;
 }
+
+/*   Tabs   */
+.tabs__container {
+  @apply flex flex-col relative w-full bg-slate-300 break-words border border-solid border-gray-500;
+}
+.tabs__bloc {
+  @apply flex;
+}
+.tabs {
+  @apply relative p-[15px] text-base text-center w-1/2 text-slate-800 bg-gray-200 cursor-pointer border-b border-solid border-gray-500 outline-0 flex items-center justify-center gap-4;
+}
+.tabs:not(:last-child) {
+  border-right: 1px solid rgba(0, 0, 0, 0.274);
+}
+.active__tabs {
+  @apply bg-white border-b border-solid border-transparent;
+}
+.active__tabs::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% + 2px);
+  height: 5px;
+  background: rgb(88, 147, 241);
+}
+.tabs__content {
+  @apply grow bg-white;
+}
+.tab__content {
+  @apply bg-white py-0 px-5 w-full h-full hidden;
+}
+.tab__content h2 {
+  @apply pb-1 pt-0 px-0;
+}
+.tab__content hr {
+  @apply w-full h-0.5 bg-gray-800 mb-1;
+}
+.active__content {
+  @apply block;
+}
+
+.grid__image {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 2em 2em;
+}
+
+.dz-image {
+  @apply relative;
+}
+
+.dz-remove {
+  @apply absolute top-3 right-36 bg-red-500 text-slate-100;
+}
+
+.dz-preview {
+  height: 150px;
+}

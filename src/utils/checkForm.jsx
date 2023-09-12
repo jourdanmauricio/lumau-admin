@@ -1,5 +1,6 @@
 const checkForm = (e) => {
   e.preventDefault();
+
   const fieldsToValidate = document
     .getElementById(e.target.id)
     .querySelectorAll('[required], [pattern]');
@@ -14,6 +15,8 @@ const checkForm = (e) => {
       error = true;
     }
   }
+
+  console.log('ERROR', error);
   if (error) return error;
 
   // Accede al formulario a través de event.target
