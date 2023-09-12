@@ -82,7 +82,7 @@ const useUsers = () => {
     return (
       <div
         className="btn-icon"
-        onClick={() => setAction('NEW')}
+        onClick={() => onNew()}
       >
         <FaPlus className="text-teal-500" />
       </div>
@@ -119,6 +119,11 @@ const useUsers = () => {
   const onEdit = (row) => {
     setCurrentData(row);
     setAction('EDIT');
+  };
+
+  const onNew = () => {
+    setCurrentData({ attributes: [] });
+    setAction('NEW');
   };
 
   const onSubmit = async (e) => {
@@ -165,7 +170,7 @@ const useUsers = () => {
           message: 'Usuario modificado!',
         });
       }
-      setCurrentData({});
+      setCurrentData({ attributes: [] });
       onChangeAction('VIEW');
     } catch (error) {
       let message = `Error ${
@@ -188,7 +193,7 @@ const useUsers = () => {
   };
 
   const onCancelDelete = () => {
-    setCurrentData({});
+    setCurrentData({ attributes: [] });
     closeModal();
     onChangeAction('VIEW');
   };
