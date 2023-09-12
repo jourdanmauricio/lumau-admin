@@ -13,13 +13,13 @@ export const createImage = async (image) => {
   return response.data;
 };
 
-export const createCloudImage = async (file) => {
+export const createCloudImage = async (file, user) => {
   const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dbep4ggne/image/upload`;
 
   file.public_id = file.name;
 
   const formData = new FormData();
-  formData.append('upload_preset', 'ngjumjti');
+  formData.append('upload_preset', user.cloudPreset);
   formData.append('file', file);
 
   try {

@@ -74,7 +74,7 @@ const Tabs = ({ handleSelect }) => {
   const handleAddPict = async (file) => {
     try {
       setLoading(true);
-      const cloudImage = await createCloudImage(file);
+      const cloudImage = await createCloudImage(file, user);
       console.log('cloudImage', cloudImage);
       const obj = {
         id: cloudImage.id,
