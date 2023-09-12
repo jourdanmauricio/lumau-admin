@@ -85,7 +85,7 @@ const useLoans = () => {
     return (
       <div
         className="btn-icon"
-        onClick={onNew}
+        onClick={() => onNew()}
       >
         <FaPlus className="text-teal-500" />
       </div>
