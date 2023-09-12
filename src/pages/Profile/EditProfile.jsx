@@ -91,7 +91,6 @@ const EditProfile = ({ user, handleSubmit }) => {
               placeholder="example.com"
               value={user.username}
               selectOnFocus
-              readonly
             ></lumau-input>
           </div>
           <div className="w-full mt-4">
@@ -103,7 +102,6 @@ const EditProfile = ({ user, handleSubmit }) => {
               placeholder="https://example.com"
               value={user.url}
               selectOnFocus
-              readonly
             ></lumau-input>
           </div>
         </div>
@@ -118,7 +116,6 @@ const EditProfile = ({ user, handleSubmit }) => {
               placeholder=" "
               value={user.cloudName}
               selectOnFocus
-              readonly
             ></lumau-input>
           </div>
           <div className="w-full mt-4">
@@ -130,7 +127,6 @@ const EditProfile = ({ user, handleSubmit }) => {
               placeholder=" "
               value={user.cloudFolder}
               selectOnFocus
-              readonly
             ></lumau-input>
           </div>
         </div>
@@ -145,7 +141,6 @@ const EditProfile = ({ user, handleSubmit }) => {
               placeholder=" "
               value={user.cloudApiKey}
               selectOnFocus
-              readonly
             ></lumau-input>
           </div>
 
@@ -158,7 +153,6 @@ const EditProfile = ({ user, handleSubmit }) => {
               placeholder=" "
               value={user.cloudPreset}
               selectOnFocus
-              readonly
             ></lumau-input>
           </div>
         </div>
