@@ -85,7 +85,7 @@ const useLoans = () => {
     return (
       <div
         className="btn-icon"
-        onClick={() => setAction('NEW')}
+        onClick={onNew}
       >
         <FaPlus className="text-teal-500" />
       </div>
@@ -96,6 +96,11 @@ const useLoans = () => {
   const handleDelete = (row) => {
     setCurrentData(row);
     openModal();
+  };
+
+  const onNew = () => {
+    setAction('NEW');
+    setCurrentData({});
   };
 
   const onDelete = async (loanId) => {
