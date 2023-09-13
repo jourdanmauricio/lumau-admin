@@ -43,6 +43,7 @@ const useServices = () => {
       width: '100px',
       cell: (service) => (
         <img
+          className="p-2"
           src={service.image}
           alt={service.image_alt}
         />

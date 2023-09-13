@@ -114,8 +114,12 @@ const Tabs = ({ handleSelect }) => {
 
   return (
     <>
-      <h2 className="title-modal">Imágenes</h2>
-      <hr className="mt-1" />
+      {location.pathname !== '/images' && (
+        <>
+          <h2 className="title-modal">Imágenes</h2>
+          <hr className="mt-1" />
+        </>
+      )}
       <div className="tabs__container mt-2">
         {loading && <Spinner />}
         <div className="tabs__bloc">
@@ -127,7 +131,7 @@ const Tabs = ({ handleSelect }) => {
               color="teal"
               size={20}
             />
-            <span>Upload Clodinary</span>
+            <span>Upload Cloudinary</span>
           </div>
           <div
             onClick={() => toggleTab(2)}

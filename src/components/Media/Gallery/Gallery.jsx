@@ -3,6 +3,7 @@ import { FaEye, FaTrash } from 'react-icons/fa';
 import { Modal } from '@/components/Modal/Modal';
 import DeleteImage from '../DeleteImage/DeleteImage';
 import DetailImage from '../DetailImage/DetailImage';
+import { useLocation } from 'react-router-dom';
 
 const Gallery = ({
   images,
@@ -44,6 +45,8 @@ const Gallery = ({
   const onDoubleClick = (image) => {
     handleSelect(image.secureUrl);
   };
+
+  const location = useLocation();
 
   return (
     <>
@@ -90,7 +93,7 @@ const Gallery = ({
           ))}
       </div>
 
-      {selected && (
+      {location.pathname !== '/images' && selected && (
         <button
           onClick={() => onDoubleClick(selected)}
           className="btn-confirm mb-5 block ml-auto"
@@ -98,7 +101,6 @@ const Gallery = ({
           Seleccionar
         </button>
       )}
-
       <Modal
         isOpenModal={isOpenModalDelete}
         closeModal={closeModalDelete}
@@ -110,7 +112,6 @@ const Gallery = ({
           handleDelete={handleDelete}
         />
       </Modal>
-
       <Modal
         isOpenModal={isOpenModalDetail}
         closeModal={closeModalDetail}

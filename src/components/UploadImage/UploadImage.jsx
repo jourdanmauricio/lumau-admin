@@ -97,7 +97,7 @@ const UploadImage = ({ picture, setPicture, handleAddPict }) => {
             className="absolute cursor-pointer opacity-0 w-full h-full top-0 left-0"
             type="file"
           />
-          <h3>Drag and drop file here or</h3>
+          <h3 className="text-slate-900">Drag and drop file here or</h3>
           <br />
           <label className="ml-2.5 mt-10 text-white w-[183px] h-[44px] rounded-[21.5px] bg-red-600 py-2 px-4">
             Browse file
