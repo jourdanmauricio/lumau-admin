@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useMemo, useState } from 'react';
 import { getUsers } from '@/services/api/users.api';
 import { useUserStore } from '@/store/user';
@@ -35,13 +36,8 @@ const useUsers = () => {
 
   const USERS_COLUMNS = [
     {
-      name: 'Web',
-      selector: (row) => row.url,
-      sortable: true,
-    },
-    {
-      name: 'Nombre',
-      selector: (row) => row.name,
+      name: 'Username',
+      selector: (row) => row.username,
       sortable: true,
     },
     {
@@ -197,6 +193,31 @@ const useUsers = () => {
     onChangeAction('VIEW');
   };
 
+  const ExpandedComponent = ({ data }) => (
+    <div className="p-4">
+      <div className="flex gap-8">
+        <div className="w-full md:w1/2 p-2 rounded border border-solid dark:border-gray-600 border-gray-200 shadow-xl dark:shadow-lg dark:shadow-gray-700/50">
+          <p>User: {data.username}</p>
+          <p>Nombre: {data.name}</p>
+          <p>Email: {data.email}</p>
+          <p>Web: {data.url}</p>
+          <p>Teléfono:{data.phone}</p>
+          <p>DNI: {data.dni}</p>
+          <p>Deploy: {data.deploy}</p>
+          <p>Role:{data.role}</p>
+          <p>Atributos: {data.attributes}</p>
+        </div>
+        <div className="w-full md:w1/2 p-2 rounded border border-solid dark:border-gray-600 border-gray-200 shadow-xl dark:shadow-lg dark:shadow-gray-700/50">
+          <p>Name: {data.cloudName}</p>
+          <p>Folder: {data.cloudFolder}</p>
+          <p>Api Key: {data.cloudApiKey}</p>
+          <p>Preset: {data.cloudPreset}</p>
+        </div>
+      </div>
+    </div>
+    // <pre>{JSON.stringify(data, null, 2)}</pre>
+  );
+
   return {
     users,
     USERS_COLUMNS,
@@ -210,6 +231,7 @@ const useUsers = () => {
     onDelete,
     isOpenModal,
     menuItems,
+    ExpandedComponent,
   };
 };
 export default useUsers;

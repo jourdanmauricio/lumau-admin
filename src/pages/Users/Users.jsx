@@ -22,6 +22,7 @@ const Users = () => {
     openModalPass,
     closeModalPass,
     menuItems,
+    ExpandedComponent,
   } = useUsers();
 
   return (
@@ -42,6 +43,8 @@ const Users = () => {
             data={users}
             theme={theme}
             actions={actionsMenu}
+            expandableRows
+            expandableRowsComponent={ExpandedComponent}
             pagination
           />
         )}
