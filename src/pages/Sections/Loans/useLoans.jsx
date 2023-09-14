@@ -1,15 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useUserStore } from '../../store/user';
+import { useUserStore } from '@/store/user';
 import { useNotification } from '@/components/Notifications/NotificationProvider';
 import {
   createLoan,
   deleteLoan,
   getLoans,
   updateLoan,
-} from '../../services/api/loans.api';
-import { useModal } from '../../hooks/useModal';
+} from '@/services/api/loans.api';
+import { useModal } from '@/hooks/useModal';
 import { FaEdit, FaPlus, FaRegTrashAlt } from 'react-icons/fa';
-import checkForm from '../../utils/checkForm';
+import checkForm from '@/utils/checkForm';
 
 const useLoans = () => {
   const [action, setAction] = useState('VIEW');

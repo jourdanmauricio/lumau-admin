@@ -6,7 +6,7 @@ import { Navigate } from 'react-router-dom';
 const AuthRoute = (props) => {
   const isLogged = useUserStore((state) => state.isLogged);
   if (!isLogged) {
-    return <Navigate to="/" />;
+    return <Navigate to="/login" />;
   }
   return props.children;
 };

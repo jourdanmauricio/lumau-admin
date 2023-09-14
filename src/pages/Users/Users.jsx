@@ -1,4 +1,3 @@
-import Layout from '@/components/Layout/layout';
 import useUsers from './useUsers';
 import NewEditUser from './NewEditUser';
 import DataTable from 'react-data-table-component';
@@ -26,7 +25,7 @@ const Users = () => {
   } = useUsers();
 
   return (
-    <Layout>
+    <>
       <div className="relative">
         <lumau-message
           id="form-error-users"
@@ -71,7 +70,7 @@ const Users = () => {
           </Modal>
         )}
       </div>
-    </Layout>
+    </>
   );
 };
 export default Users;

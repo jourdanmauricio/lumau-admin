@@ -1,14 +1,23 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+
+import { useEffect, useState } from 'react';
 import { useUserStore } from '@/store/user';
 import { NavLink } from 'react-router-dom';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import Nav from '../Nav/Nav';
 import { menuItems } from '@/utils/menuItems';
 import '@/components/lumau-spinner.js';
+import { useSectionsStore } from '../../store/sections';
 
-const Layout = (props) => {
+const Layout = () => {
   const user = useUserStore((state) => state.user);
+  const { getAllSections } = useSectionsStore();
+
+  useEffect(() => {
+    getAllSections();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const [minItems, setMinItems] = useState(false);
 
@@ -39,8 +48,8 @@ const Layout = (props) => {
 
           {menuItems.map(
             (feature) =>
-              feature.role.includes(user.role) &&
-              user.attributes.includes(feature.name) && (
+              feature.role.includes(user.role) && (
+                // user.attributes.includes(feature.name) &&
                 <NavLink
                   key={feature.id}
                   to={feature.route}
@@ -61,7 +70,8 @@ const Layout = (props) => {
           className={`w-full ml-0 py-4 px-4 transform transition duration-500 ease-in-out border-l border-solid border-slate-300 dark:border-slate-700 bg-text-color`}
         >
           <lumau-spinner id="lumau-spinner"></lumau-spinner>
-          {props.children}
+          {/* {props.children} */}
+          <Outlet />
         </section>
       </main>
     </div>

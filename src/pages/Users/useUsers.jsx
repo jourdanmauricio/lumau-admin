@@ -7,7 +7,6 @@ import checkForm from '@/utils/checkForm';
 import { FaEdit, FaPlus, FaRegTrashAlt } from 'react-icons/fa';
 import { useModal } from '../../hooks/useModal';
 import { menuItems } from '@/utils/menuItems';
-// import { createFeature } from '../../services/api/features.api';
 
 const useUsers = () => {
   const [users, setUsers] = useState(null);

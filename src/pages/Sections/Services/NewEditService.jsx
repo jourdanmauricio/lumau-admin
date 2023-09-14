@@ -3,7 +3,7 @@
 import '@/components/lumau-input.js';
 import '@/components/lumau-text-area.js';
 import '@/components/lumau-message.js';
-import AddPicture from '../../components/AddPicture/AddPicture';
+import AddPicture from '../../../components/AddPicture/AddPicture';
 
 const NewEditService = ({ onSubmit, action, onCancelDelete, currentData }) => {
   return (

@@ -1,6 +1,5 @@
 import DataTable from 'react-data-table-component';
 import { Modal } from '@/components/Modal/Modal';
-import Layout from '@/components/Layout/layout';
 import NewEditLoan from './NewEditLoan';
 import DeleteLoan from './DeleteLoan';
 import useLoans from './useLoans';
@@ -21,7 +20,7 @@ const Loans = () => {
     onDelete,
   } = useLoans();
   return (
-    <Layout>
+    <>
       <div className="relative">
         <lumau-message
           id="form-error-loans"
@@ -62,7 +61,7 @@ const Loans = () => {
           </Modal>
         )}
       </div>
-    </Layout>
+    </>
   );
 };
 export default Loans;

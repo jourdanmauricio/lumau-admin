@@ -58,7 +58,7 @@ const Tabs = ({ handleSelect }) => {
   const handleDelete = async () => {
     try {
       setLoading(true);
-      console.log('selected', selected);
+
       await deleteImage(selected.id);
       const newImages = images.filter((image) => image.id === selected.id);
       setSelected(null);
@@ -75,7 +75,7 @@ const Tabs = ({ handleSelect }) => {
     try {
       setLoading(true);
       const cloudImage = await createCloudImage(file, user);
-      console.log('cloudImage', cloudImage);
+
       const obj = {
         id: cloudImage.id,
         assetId: cloudImage.asset_id,
@@ -96,8 +96,6 @@ const Tabs = ({ handleSelect }) => {
 
       const upload = await createImage(obj);
 
-      console.log('upload', upload);
-
       setImages([upload, ...images]);
       setToggleState(2);
       setPicture(null);
@@ -114,7 +112,7 @@ const Tabs = ({ handleSelect }) => {
 
   return (
     <>
-      {location.pathname !== '/images' && (
+      {location.pathname !== '/sections/images' && (
         <>
           <h2 className="title-modal">Imágenes</h2>
           <hr className="mt-1" />

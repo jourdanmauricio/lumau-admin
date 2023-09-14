@@ -1,11 +1,10 @@
-import Layout from '@/components/Layout/layout';
-// import axios from 'axios';
 import { regeneratePage } from '../../services/api/auth.api';
 import { useNotification } from '../../components/Notifications/NotificationProvider';
 import { config } from '../../config/config';
-// import Tabs from './Tabs/Tabs';
+// import { useUserStore } from '../../store/user';
 
 const Dashboard = () => {
+  // const user = useUserStore((state) => state.user);
   const dispatchNotif = useNotification();
   const handleRegenerateWeb = async () => {
     try {
@@ -27,16 +26,16 @@ const Dashboard = () => {
   };
 
   return (
-    <Layout>
+    <>
       <h1 className="text-gray-900 dark:text-slate-100">Dashboard</h1>
-      {/* <Tabs /> */}
+
       <button
         className="btn-confirm"
         onClick={handleRegenerateWeb}
       >
         Regerar página web
       </button>
-    </Layout>
+    </>
   );
 };
 

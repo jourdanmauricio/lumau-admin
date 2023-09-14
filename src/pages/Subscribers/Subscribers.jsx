@@ -1,4 +1,3 @@
-import Layout from '@/components/Layout/layout';
 import DataTable from 'react-data-table-component';
 import useSubscribers from './useSubscribers';
 import '@/components/lumau-message.js';
@@ -17,7 +16,7 @@ const Subscribers = () => {
     currentData,
   } = useSubscribers();
   return (
-    <Layout>
+    <>
       <div className="relative">
         <lumau-message
           id="form-error-subscribers"
@@ -48,7 +47,7 @@ const Subscribers = () => {
           />
         </Modal>
       )}
-    </Layout>
+    </>
   );
 };
 export default Subscribers;

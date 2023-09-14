@@ -1,4 +1,3 @@
-import Layout from '@/components/Layout/layout';
 import { Modal } from '@/components/Modal/Modal';
 import useProfile from './useProfile';
 import EditProfile from './EditProfile';
@@ -14,7 +13,7 @@ const Profile = () => {
     handleCancel,
   } = useProfile();
   return (
-    <Layout>
+    <>
       <div className="w-full bg-text-color min-w-[300px] p-4 rounded shadow-[0_1px_4px_rgba(0,0,0,0.16)]">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="tracking-wide leading-relaxed">
@@ -52,7 +51,7 @@ const Profile = () => {
           userId={user.id}
         />
       </Modal>
-    </Layout>
+    </>
   );
 };
 export default Profile;

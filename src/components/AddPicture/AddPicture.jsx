@@ -13,7 +13,6 @@ const AddPicture = ({ currentData }) => {
   const [altImage, setAltImage] = useState(currentData.altImage);
 
   const handleSelect = (url) => {
-    console.log('URL', url);
     const path = url.split('/');
     const altImage = path[path.length - 1];
     const altImage2 = document.getElementById('altImage');
@@ -21,7 +20,6 @@ const AddPicture = ({ currentData }) => {
 
     setAltImage(`Imagen ${altImage}`);
 
-    console.log('path', altImage);
     setImage(url);
     closeModal();
   };

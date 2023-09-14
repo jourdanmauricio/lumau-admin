@@ -1,15 +1,16 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useMemo, useState } from 'react';
-import { useUserStore } from '../../store/user';
+import { useUserStore } from '@/store/user';
 import { useNotification } from '@/components/Notifications/NotificationProvider';
 import {
   createService,
   deleteService,
   getServices,
   updateService,
-} from '../../services/api/services.api';
-import { useModal } from '../../hooks/useModal';
+} from '@/services/api/services.api';
+import { useModal } from '@/hooks/useModal';
 import { FaEdit, FaPlus, FaRegTrashAlt } from 'react-icons/fa';
-import checkForm from '../../utils/checkForm';
+import checkForm from '@/utils/checkForm';
 
 const useServices = () => {
   const [action, setAction] = useState('VIEW');
@@ -88,6 +89,12 @@ const useServices = () => {
       ),
     },
   ];
+
+  const ExpandedComponent = ({ data }) => (
+    <div className="p-4">
+      <p>Contenido: {data.content} </p>
+    </div>
+  );
 
   const actionsMenu = useMemo(() => {
     return (
@@ -201,6 +208,7 @@ const useServices = () => {
     isOpenModal,
     onCancelDelete,
     onSubmit,
+    ExpandedComponent,
   };
 };
 export default useServices;

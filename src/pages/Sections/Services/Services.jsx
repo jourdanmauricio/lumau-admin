@@ -1,6 +1,5 @@
 import DataTable from 'react-data-table-component';
 import { Modal } from '@/components/Modal/Modal';
-import Layout from '@/components/Layout/layout';
 import NewEditLoan from './NewEditService';
 import DeleteLoan from './DeleteService';
 import useServices from './useServices';
@@ -19,9 +18,10 @@ const Services = () => {
     onCancelDelete,
     isOpenModal,
     onDelete,
+    ExpandedComponent,
   } = useServices();
   return (
-    <Layout>
+    <>
       <div className="relative">
         <lumau-message
           id="form-error-services"
@@ -38,6 +38,8 @@ const Services = () => {
             data={services}
             theme={theme}
             actions={actionsMenu}
+            expandableRows
+            expandableRowsComponent={ExpandedComponent}
             pagination
           />
         )}
@@ -62,7 +64,7 @@ const Services = () => {
           </Modal>
         )}
       </div>
-    </Layout>
+    </>
   );
 };
 export default Services;

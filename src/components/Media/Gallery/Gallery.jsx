@@ -93,7 +93,7 @@ const Gallery = ({
           ))}
       </div>
 
-      {location.pathname !== '/images' && selected && (
+      {location.pathname !== '/sections/images' && selected && (
         <button
           onClick={() => onDoubleClick(selected)}
           className="btn-confirm mb-5 block ml-auto"

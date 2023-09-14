@@ -1,20 +1,25 @@
 import { useEffect, useState } from 'react';
+import { useSectionsStore } from '../../store/sections';
 
-const useFeatures = ({ attributes, setAttributes, menuItems }) => {
+const useFeatures = ({ attributes, setAttributes }) => {
   const [options, setOptions] = useState([]);
   const [currentAtrribute, setCurrentAtrribute] = useState(null);
   const [currentOption, setCurrentOption] = useState(null);
 
+  const { sections } = useSectionsStore();
+
+  console.log('Sections', sections);
+
   useEffect(() => {
     // Convertir los arrays en conjuntos
     const attribs = new Set(attributes);
-    const options = new Set(menuItems);
+    const options = new Set(sections);
     // Filtrar los elementos que no se encuentran en el segundo conjunto
     const resultado = [
       ...new Set([...options].filter((x) => !attribs.has(x.name))),
     ];
     setOptions(resultado.map((res) => res.name));
-  }, [attributes, menuItems]);
+  }, [attributes, sections]);
 
   const handleSetAttribute = (attribute) => {
     currentAtrribute === attribute
