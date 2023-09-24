@@ -27,14 +27,14 @@ const Dashboard = () => {
 
   return (
     <>
-      <h1 className="text-gray-900 dark:text-slate-100">Dashboard</h1>
-
-      <button
-        className="btn-confirm"
-        onClick={handleRegenerateWeb}
-      >
-        Regerar página web
-      </button>
+      <section className="p-4">
+        <button
+          className="btn-confirm"
+          onClick={handleRegenerateWeb}
+        >
+          Regerar página web
+        </button>
+      </section>
     </>
   );
 };
