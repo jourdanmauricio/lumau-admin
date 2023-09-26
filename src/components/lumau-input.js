@@ -89,8 +89,9 @@ class LumauInput extends LitElement {
     }
 
     input:focus::-webkit-input-placeholder {
-      opacity: 1;
+      opacity: 0.3;
       color: var(--lumau-input-text-color, #334155);
+      color: #fff;
     }
 
     input:not(:placeholder-shown) + label,

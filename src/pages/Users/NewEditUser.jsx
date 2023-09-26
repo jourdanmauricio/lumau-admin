@@ -187,6 +187,19 @@ const NewEditUser = ({
           <div className="w-full">
             <lumau-input
               small
+              id="repo"
+              label="Repositorio Github"
+              name="repo"
+              placeholder="blackwing-astro"
+              value={currentData.repo}
+              selectOnFocus
+            ></lumau-input>
+          </div>
+
+          {/* web */}
+          <div className="w-full">
+            <lumau-input
+              small
               id="url"
               label="Web"
               name="url"

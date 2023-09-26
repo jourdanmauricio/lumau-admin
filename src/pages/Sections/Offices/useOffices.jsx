@@ -1,54 +1,58 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useMemo, useState } from 'react';
-import { getUsers } from '@/services/api/users.api';
 import { useUserStore } from '@/store/user';
 import { useNotification } from '@/components/Notifications/NotificationProvider';
-import { createUser, updateUser, deleteUser } from '@/services/api/users.api';
-import checkForm from '@/utils/checkForm';
+import {
+  createOffice,
+  deleteOffice,
+  getOffices,
+  updateOffice,
+} from '@/services/api/offices.api';
+import { useModal } from '@/hooks/useModal';
 import { FaEdit, FaPlus, FaRegTrashAlt } from 'react-icons/fa';
-import { useModal } from '../../hooks/useModal';
-import { menuItems } from '@/utils/menuItems';
+import checkForm from '@/utils/checkForm';
 
-const useUsers = () => {
-  const [users, setUsers] = useState(null);
+const useOffices = () => {
   const [action, setAction] = useState('VIEW');
-  const [currentData, setCurrentData] = useState({ attributes: [] });
+  const [offices, setOffices] = useState([]);
+  const [currentData, setCurrentData] = useState({});
   const [isOpenModal, openModal, closeModal] = useModal(false);
   const theme = useUserStore((state) => state.theme);
   const dispatchNotif = useNotification();
+  const user = useUserStore((state) => state.user);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await getUsers();
-        setUsers(data);
+        const data = await getOffices(user);
+        setOffices(data);
       } catch (error) {
-        let message = 'Error obteniendo usuarios';
+        let message = 'Error obteniendo las oficinas';
         if (error.response)
           message = `${error.response.status}: ${error.response.statusText}`;
 
-        const formError = document.getElementById('form-error-users');
+        const formError = document.getElementById('form-error-offices');
         formError.setAttribute('errorForm', message);
       }
     };
     fetchData();
-  }, []);
+  }, [user]);
 
-  const USERS_COLUMNS = [
+  const OFFICE_COLUMNS = [
     {
-      name: 'Username',
-      selector: (row) => row.username,
+      name: 'Ciudad',
+      selector: (row) => row.city,
       sortable: true,
     },
     {
-      name: 'Deploy',
-      selector: (row) => row.deploy,
+      name: 'Dirección',
+      selector: (row) => row.address,
       sortable: true,
     },
     {
-      name: 'Role',
-      selector: (row) => row.role,
-      // sortable: true,
+      name: 'Order',
+      selector: (row) => row.order,
+      sortable: true,
     },
     {
       name: 'Acciones',
@@ -73,6 +77,11 @@ const useUsers = () => {
     },
   ];
 
+  const onNew = () => {
+    setAction('NEW');
+    setCurrentData({});
+  };
+
   const actionsMenu = useMemo(() => {
     return (
       <div
@@ -90,35 +99,35 @@ const useUsers = () => {
     openModal();
   };
 
-  const onDelete = async (userId) => {
+  const onDelete = async (officeId) => {
     try {
-      const { id } = await deleteUser(userId);
-      const newUsers = users.filter((user) => user.id !== parseInt(id));
-      setUsers(newUsers);
+      const { id } = await deleteOffice(officeId);
+      const newOffices = offices.filter((office) => office.id !== parseInt(id));
+      setOffices(newOffices);
       dispatchNotif({
         type: 'SUCCESS',
-        message: 'Usuario eliminado',
+        message: 'Oficina eliminada',
       });
-      closeModal();
-      onChangeAction('VIEW');
+      onCancelDelete();
     } catch (error) {
-      let message = 'Error eliminando el usuario';
+      let message = 'Error eliminando la oficina';
       if (error.response)
         message = `${error.response.status}: ${error.response.statusText}`;
 
-      const formError = document.getElementById('form-error-delete-users');
+      const formError = document.getElementById('form-error-delete-office');
       formError.setAttribute('errorForm', message);
     }
+  };
+
+  const onChangeAction = (action) => {
+    setAction(action);
+    const formError = document.getElementById('form-error-offices');
+    formError.removeAttribute('errorForm');
   };
 
   const onEdit = (row) => {
     setCurrentData(row);
     setAction('EDIT');
-  };
-
-  const onNew = () => {
-    setCurrentData({ attributes: [] });
-    setAction('NEW');
   };
 
   const onSubmit = async (e) => {
@@ -127,68 +136,46 @@ const useUsers = () => {
 
     try {
       if (action === 'NEW') {
-        const resp = await createUser(data);
+        const resp = await createOffice(data);
 
-        setUsers([...users, resp]);
+        setOffices([...offices, resp]);
         dispatchNotif({
           type: 'SUCCESS',
-          message: 'Usuario creado!',
+          message: 'Oficina creada!',
         });
       } else {
         data.id = currentData.id;
-        const updUser = await updateUser(data);
+        const updOffice = await updateOffice(data);
 
-        // updUser.attributes.map(async (attrib) => {
-        //   const feature = menuItems.find(
-        //     (item) => item.name === attrib && item.feature === true
-        //   );
-        //   if (feature) {
-        //     console.log('feature', feature);
-        //     const obj = {
-        //       name: feature.name,
-        //       value: [],
-        //       userId: currentData.id,
-        //       description: feature.description,
-        //     };
-        //     const resp = await createFeature(obj);
-        //     console.log('RESP feature', resp);
-        //   }
-        // });
-
-        const newUsers = users.map((user) =>
-          user.id === updUser.id ? updUser : user
+        const newOffices = offices.map((office) =>
+          office.id === updOffice.id ? updOffice : office
         );
-        setUsers(newUsers);
+        setOffices(newOffices);
 
         dispatchNotif({
           type: 'SUCCESS',
-          message: 'Usuario modificado!',
+          message: 'Oficina modificada!',
         });
       }
-      setCurrentData({ attributes: [] });
+      setCurrentData({});
       onChangeAction('VIEW');
     } catch (error) {
+      console.log('error', error);
       let message = `Error ${
         action === 'NEW' ? 'creando' : 'modificando'
-      } el usuario`;
+      } la oficina`;
       if (error.response)
         message = `${error.response.status}: ${error.response.statusText}`;
 
-      const formError = document.getElementById('form-error-users');
+      const formError = document.getElementById('form-error-offices');
       formError.setAttribute('errorForm', message);
     } finally {
       // loading.removeAttribute('loading');
     }
   };
 
-  const onChangeAction = (action) => {
-    setAction(action);
-    const formError = document.getElementById('form-error-users');
-    formError.removeAttribute('errorForm');
-  };
-
   const onCancelDelete = () => {
-    setCurrentData({ attributes: [] });
+    setCurrentData({});
     closeModal();
     onChangeAction('VIEW');
   };
@@ -197,22 +184,16 @@ const useUsers = () => {
     <div className="p-4">
       <div className="flex gap-8">
         <div className="w-full md:w1/2 p-2 rounded border border-solid dark:border-gray-600 border-gray-200 shadow-xl dark:shadow-lg dark:shadow-gray-700/50">
-          <p>User: {data.username}</p>
-          <p>Nombre: {data.name}</p>
-          <p>Email: {data.email}</p>
-          <p>Web: {data.url}</p>
-          <p>Repo: {data.repo}</p>
+          <p>Ciudad: {data.city}</p>
+          <p>Dirección: {data.address}</p>
+          <p>Provincia: {data.province}</p>
           <p>Teléfono:{data.phone}</p>
-          <p>DNI: {data.dni}</p>
-          <p>Deploy: {data.deploy}</p>
-          <p>Role:{data.role}</p>
-          <p>Atributos: {data.attributes}</p>
+          <p>Email: {data.email}</p>
         </div>
         <div className="w-full md:w1/2 p-2 rounded border border-solid dark:border-gray-600 border-gray-200 shadow-xl dark:shadow-lg dark:shadow-gray-700/50">
-          <p>Name: {data.cloudName}</p>
-          <p>Folder: {data.cloudFolder}</p>
-          <p>Api Key: {data.cloudApiKey}</p>
-          <p>Preset: {data.cloudPreset}</p>
+          <p>Latitud:{data.lat}</p>
+          <p>Longitud:{data.lng}</p>
+          <p>Orden: {data.order}</p>
         </div>
       </div>
     </div>
@@ -220,19 +201,18 @@ const useUsers = () => {
   );
 
   return {
-    users,
-    USERS_COLUMNS,
+    offices,
+    OFFICE_COLUMNS,
+    action,
     theme,
     actionsMenu,
-    action,
+    handleDelete,
     currentData,
-    onSubmit,
-    onChangeAction,
-    onCancelDelete,
     onDelete,
     isOpenModal,
-    menuItems,
+    onCancelDelete,
+    onSubmit,
     ExpandedComponent,
   };
 };
-export default useUsers;
+export default useOffices;

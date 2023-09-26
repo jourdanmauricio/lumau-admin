@@ -19,6 +19,7 @@ const Subscribers = React.lazy(() => import('@/pages/Subscribers/Subscribers'));
 const Contacts = React.lazy(() => import('@/pages/Contacts/Contacts'));
 const Users = React.lazy(() => import('@/pages/Users/Users'));
 const Loans = React.lazy(() => import('@/pages/Sections/Loans/Loans'));
+const Offices = React.lazy(() => import('@/pages/Sections/Offices/Offices'));
 const Services = React.lazy(() => import('@/pages/Sections/Services/Services'));
 const Images = React.lazy(() => import('@/pages/Sections/Images/Images'));
 const Sections = React.lazy(() => import('@/pages/Sections/Sections'));
@@ -133,6 +134,14 @@ function AppRoutes() {
                 element={
                   <AuthRoute>
                     <Loans />
+                  </AuthRoute>
+                }
+              />
+              <Route
+                path="offices"
+                element={
+                  <AuthRoute>
+                    <Offices />
                   </AuthRoute>
                 }
               />

@@ -22,8 +22,6 @@ const RecoveryPassword = () => {
     const { data } = checkForm(e);
     if (!data) return;
 
-    console.log('DATA', data);
-
     try {
       const options = {
         method: 'POST',

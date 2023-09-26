@@ -1,14 +1,14 @@
 import { regeneratePage } from '../../services/api/auth.api';
 import { useNotification } from '../../components/Notifications/NotificationProvider';
-import { config } from '../../config/config';
-// import { useUserStore } from '../../store/user';
+// import { config } from '../../config/config';
+import { useUserStore } from '../../store/user';
 
 const Dashboard = () => {
-  // const user = useUserStore((state) => state.user);
+  const user = useUserStore((state) => state.user);
   const dispatchNotif = useNotification();
   const handleRegenerateWeb = async () => {
     try {
-      const resp = await regeneratePage({ repo: config.repo });
+      const resp = await regeneratePage({ repo: user.repo });
       console.log('Resp', resp);
       if (resp.status === 200) {
         dispatchNotif({
