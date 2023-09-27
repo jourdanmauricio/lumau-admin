@@ -2,6 +2,8 @@ import { Modal } from '@/components/Modal/Modal';
 import useProfile from './useProfile';
 import EditProfile from './EditProfile';
 import ChangePassword from './ChangePassword/ChangePassword';
+import SocialNetworks from './SocialNetworks/SocialNetworks';
+import { FaTelegramPlane, FaUserCog } from 'react-icons/fa';
 
 const Profile = () => {
   const {
@@ -11,6 +13,8 @@ const Profile = () => {
     openModalPass,
     closeModalPass,
     handleCancel,
+    toggleState,
+    toggleTab,
   } = useProfile();
   return (
     <>
@@ -36,10 +40,53 @@ const Profile = () => {
         </div>
       </div>
 
-      <EditProfile
-        user={user}
-        handleSubmit={handleSubmit}
-      ></EditProfile>
+      <div className="tabs__container mt-10">
+        <div className="tabs__bloc">
+          <div
+            onClick={() => toggleTab(1)}
+            className={toggleState === 1 ? 'tabs active__tabs' : 'tabs'}
+          >
+            <FaUserCog
+              color="teal"
+              size={20}
+            />
+            <span>Perfil</span>
+          </div>
+          <div
+            onClick={() => toggleTab(2)}
+            className={toggleState === 2 ? 'tabs active__tabs' : 'tabs'}
+          >
+            <FaTelegramPlane
+              color="green"
+              size={20}
+            />
+            <span>Redes sociales</span>
+          </div>
+        </div>
+        <div className="tabs__content">
+          <div
+            className={
+              toggleState === 1
+                ? 'tab__content active__content'
+                : 'tab__content'
+            }
+          >
+            <EditProfile
+              user={user}
+              handleSubmit={handleSubmit}
+            ></EditProfile>
+          </div>
+          <div
+            className={
+              toggleState === 2
+                ? 'tab__content active__content'
+                : 'tab__content'
+            }
+          >
+            <SocialNetworks />
+          </div>
+        </div>
+      </div>
 
       <Modal
         width="md"

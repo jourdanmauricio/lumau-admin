@@ -258,7 +258,7 @@ class LumauInput extends LitElement {
       return;
     }
 
-    if (this.pattern) {
+    if (this.pattern && this.value.length > 0) {
       let regex = new RegExp(this.pattern);
       if (regex.exec(this.value) === null) {
         this.internals_.setValidity({ customError: true }, this.patternerror);

@@ -128,19 +128,19 @@ body {
 
 /*   Tabs   */
 .tabs__container {
-  @apply flex flex-col relative w-full bg-slate-300 break-words border border-solid border-gray-500;
+  @apply flex flex-col relative w-full bg-slate-300 break-words border border-solid border-gray-500 dark:bg-slate-800;
 }
 .tabs__bloc {
   @apply flex;
 }
 .tabs {
-  @apply relative p-[15px] text-base text-center w-1/2 text-slate-800 bg-gray-200 cursor-pointer border-b border-solid border-gray-500 outline-0 flex items-center justify-center gap-4;
+  @apply relative p-[15px] text-base text-center w-1/2 text-slate-800 bg-gray-200 cursor-pointer border-b border-solid border-gray-500 outline-0 flex items-center justify-center gap-4 dark:bg-slate-700 dark:text-slate-100;
 }
 .tabs:not(:last-child) {
-  border-right: 1px solid rgba(0, 0, 0, 0.274);
+  @apply border-r border-solid border-r-slate-950 dark:border-slate-300;
 }
 .active__tabs {
-  @apply bg-white border-b border-solid border-transparent;
+  @apply bg-white dark:bg-slate-800 border-b border-solid border-transparent;
 }
 .active__tabs::before {
   content: '';
@@ -151,13 +151,13 @@ body {
   transform: translateX(-50%);
   width: calc(100% + 2px);
   height: 5px;
-  background: rgb(88, 147, 241);
+  background: #5b21b6;
 }
 .tabs__content {
-  @apply grow bg-white;
+  @apply grow bg-white dark:bg-slate-800;
 }
 .tab__content {
-  @apply bg-white py-0 px-5 w-full h-full hidden;
+  @apply bg-white dark:bg-slate-800 pb-5 py-0 px-5 w-full h-full hidden;
 }
 .tab__content h2 {
   @apply pb-1 pt-0 px-0;
