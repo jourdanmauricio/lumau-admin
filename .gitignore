@@ -2,6 +2,7 @@
 .env.production
 package-lock.json
 GUIA.txt
+GUIA-CLOUDINARY.txt
 
 # Logs
 logs

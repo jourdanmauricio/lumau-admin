@@ -39,12 +39,11 @@ const checkForm = (e) => {
         if (element.options[i].selected) {
           options.push(element.options[i].value);
         }
-        console.log('name', data[element.name]);
       }
       data[element.name] = options;
     }
 
-    if (element.nodeName === 'INPUT' && element.type === 'hidden') {
+    if (element.id === 'attributes') {
       data[element.name] = element.getAttribute('data-custom').split(',');
     }
   }

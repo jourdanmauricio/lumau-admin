@@ -65,7 +65,7 @@ const SocialNetworks = () => {
               id="whatsapp"
               label="Whatsapp"
               name="whatsapp"
-              placeholder="https://wa.me/5491158046525?text=Hola, quiero rebir información"
+              placeholder="https://wa.me/5492262470952?text=Hola, quiero rebir información"
               pattern="(?:(?:http|https):\/\/)?(?:www\.)?(?:wa\.me)\/.*$"
               patternerror="Ingrese un link válido para Whatsapp"
               value={networks.whatsapp}

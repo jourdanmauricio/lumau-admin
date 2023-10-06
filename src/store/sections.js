@@ -50,9 +50,14 @@ export const useSectionsStore = create((set, get) => ({
       const { sections } = get();
       const updSection = await updateSection(data);
 
+      console.log('UPDATE SECTION', typeof updSection.id);
+      console.log('SECTION[0]', typeof sections[0].id);
+
       const newSections = sections.map((section) =>
         section.id === updSection.id ? updSection : section
       );
+
+      console.log('sections', newSections);
       set({
         sections: newSections,
         error: null,

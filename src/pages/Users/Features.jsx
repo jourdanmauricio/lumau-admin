@@ -2,7 +2,7 @@
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import usefeatures from './useFeatures';
 
-const Features = ({ attributes, setAttributes, menuItems }) => {
+const Features = ({ attributes, setAttributes }) => {
   const {
     handleSetAttribute,
     handleSetOption,
@@ -11,7 +11,7 @@ const Features = ({ attributes, setAttributes, menuItems }) => {
     currentAtrribute,
     options,
     currentOption,
-  } = usefeatures({ attributes, setAttributes, menuItems });
+  } = usefeatures({ attributes, setAttributes });
 
   return (
     <>

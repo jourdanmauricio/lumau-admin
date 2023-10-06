@@ -1,46 +1,42 @@
-import useUsers from './useUsers';
-import NewEditUser from './NewEditUser';
 import DataTable from 'react-data-table-component';
 import { Modal } from '@/components/Modal/Modal';
-import DeleteUser from './DeleteUser';
+import Office from './Post';
+import DeleteOffice from './DeletePost';
+import usePosts from './usePosts';
 import '@/components/lumau-message.js';
 import '@/styles/dataTableThemes';
 
-const Users = () => {
+const Offices = () => {
   const {
-    users,
-    USERS_COLUMNS,
+    posts,
+    POST_COLUMNS,
+    action,
     theme,
     actionsMenu,
-    action,
+    // handleDelete,
     currentData,
-    onSubmit,
-    onCancelDelete,
     onDelete,
     isOpenModal,
-    isOpenModalPass,
-    openModalPass,
-    closeModalPass,
-    // menuItems,
+    onCancelDelete,
+    onSubmit,
     ExpandedComponent,
-  } = useUsers();
-
+  } = usePosts();
   return (
     <>
       <div className="relative">
         <lumau-message
-          id="form-error-users"
+          id="form-error-posts"
           errorForm=""
         ></lumau-message>
       </div>
-      <div>
-        {action === 'VIEW' && users && (
+
+      <div className="h-full">
+        {action === 'VIEW' && posts && (
           <DataTable
-            dense
-            // selectableRows
-            title="Usuarios"
-            columns={USERS_COLUMNS}
-            data={users}
+            // dense
+            title="Posts"
+            columns={POST_COLUMNS}
+            data={posts}
             theme={theme}
             actions={actionsMenu}
             expandableRows
@@ -49,15 +45,11 @@ const Users = () => {
           />
         )}
         {(action === 'NEW' || action === 'EDIT') && (
-          <NewEditUser
+          <Office
             currentData={currentData}
             action={action}
             onSubmit={onSubmit}
             onCancelDelete={onCancelDelete}
-            isOpenModalPass={isOpenModalPass}
-            openModalPass={openModalPass}
-            closeModalPass={closeModalPass}
-            // menuItems={menuItems}
           />
         )}
         {isOpenModal && (
@@ -65,7 +57,7 @@ const Users = () => {
             isOpenModal={isOpenModal}
             closeModal={onCancelDelete}
           >
-            <DeleteUser
+            <DeleteOffice
               currentData={currentData}
               onDelete={onDelete}
               onCancelDelete={onCancelDelete}
@@ -76,4 +68,4 @@ const Users = () => {
     </>
   );
 };
-export default Users;
+export default Offices;

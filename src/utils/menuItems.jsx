@@ -6,8 +6,6 @@ import {
   FaTelegramPlane,
   FaTasks,
   FaCogs,
-  // FaWrench,
-  // FaImages,
 } from 'react-icons/fa';
 
 export const menuItems = [
@@ -82,34 +80,4 @@ export const menuItems = [
     description: 'Configuración de secciones de la página web',
     role: ['admin', 'user'],
   },
-  // {
-  //   id: 6,
-  //   name: 'Préstamos',
-  //   route: '/loans',
-  //   menu: true,
-  //   feature: false,
-  //   icon: FaCoins,
-  //   description: 'Configuración de tipos de préstamos - financieras',
-  //   role: ['admin', 'user'],
-  // },
-  // {
-  //   id: 7,
-  //   name: 'Servicios',
-  //   route: '/services',
-  //   menu: true,
-  //   feature: false,
-  //   icon: FaWrench,
-  //   description: 'Configuración de servicios',
-  //   role: ['admin', 'user'],
-  // },
-  // {
-  //   id: 8,
-  //   name: 'Imágenes',
-  //   route: '/images',
-  //   menu: true,
-  //   feature: false,
-  //   icon: FaImages,
-  //   description: 'Configuración de Imágenes - Cloudinary',
-  //   role: ['admin', 'user'],
-  // },
 ];

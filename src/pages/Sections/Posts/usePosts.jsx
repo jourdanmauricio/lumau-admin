@@ -1,54 +1,66 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useMemo, useState } from 'react';
-import { getUsers } from '@/services/api/users.api';
 import { useUserStore } from '@/store/user';
 import { useNotification } from '@/components/Notifications/NotificationProvider';
-import { createUser, updateUser, deleteUser } from '@/services/api/users.api';
-import checkForm from '@/utils/checkForm';
+import {
+  createPost,
+  deletePost,
+  getPosts,
+  updatePost,
+} from '@/services/api/posts.api';
+import { useModal } from '@/hooks/useModal';
 import { FaEdit, FaPlus, FaRegTrashAlt } from 'react-icons/fa';
-import { useModal } from '../../hooks/useModal';
-// import { menuItems } from '@/utils/menuItems';
+import checkForm from '@/utils/checkForm';
 
-const useUsers = () => {
-  const [users, setUsers] = useState(null);
+const usePosts = () => {
   const [action, setAction] = useState('VIEW');
-  const [currentData, setCurrentData] = useState({ attributes: [] });
+  const [posts, setPosts] = useState([]);
+  const [currentData, setCurrentData] = useState({});
   const [isOpenModal, openModal, closeModal] = useModal(false);
   const theme = useUserStore((state) => state.theme);
   const dispatchNotif = useNotification();
+  const user = useUserStore((state) => state.user);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await getUsers();
-        setUsers(data);
+        const data = await getPosts(user);
+        setPosts(data);
       } catch (error) {
-        let message = 'Error obteniendo usuarios';
+        let message = 'Error obteniendo los posts';
         if (error.response)
           message = `${error.response.status}: ${error.response.statusText}`;
 
-        const formError = document.getElementById('form-error-users');
+        const formError = document.getElementById('form-error-posts');
         formError.setAttribute('errorForm', message);
       }
     };
     fetchData();
-  }, []);
+  }, [user]);
 
-  const USERS_COLUMNS = [
+  const POST_COLUMNS = [
     {
-      name: 'Username',
-      selector: (row) => row.username,
-      sortable: true,
-    },
-    {
-      name: 'Deploy',
-      selector: (row) => row.deploy,
-      sortable: true,
-    },
-    {
-      name: 'Role',
-      selector: (row) => row.role,
+      name: 'Imagen',
+      // selector: (row) => row.image,
       // sortable: true,
+      width: '100px',
+      cell: (row) => (
+        <img
+          src={row.image}
+          alt={row.image_alt}
+        />
+      ),
+    },
+    {
+      name: 'Título',
+      selector: (row) => row.title,
+      sortable: true,
+    },
+    {
+      name: 'Order',
+      width: '90px',
+      selector: (row) => row.order,
+      sortable: true,
     },
     {
       name: 'Acciones',
@@ -73,6 +85,11 @@ const useUsers = () => {
     },
   ];
 
+  const onNew = () => {
+    setAction('NEW');
+    setCurrentData({});
+  };
+
   const actionsMenu = useMemo(() => {
     return (
       <div
@@ -90,25 +107,30 @@ const useUsers = () => {
     openModal();
   };
 
-  const onDelete = async (userId) => {
+  const onDelete = async (postId) => {
     try {
-      const { id } = await deleteUser(userId);
-      const newUsers = users.filter((user) => user.id !== parseInt(id));
-      setUsers(newUsers);
+      const { id } = await deletePost(postId);
+      const newPosts = posts.filter((post) => post.id !== parseInt(id));
+      setPosts(newPosts);
       dispatchNotif({
         type: 'SUCCESS',
-        message: 'Usuario eliminado',
+        message: 'Post eliminado',
       });
-      closeModal();
-      onChangeAction('VIEW');
+      onCancelDelete();
     } catch (error) {
-      let message = 'Error eliminando el usuario';
+      let message = 'Error eliminando el post';
       if (error.response)
         message = `${error.response.status}: ${error.response.statusText}`;
 
-      const formError = document.getElementById('form-error-delete-users');
+      const formError = document.getElementById('form-error-delete-post');
       formError.setAttribute('errorForm', message);
     }
+  };
+
+  const onChangeAction = (action) => {
+    setAction(action);
+    const formError = document.getElementById('form-error-posts');
+    formError.removeAttribute('errorForm');
   };
 
   const onEdit = (row) => {
@@ -116,79 +138,53 @@ const useUsers = () => {
     setAction('EDIT');
   };
 
-  const onNew = () => {
-    setCurrentData({ attributes: [] });
-    setAction('NEW');
-  };
-
   const onSubmit = async (e) => {
     const { data } = checkForm(e);
+    console.log('DATA', data);
     if (!data) return;
 
     try {
       if (action === 'NEW') {
-        const resp = await createUser(data);
+        const resp = await createPost(data);
 
-        setUsers([...users, resp]);
+        setPosts([...posts, resp]);
         dispatchNotif({
           type: 'SUCCESS',
-          message: 'Usuario creado!',
+          message: 'Post creado!',
         });
       } else {
         data.id = currentData.id;
-        const updUser = await updateUser(data);
+        const updPost = await updatePost(data);
 
-        // updUser.attributes.map(async (attrib) => {
-        //   const feature = menuItems.find(
-        //     (item) => item.name === attrib && item.feature === true
-        //   );
-        //   if (feature) {
-        //     console.log('feature', feature);
-        //     const obj = {
-        //       name: feature.name,
-        //       value: [],
-        //       userId: currentData.id,
-        //       description: feature.description,
-        //     };
-        //     const resp = await createFeature(obj);
-        //     console.log('RESP feature', resp);
-        //   }
-        // });
-
-        const newUsers = users.map((user) =>
-          user.id === updUser.id ? updUser : user
+        const newPosts = posts.map((post) =>
+          post.id === updPost.id ? updPost : post
         );
-        setUsers(newUsers);
+        setPosts(newPosts);
 
         dispatchNotif({
           type: 'SUCCESS',
-          message: 'Usuario modificado!',
+          message: 'Post modificado!',
         });
       }
-      setCurrentData({ attributes: [] });
+      setCurrentData({});
       onChangeAction('VIEW');
     } catch (error) {
+      console.log('error', error);
       let message = `Error ${
         action === 'NEW' ? 'creando' : 'modificando'
-      } el usuario`;
+      } el post`;
       if (error.response)
         message = `${error.response.status}: ${error.response.statusText}`;
 
-      const formError = document.getElementById('form-error-users');
+      const formError = document.getElementById('form-error-posts');
       formError.setAttribute('errorForm', message);
     } finally {
       // loading.removeAttribute('loading');
     }
   };
 
-  const onChangeAction = (action) => {
-    setAction(action);
-    const formError = document.getElementById('form-error-users');
-    formError.removeAttribute('errorForm');
-  };
-
   const onCancelDelete = () => {
-    setCurrentData({ attributes: [] });
+    setCurrentData({});
     closeModal();
     onChangeAction('VIEW');
   };
@@ -197,42 +193,38 @@ const useUsers = () => {
     <div className="p-4">
       <div className="flex gap-8">
         <div className="w-full md:w1/2 p-2 rounded border border-solid dark:border-gray-600 border-gray-200 shadow-xl dark:shadow-lg dark:shadow-gray-700/50">
-          <p>User: {data.username}</p>
-          <p>Nombre: {data.name}</p>
-          <p>Email: {data.email}</p>
-          <p>Web: {data.url}</p>
-          <p>Repo: {data.repo}</p>
-          <p>Teléfono:{data.phone}</p>
-          <p>DNI: {data.dni}</p>
-          <p>Deploy: {data.deploy}</p>
-          <p>Role:{data.role}</p>
-          <p>Atributos: {data.attributes}</p>
+          <p>Título: {data.title}</p>
+          <p>Slug: {data.slug}</p>
+          <p>Resumen: {data.excerpt}</p>
+          <p>Alt Imagen:{data.altImage}</p>
         </div>
         <div className="w-full md:w1/2 p-2 rounded border border-solid dark:border-gray-600 border-gray-200 shadow-xl dark:shadow-lg dark:shadow-gray-700/50">
-          <p>Name: {data.cloudName}</p>
-          <p>Folder: {data.cloudFolder}</p>
-          <p>Api Key: {data.cloudApiKey}</p>
-          <p>Preset: {data.cloudPreset}</p>
+          <p>Secciones:{data.sections}</p>
+          <p>Tipo: {data.type}</p>
+          <p>Orden: {data.order}</p>
         </div>
       </div>
+      <div
+        className="p-4 mt-4"
+        dangerouslySetInnerHTML={{
+          __html: data.content,
+        }}
+      ></div>
     </div>
-    // <pre>{JSON.stringify(data, null, 2)}</pre>
   );
 
   return {
-    users,
-    USERS_COLUMNS,
+    posts,
+    POST_COLUMNS,
+    action,
     theme,
     actionsMenu,
-    action,
     currentData,
-    onSubmit,
-    onChangeAction,
-    onCancelDelete,
     onDelete,
     isOpenModal,
-    // menuItems,
+    onCancelDelete,
+    onSubmit,
     ExpandedComponent,
   };
 };
-export default useUsers;
+export default usePosts;

@@ -230,6 +230,9 @@ class LumauInput extends LitElement {
     this._validate();
     if (!this.checkValidity()) this.error = this.validationMessage;
     this.internals_.setFormValue(this.value);
+
+    // const event = new Event('my-event', { bubbles: true, composed: true });
+    this.dispatchEvent(new Event('event'));
   }
 
   firstUpdated() {

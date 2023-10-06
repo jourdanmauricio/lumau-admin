@@ -14,7 +14,7 @@ export const createImage = async (image) => {
 };
 
 export const createCloudImage = async (file, user) => {
-  const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dbep4ggne/image/upload`;
+  const cloudinaryUrl = `https://api.cloudinary.com/v1_1/${user.cloudName}/image/upload`;
 
   file.public_id = file.name;
 

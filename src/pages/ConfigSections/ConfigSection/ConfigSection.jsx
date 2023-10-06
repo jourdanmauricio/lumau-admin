@@ -5,6 +5,8 @@ import '@/components/lumau-message.js';
 const ConfigSection = () => {
   const { handleSubmit, error, currentData, action } = useNewSection();
 
+  console.log('currentData', currentData);
+
   return (
     <>
       <div className="relative">
@@ -104,6 +106,7 @@ const ConfigSection = () => {
             name="description"
             placeholder="Para no olvidar..."
             //pattern="^.{1,5000}$"
+            value={currentData.description}
             rows="6"
             patternerror="Máximo 5000 caracteres"
             selectOnFocus

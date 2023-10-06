@@ -21,7 +21,6 @@ const NewEditUser = ({
     handleCancel,
     attributes,
     setAttributes,
-    // menuItems,
   } = useNewEditUser({ currentData });
 
   return (
