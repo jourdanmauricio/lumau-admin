@@ -24,6 +24,8 @@ const Services = React.lazy(() => import('@/pages/Sections/Services/Services'));
 const Images = React.lazy(() => import('@/pages/Sections/Images/Images'));
 const Sections = React.lazy(() => import('@/pages/Sections/Sections'));
 const Posts = React.lazy(() => import('@/pages/Sections/Posts/Posts'));
+const Lessons = React.lazy(() => import('@/pages/Sections/Lessons/Lessons'));
+
 const ConfigSection = React.lazy(() =>
   import('@/pages/ConfigSections/ConfigSection/ConfigSection')
 );
@@ -151,6 +153,14 @@ function AppRoutes() {
                 element={
                   <AuthRoute>
                     <Posts />
+                  </AuthRoute>
+                }
+              />
+              <Route
+                path="lessons"
+                element={
+                  <AuthRoute>
+                    <Lessons />
                   </AuthRoute>
                 }
               />
