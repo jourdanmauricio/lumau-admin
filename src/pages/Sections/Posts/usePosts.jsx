@@ -68,6 +68,15 @@ const usePosts = () => {
       center: true,
       cell: (row) => (
         <div className="flex gap-2">
+          {/* <a
+            href={row.slug}
+            target="_blank"
+            rel="noreferrer"
+            className="btn-icon"
+          >
+            <FaEye className="text-teal-500 text-lg" />
+          </a> */}
+
           <div
             onClick={() => handleDelete(row)}
             className="btn-icon"
@@ -204,12 +213,14 @@ const usePosts = () => {
           <p>Orden: {data.order}</p>
         </div>
       </div>
-      <div
-        className="p-4 mt-4"
-        dangerouslySetInnerHTML={{
-          __html: data.content,
-        }}
-      ></div>
+      <div className="ql-snow">
+        <div
+          className="p-4 mt-4 ql-editor"
+          dangerouslySetInnerHTML={{
+            __html: data.content,
+          }}
+        ></div>
+      </div>
     </div>
   );
 
