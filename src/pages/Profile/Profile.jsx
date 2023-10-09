@@ -22,7 +22,14 @@ const Profile = () => {
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="tracking-wide leading-relaxed">
             <p>
-              Web: <span>{user.url}</span>
+              Web:{' '}
+              <a
+                href={user.url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {user.url}
+              </a>
             </p>
             <p>
               Email: <span>{user.email}</span>

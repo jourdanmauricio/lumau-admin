@@ -7,7 +7,7 @@
 .ql-container {
   box-sizing: border-box;
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-size: 16px;
   height: 100%;
   margin: 0px;
   position: relative;
@@ -90,6 +90,9 @@
 }
 .ql-editor ul[data-checked='false'] > li::before {
   content: '\2610';
+}
+.ql-editor li {
+  padding-bottom: 1rem;
 }
 .ql-editor li::before {
   display: inline-block;
