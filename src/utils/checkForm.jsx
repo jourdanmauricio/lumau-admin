@@ -28,7 +28,10 @@ const checkForm = (e) => {
   // Itera a través de los elementos del formulario
   for (let i = 0; i < elements.length; i++) {
     const element = elements[i];
-    if (element.nodeName !== 'BUTTON' && element.nodeName !== 'SELECT') {
+    if (element.nodeName === 'BUTTON') continue;
+    if (element.type === 'select-one') continue;
+
+    if (element.nodeName !== 'SELECT' && element.value) {
       data[element.name] = element.value;
     }
 

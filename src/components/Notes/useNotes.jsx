@@ -3,6 +3,7 @@ import { getAllNotes } from '@/services/api/notes.api';
 import { createNote, deleteNote, updateNote } from '@/services/api/notes.api';
 import { useNotification } from '@/components/Notifications/NotificationProvider';
 import checkForm from '@/utils/checkForm';
+import { useUserStore } from '../../store/user';
 
 const INITIAL_DATA = {
   name: '',
@@ -15,9 +16,10 @@ const useNotes = () => {
   const [action, setAction] = useState('VIEW');
   const [editData, setEditData] = useState(INITIAL_DATA);
   const dispatchNotif = useNotification();
+  const user = useUserStore((state) => state.user);
 
   const fetchData = async () => {
-    const data = await getAllNotes();
+    const data = await getAllNotes(user);
     setNotes(data);
   };
 

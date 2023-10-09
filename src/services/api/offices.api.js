@@ -7,13 +7,13 @@ export const getOffices = async (user) => {
   return response.data;
 };
 
-export const createOffice = async (loan) => {
-  const response = await axiosApi.post('/offices', loan);
+export const createOffice = async (office) => {
+  const response = await axiosApi.post('/offices', office);
   return response.data;
 };
 
-export const updateOffice = async (loan) => {
-  const data = Object.assign({}, loan);
+export const updateOffice = async (office) => {
+  const data = Object.assign({}, office);
   const id = data.id;
   delete data.id;
   const response = await axiosApi.put(`/offices/${id}`, data);

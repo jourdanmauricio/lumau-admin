@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import '@/components/lumau-input.js';
 import '@/components/lumau-message.js';
+// import AddPicture from '../../components/AddPicture/AddPicture';
 
 const EditProfile = ({ user, handleSubmit }) => {
   return (
@@ -156,6 +157,11 @@ const EditProfile = ({ user, handleSubmit }) => {
             ></lumau-input>
           </div>
         </div>
+
+        {/* image / alt image */}
+        {/* <div className="mt-8">
+          <AddPicture currentData={user} />
+        </div> */}
 
         <button
           type="submit"

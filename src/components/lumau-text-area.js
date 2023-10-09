@@ -53,7 +53,8 @@ class LumauTextArea extends LitElement {
       font-size: 1rem;
       background-color: var(--lumau-input-background-color, #fff);
       outline: 1px solid transparent;
-      /* letter-spacing: 0.05rem; */
+      font-family: 'Arial';
+      letter-spacing: 0.05rem;
     }
 
     textarea:disabled,
