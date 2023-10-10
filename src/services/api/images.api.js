@@ -16,11 +16,16 @@ export const createImage = async (image) => {
 export const createCloudImage = async (file, user) => {
   const cloudinaryUrl = `https://api.cloudinary.com/v1_1/${user.cloudName}/image/upload`;
 
+  const tags = user.cloudFolder;
   file.public_id = file.name;
+  file.tags = tags;
+
+  console.log('file to cloudinary', file);
 
   const formData = new FormData();
   formData.append('upload_preset', user.cloudPreset);
   formData.append('file', file);
+  formData.append('tags', tags);
 
   try {
     const res = await fetch(cloudinaryUrl, {

@@ -2,7 +2,7 @@
 import { FaEye, FaTrash } from 'react-icons/fa';
 import { Modal } from '@/components/Modal/Modal';
 import DeleteImage from '../DeleteImage/DeleteImage';
-import DetailImage from '../DetailImage/DetailImage';
+// import DetailImage from '../DetailImage/DetailImage';
 import { useLocation } from 'react-router-dom';
 
 const Gallery = ({
@@ -13,9 +13,9 @@ const Gallery = ({
   isOpenModalDelete,
   openModalDelete,
   closeModalDelete,
-  isOpenModalDetail,
-  openModalDetail,
-  closeModalDetail,
+  // isOpenModalDetail,
+  // openModalDetail,
+  // closeModalDetail,
   handleSelect,
 }) => {
   const isSelected = (id) => {
@@ -33,13 +33,13 @@ const Gallery = ({
 
   const onViewImage = (image) => {
     setSelected(image);
-    openModalDetail();
+    // openModalDetail();
   };
 
   const handleCancelDelete = () => {
     setSelected(null);
     closeModalDelete();
-    closeModalDetail();
+    // closeModalDetail();
   };
 
   const onDoubleClick = (image) => {
@@ -112,7 +112,7 @@ const Gallery = ({
           handleDelete={handleDelete}
         />
       </Modal>
-      <Modal
+      {/* <Modal
         isOpenModal={isOpenModalDetail}
         closeModal={closeModalDetail}
         capa="2"
@@ -121,7 +121,7 @@ const Gallery = ({
           image={selected}
           handleCancelDelete={handleCancelDelete}
         />
-      </Modal>
+      </Modal> */}
     </>
   );
 };

@@ -4,7 +4,7 @@ import {
   createImage,
   createCloudImage,
   deleteImage,
-  getImages,
+  // getImages,
 } from '../../../services/api/images.api';
 import { FaCloudUploadAlt, FaImages } from 'react-icons/fa';
 import UploadImage from '@/components/UploadImage/UploadImage';
@@ -22,8 +22,8 @@ const Tabs = ({ handleSelect }) => {
   const [picture, setPicture] = useState(null);
   const [isOpenModalDelete, openModalDelete, closeModalDelete] =
     useModal(false);
-  const [isOpenModalDetail, openModalDetail, closeModalDetail] =
-    useModal(false);
+  // const [isOpenModalDetail, openModalDetail, closeModalDetail] =
+  //   useModal(false);
   const user = useUserStore((state) => state.user);
 
   const [toggleState, setToggleState] = useState(2);
@@ -36,9 +36,31 @@ const Tabs = ({ handleSelect }) => {
   useEffect(() => {
     const loadImages = async () => {
       try {
+        let images = [];
+        var folderUrl =
+          'https://res.cloudinary.com/denhfebpt/image/list/hathayogaloberiaweb.json';
+
+        fetch(folderUrl)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            data.resources.forEach(function (resource) {
+              images.push({
+                id: resource.public_id,
+                secureUrl: `https://res.cloudinary.com/${user.cloudName}/image/upload/v${resource.version}/${resource.public_id}.${resource.format}`,
+              });
+            });
+            setImages(images);
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+
         setLoading(true);
-        const images = await getImages(user);
-        setImages(images);
+        // const images = await getImages(user);
+        // console.log('IMAGES', images);
+        // setImages(images);
       } catch (error) {
         let message = 'Error obteniendo imágenes 😞';
         if (error.response)
@@ -171,9 +193,9 @@ const Tabs = ({ handleSelect }) => {
               isOpenModalDelete={isOpenModalDelete}
               openModalDelete={openModalDelete}
               closeModalDelete={closeModalDelete}
-              isOpenModalDetail={isOpenModalDetail}
-              openModalDetail={openModalDetail}
-              closeModalDetail={closeModalDetail}
+              // isOpenModalDetail={isOpenModalDetail}
+              // openModalDetail={openModalDetail}
+              // closeModalDetail={closeModalDetail}
               handleSelect={handleSelect}
             />
           </div>
