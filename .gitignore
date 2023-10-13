@@ -1,8 +1,8 @@
 .env
 .env.production
 package-lock.json
-GUIA.txt
-GUIA-CLOUDINARY.txt
+
+**/*.txt
 
 # Logs
 logs
