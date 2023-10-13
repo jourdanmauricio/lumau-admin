@@ -37,8 +37,7 @@ const Tabs = ({ handleSelect }) => {
     const loadImages = async () => {
       try {
         let images = [];
-        var folderUrl =
-          'https://res.cloudinary.com/denhfebpt/image/list/hathayogaloberiaweb.json';
+        var folderUrl = `https://res.cloudinary.com/${user.cloudName}/image/list/${user.cloudFolder}.json`;
 
         fetch(folderUrl)
           .then(function (response) {
