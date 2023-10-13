@@ -71,6 +71,7 @@ const Layout = () => {
         >
           <lumau-spinner id="lumau-spinner"></lumau-spinner>
           {/* {props.children} */}
+          HOLAS
           <Outlet />
         </section>
       </main>
