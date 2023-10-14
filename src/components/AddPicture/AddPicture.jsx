@@ -59,7 +59,6 @@ const AddPicture = ({ currentData }) => {
             placeholder="Texto alternativo"
             value={altImage}
             selectOnFocus
-            required
           ></lumau-input>
 
           <lumau-input
@@ -70,7 +69,6 @@ const AddPicture = ({ currentData }) => {
             placeholder="Imagen"
             value={image}
             selectOnFocus
-            required
           ></lumau-input>
         </div>
       </div>
