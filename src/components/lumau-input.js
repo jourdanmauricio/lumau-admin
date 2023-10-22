@@ -60,7 +60,8 @@ class LumauInput extends LitElement {
 
     input:disabled,
     input:disabled + label {
-      background-color: var(--lumau-input-disabled-background-color, #e2e8f0);
+      /* background-color: var(--lumau-input-disabled-background-color, #e2e8f0);
+      color: #000; */
     }
 
     label {
@@ -161,7 +162,7 @@ class LumauInput extends LitElement {
     this.patternerror = '';
     this.controlType = 'text';
     this.passwordVisible = false;
-    this.disabled = false;
+    //this.isDisabled = false;
     this.readonly = false;
     this.required = false;
   }
@@ -179,7 +180,7 @@ class LumauInput extends LitElement {
           class="${this.errored ? 'errored' : ''}"
           autocomplete="${this.disableAutocomplete ? 'off' : 'on'}"
           .value="${this.computeValue(this.value)}"
-          ?disabled="${this.disabled}"
+          ?disabled=${this.disabled}
           ?readonly="${this.readonly}"
           ?required="${this.required}"
           @keypress="${this._lookForEnter}"

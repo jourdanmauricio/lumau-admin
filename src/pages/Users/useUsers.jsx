@@ -7,7 +7,6 @@ import { createUser, updateUser, deleteUser } from '@/services/api/users.api';
 import checkForm from '@/utils/checkForm';
 import { FaEdit, FaPlus, FaRegTrashAlt } from 'react-icons/fa';
 import { useModal } from '../../hooks/useModal';
-// import { menuItems } from '@/utils/menuItems';
 
 const useUsers = () => {
   const [users, setUsers] = useState(null);
@@ -138,23 +137,6 @@ const useUsers = () => {
         data.id = currentData.id;
         const updUser = await updateUser(data);
 
-        // updUser.attributes.map(async (attrib) => {
-        //   const feature = menuItems.find(
-        //     (item) => item.name === attrib && item.feature === true
-        //   );
-        //   if (feature) {
-        //     console.log('feature', feature);
-        //     const obj = {
-        //       name: feature.name,
-        //       value: [],
-        //       userId: currentData.id,
-        //       description: feature.description,
-        //     };
-        //     const resp = await createFeature(obj);
-        //     console.log('RESP feature', resp);
-        //   }
-        // });
-
         const newUsers = users.map((user) =>
           user.id === updUser.id ? updUser : user
         );
@@ -216,7 +198,6 @@ const useUsers = () => {
         </div>
       </div>
     </div>
-    // <pre>{JSON.stringify(data, null, 2)}</pre>
   );
 
   return {
@@ -231,7 +212,6 @@ const useUsers = () => {
     onCancelDelete,
     onDelete,
     isOpenModal,
-    // menuItems,
     ExpandedComponent,
   };
 };

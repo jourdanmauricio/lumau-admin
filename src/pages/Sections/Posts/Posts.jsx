@@ -1,7 +1,7 @@
 import DataTable from 'react-data-table-component';
 import { Modal } from '@/components/Modal/Modal';
-import Office from './Post';
-import DeleteOffice from './DeletePost';
+import Post from './Post';
+import DeletePost from './DeletePost';
 import usePosts from './usePosts';
 import '@/components/lumau-message.js';
 import '@/styles/dataTableThemes';
@@ -45,7 +45,7 @@ const Offices = () => {
           />
         )}
         {(action === 'NEW' || action === 'EDIT') && (
-          <Office
+          <Post
             currentData={currentData}
             action={action}
             onSubmit={onSubmit}
@@ -57,7 +57,7 @@ const Offices = () => {
             isOpenModal={isOpenModal}
             closeModal={onCancelDelete}
           >
-            <DeleteOffice
+            <DeletePost
               currentData={currentData}
               onDelete={onDelete}
               onCancelDelete={onCancelDelete}

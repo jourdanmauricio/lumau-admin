@@ -4,7 +4,7 @@ import '@/components/lumau-text-area.js';
 import '@/components/lumau-message.js';
 
 import TextEditor from '@/components/TextEditor/TextEditor';
-import AddPicture from '../../../components/AddPicture/AddPicture';
+import AddPicture from '@/components/AddPicture/AddPicture';
 import { useEffect, useRef, useState } from 'react';
 
 const Post = ({ onSubmit, action, onCancelDelete, currentData }) => {
@@ -114,7 +114,7 @@ const Post = ({ onSubmit, action, onCancelDelete, currentData }) => {
           <AddPicture currentData={currentData} />
         </div>
 
-        {/* Type / Order */}
+        {/* Sections / Order */}
         <div className="flex flex-col sm:flex-row gap-4 w-full justify-center items-start">
           <div className="w-full flex flex-col sm:w-1/2">
             <label

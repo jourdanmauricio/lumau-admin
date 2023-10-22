@@ -21,7 +21,6 @@ const Users = () => {
     isOpenModalPass,
     openModalPass,
     closeModalPass,
-    // menuItems,
     ExpandedComponent,
   } = useUsers();
 
@@ -57,7 +56,6 @@ const Users = () => {
             isOpenModalPass={isOpenModalPass}
             openModalPass={openModalPass}
             closeModalPass={closeModalPass}
-            // menuItems={menuItems}
           />
         )}
         {isOpenModal && (

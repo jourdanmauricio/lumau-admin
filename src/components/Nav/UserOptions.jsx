@@ -92,7 +92,7 @@ const UserOptions = () => {
         onClick={handleClick}
         className="flex gap-4 text-text-color dark:text-dark-text-color bg-transparent items-center cursor-pointer p-2"
       >
-        <span className="text-text-color dark:text-dark-text-color text-lg font-medium">
+        <span className="text-text-color dark:text-dark-text-color text-lg font-medium whitespace-nowrap">
           {user.username}
         </span>
         <FaChevronDown className="border-none" />

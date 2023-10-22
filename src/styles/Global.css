@@ -106,6 +106,42 @@ body {
   transition: 0.3s;
 }
 
+.input-form {
+  @apply bg-text-color w-full rounded border py-1 px-2 disabled:bg-slate-200;
+}
+
+.label-form {
+  @apply text-sm;
+}
+
+.error__form {
+  @apply absolute top-0 w-full text-red-700 bg-red-100 bg-opacity-50 px-5 text-sm;
+}
+
+.input__form {
+  @apply min-h-[auto] w-full rounded border border-slate-600 bg-transparent py-[0.15rem] px-3 leading-[1.6] text-slate-900 outline-none block focus:outline-none focus:ring-0 focus:border-slate-900;
+}
+
+.label__form {
+  @apply absolute text-slate-600 duration-300 transform -translate-y-[1.50rem] scale-90 top-[0.25rem] z-10 origin-[0_0] left-3 mb-0 peer-focus:text-slate-600 peer-focus:scale-90 peer-focus:-translate-y-[1.50rem] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100;
+}
+
+.table__icon {
+  @apply border-none bg-none cursor-pointer text-lg p-2.5 rounded-full;
+}
+
+.table__icon--edit {
+  @apply text-blue-500 hover:bg-blue-50;
+}
+
+.table__icon--delete {
+  @apply text-red-500 hover:bg-red-50;
+}
+
+.table__icon--add {
+  @apply text-teal-500 hover:bg-teal-50;
+}
+
 .btn-cancel {
   @apply text-gray-900 dark:text-slate-100 bg-slate-200 dark:bg-gray-800 p-2 hover:bg-gray-300 dark:hover:bg-gray-700 rounded transition ease-in-out delay-100;
 }

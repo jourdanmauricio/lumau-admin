@@ -2,7 +2,7 @@
 import { useRef, useState } from 'react';
 import ReactQuill from 'react-quill';
 import DOMPurify from 'dompurify';
-import { quillSimpleModules } from '@/config/constants';
+import { quillSimpleModules } from '@/config/variables';
 
 const TextEditor = ({ data }) => {
   //console.log('data', data.content);
@@ -13,12 +13,12 @@ const TextEditor = ({ data }) => {
     <>
       <ReactQuill
         ref={quillRef}
-        className="bg-text-color"
+        className="bg-text-color min-h-[247px]"
         theme="snow"
         name="editor"
         value={content}
         onChange={(e) => setContent(e)}
-        placeholder={'Haz tu magia...'}
+        placeholder={'Ingresa el contenido...'}
         modules={quillSimpleModules}
       />
 

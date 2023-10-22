@@ -1,3 +1,36 @@
+export const status = [
+  { id: 'active', value: 'Activo' },
+  { id: 'paused', value: 'Pausado' },
+  // { id: 'under_review', name: 'Revisión' },
+];
+
+export const actions = [
+  { id: 'delete', value: 'Eliminar' },
+  { id: 'changeStatus', value: 'Cambiar estado' },
+  { id: 'changePrice', value: 'Modificar precio' },
+];
+
+export const paginationOptions = {
+  rowsPerPageText: 'Filas por página',
+  rangeSeparatorText: 'de',
+  selectAllRowsItem: true,
+  selectAllRowsItemText: 'Todos',
+};
+
+export const quillSimpleModules = {
+  toolbar: [
+    [{ header: [1, 2, 3, 4, 5, 6, false] }, { font: [] }],
+    [{ size: [] }],
+    ['bold', 'italic', 'underline', 'strike'],
+    [{ color: [] }, { background: [] }],
+    [{ list: 'ordered' }, { list: 'bullet' }],
+    [{ script: 'sub' }, { script: 'super' }],
+    [{ indent: '-1' }, { indent: '+1' }, { align: [] }],
+    ['link'],
+    ['clean'],
+  ],
+};
+
 import {
   FaUserCog,
   FaTh,

@@ -61,7 +61,7 @@ const NewEditService = ({ onSubmit, action, onCancelDelete, currentData }) => {
           </div>
           {/* Content */}
           <div className="w-full">
-            <div className=" w-full">
+            <div className="w-full">
               <lumau-text-area
                 small
                 id="content"

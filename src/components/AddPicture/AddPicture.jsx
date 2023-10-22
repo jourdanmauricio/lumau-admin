@@ -72,12 +72,14 @@ const AddPicture = ({ currentData }) => {
           ></lumau-input>
         </div>
       </div>
-      <Modal
-        isOpenModal={isOpenModal}
-        closeModal={closeModal}
-      >
-        <Media handleSelect={handleSelect} />
-      </Modal>
+      {isOpenModal && (
+        <Modal
+          isOpenModal={isOpenModal}
+          closeModal={closeModal}
+        >
+          <Media handleSelect={handleSelect} />
+        </Modal>
+      )}
     </>
   );
 };

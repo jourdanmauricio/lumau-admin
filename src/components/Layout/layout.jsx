@@ -6,9 +6,9 @@ import { useUserStore } from '@/store/user';
 import { NavLink } from 'react-router-dom';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import Nav from '../Nav/Nav';
-import { menuItems } from '@/utils/menuItems';
+import { menuItems } from '@/config/variables';
 import '@/components/lumau-spinner.js';
-import { useSectionsStore } from '../../store/sections';
+import { useSectionsStore } from '@/store/sections';
 
 const Layout = () => {
   const user = useUserStore((state) => state.user);
