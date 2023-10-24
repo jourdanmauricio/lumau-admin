@@ -47,7 +47,7 @@ const Slide = ({ onSubmit, action, onCancelDelete, currentData }) => {
               placeholder="Tipo de slide"
               pattern="[A-Za-z0-9 ñáéíóúÑÁÉÍÓÚ]{0,255}$"
               patternerror="Ingrese letras o espacios"
-              value={currentData.title}
+              value={currentData.type}
               selectOnFocus
               required
             ></lumau-input>
