@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-const DeleteHero = ({ currentData, onDelete, onCancelDelete }) => {
+const DeleteOffice = ({ currentData, onDelete, onCancelDelete }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onDelete(currentData.id);
@@ -7,12 +7,12 @@ const DeleteHero = ({ currentData, onDelete, onCancelDelete }) => {
 
   return (
     <>
-      <h2 className="title-modal">Eliminar Post</h2>
+      <h2 className="title-modal">Eliminar Slide</h2>
       <hr className="mt-1" />
 
       <div className="relative">
         <lumau-message
-          id="form-error-delete-post"
+          id="form-error-delete-office"
           errorForm=""
         ></lumau-message>
       </div>
@@ -22,7 +22,7 @@ const DeleteHero = ({ currentData, onDelete, onCancelDelete }) => {
           onSubmit={handleSubmit}
         >
           <p className="text-center font-medium text-base my-5">
-            Esta seguro de eliminar el post {currentData.id}?
+            Esta seguro de eliminar la oficina {currentData.id}?
           </p>
           <div className="mt-4 flex justify-between items-center w-full">
             <button
@@ -47,4 +47,4 @@ const DeleteHero = ({ currentData, onDelete, onCancelDelete }) => {
     </>
   );
 };
-export default DeleteHero;
+export default DeleteOffice;
