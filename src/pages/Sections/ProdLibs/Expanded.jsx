@@ -7,8 +7,8 @@ const Expanded = ({ data }) => {
           <p>Categoría Web: {data.categoryWeb}</p>
           <p>Slug: {data.slug}</p>
           <p>Detalle: {data.excerpt}</p>
-          <p>Alt Imagen:{data.altImage}</p>
-          <p>Secciones:{data.sections}</p>
+          <p>Alt Imagen: {data.altImage}</p>
+          <p>Secciones: {data.sections}</p>
           <p>Tipo: {data.type}</p>
           <p>Orden: {data.order}</p>
         </div>

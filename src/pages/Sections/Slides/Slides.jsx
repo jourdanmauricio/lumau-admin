@@ -38,7 +38,6 @@ const Offices = () => {
             data={slides}
             theme={theme}
             actions={actionsMenu}
-            expandableRows
             pagination
           />
         )}

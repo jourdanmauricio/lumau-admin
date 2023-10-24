@@ -10,6 +10,16 @@ export const actions = [
   { id: 'changePrice', value: 'Modificar precio' },
 ];
 
+export const sections = [
+  { id: 'blog', value: 'Blog' },
+  { id: 'featured', value: 'Destacado' },
+  { id: 'gallery', value: 'Galería' },
+  { id: 'home', value: 'Home' },
+  { id: 'new', value: 'Nuevos' },
+  { id: 'ofers', value: 'Ofertas' },
+  { id: 'product', value: 'Product' },
+];
+
 export const paginationOptions = {
   rowsPerPageText: 'Filas por página',
   rangeSeparatorText: 'de',

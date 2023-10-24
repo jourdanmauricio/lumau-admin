@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import AddPicture from '@/components/AddPicture/AddPicture';
 import TextEditor from '@/components/TextEditor/TextEditor';
-import { status as prodStatus } from '@/config/variables';
+import { status as prodStatus, sections } from '@/config/variables';
 import { useProdLibsStore } from '@/store/prodLib';
 import { useNotification } from '@/components/Notifications/NotificationProvider';
 import '@/components/lumau-input.js';
@@ -293,16 +293,20 @@ const ProdLib = ({ onCancelDelete }) => {
                 Secciones
               </label>
               <select
-                className="p-1 dark:bg-slate-700 bg-slate-100 border border-slate-600 rounded overflow-auto "
+                className="p-1 dark:bg-slate-700 bg-slate-100 border border-slate-600 rounded overflow-auto h-[150px]"
                 name="sections"
                 id="sections"
                 defaultValue={currentData.sections}
                 multiple
               >
-                <option value="blog">Blog</option>
-                <option value="home">Home</option>
-                <option value="product">Product</option>
-                <option value="gallery">Galería</option>
+                {sections.map((section) => (
+                  <option
+                    key={section.id}
+                    value={section.id}
+                  >
+                    {section.value}
+                  </option>
+                ))}
               </select>
             </div>
 
