@@ -8,6 +8,7 @@ export const actions = [
   { id: 'delete', value: 'Eliminar' },
   { id: 'changeStatus', value: 'Cambiar estado' },
   { id: 'changePrice', value: 'Modificar precio' },
+  { id: 'changeCatWeb', value: 'Modificar cat web' },
 ];
 
 export const sections = [

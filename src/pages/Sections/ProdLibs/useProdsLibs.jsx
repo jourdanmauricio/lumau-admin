@@ -60,8 +60,14 @@ const useProdsLibs = () => {
       sortable: true,
     },
     {
+      name: 'Categoría Web',
+      width: '130px',
+      selector: (row) => row.categoryWeb,
+      sortable: true,
+    },
+    {
       name: 'Estado',
-      width: '120px',
+      width: '90px',
       selector: (row) => (
         <>
           <span>{statusProd.find((el) => el.id === row.status)?.value}</span>
@@ -71,7 +77,7 @@ const useProdsLibs = () => {
     },
     {
       name: 'Price',
-      width: '100px',
+      width: '90px',
       selector: (row) => row.price,
       sortable: true,
     },

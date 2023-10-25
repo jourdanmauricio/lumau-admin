@@ -34,7 +34,7 @@ export const readData = (file) => {
       id: item.Artículo.toString(),
       name,
       category: category,
-      categoryWeb: category,
+      // categoryWeb: category,
       status: 'active',
       costPrice: item.Costo.toFixed(2),
       iva: item.IVA,

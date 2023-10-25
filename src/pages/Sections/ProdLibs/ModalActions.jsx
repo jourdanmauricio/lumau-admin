@@ -1,10 +1,11 @@
 import { useProdLibsStore } from '@/store/prodLib';
 import { actions } from '@/config/variables';
-import DeleteProds from './Massive/DeleteProds';
-import ChangeStatus from './Massive/ChangeStatus';
 import Spinner from '@/components/Spinner/Spinner';
 import { useNotification } from '@/components/Notifications/NotificationProvider';
+import DeleteProds from './Massive/DeleteProds';
+import ChangeStatus from './Massive/ChangeStatus';
 import ChangePrice from './Massive/ChangePrice';
+import ChangeCatWeb from './Massive/ChangeCatWeb';
 
 /* eslint-disable react/prop-types */
 const ModalActions = ({ handleCancelDelete }) => {
@@ -77,6 +78,7 @@ const ModalActions = ({ handleCancelDelete }) => {
             {massiveAction === 'delete' && <DeleteProds />}
             {massiveAction === 'changeStatus' && <ChangeStatus />}
             {massiveAction === 'changePrice' && <ChangePrice />}
+            {massiveAction === 'changeCatWeb' && <ChangeCatWeb />}
           </div>
 
           <div className="mt-4 flex justify-between items-center w-full">

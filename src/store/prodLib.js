@@ -79,6 +79,9 @@ export const useProdLibsStore = create((set, get) => ({
           (product.name
             .toLowerCase()
             .includes(filter.filterText.toLowerCase()) ||
+            product.categoryWeb
+              .toLowerCase()
+              .includes(filter.filterText.toLowerCase()) ||
             product.id
               .toLowerCase()
               .includes(filter.filterText.toLowerCase())) &&
@@ -130,6 +133,7 @@ export const useProdLibsStore = create((set, get) => ({
               el.sections = ['product'];
               el.status = 'paused';
               el.order = maxOrder;
+              el.categoryWeb = el.category;
               maxOrder++;
             }
           });
@@ -234,6 +238,19 @@ export const useProdLibsStore = create((set, get) => ({
         const newProds = selectedRows.map((el) => ({
           id: el.id,
           status: massiveValue,
+        }));
+        const resp = await massiveCreateOrUpdateProdLib(newProds);
+        [respOk, respError] = genRespFiles(resp);
+
+        respOk.forEach((el) => {
+          const index = newProducts.findIndex((prod) => prod.id === el.id);
+          if (index !== -1) newProducts.splice(index, 1, el);
+        });
+      }
+      if (massiveAction === 'changeCatWeb') {
+        const newProds = selectedRows.map((el) => ({
+          id: el.id,
+          categoryWeb: massiveValue,
         }));
         const resp = await massiveCreateOrUpdateProdLib(newProds);
         [respOk, respError] = genRespFiles(resp);
