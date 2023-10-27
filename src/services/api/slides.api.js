@@ -21,6 +21,6 @@ export const updateSlide = async (slide) => {
 };
 
 export const deleteSlide = async (id) => {
-  const response = await axiosApi.delete(`/slide/${id}`);
+  const response = await axiosApi.delete(`/slides/${id}`);
   return response.data;
 };
