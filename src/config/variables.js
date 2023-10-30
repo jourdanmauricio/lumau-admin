@@ -4,6 +4,12 @@ export const status = [
   // { id: 'under_review', name: 'Revisión' },
 ];
 
+export const orderStatus = [
+  { id: 'active', value: 'Activo' },
+  { id: 'paused', value: 'Pausado' },
+  // { id: 'under_review', name: 'Revisión' },
+];
+
 export const actions = [
   { id: 'delete', value: 'Eliminar' },
   { id: 'changeStatus', value: 'Cambiar estado' },
