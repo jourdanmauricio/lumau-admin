@@ -25,7 +25,7 @@ const Layout = () => {
     setMinItems(!minItems);
   };
   return (
-    <div className="grid min-h-screen grid-layout">
+    <div className="grid min-h-screen grid-layout max-w-[1600px] mx-auto">
       <Nav />
       <main className="flex w-full">
         <div
