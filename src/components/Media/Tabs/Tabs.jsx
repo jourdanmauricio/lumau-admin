@@ -60,7 +60,7 @@ const Tabs = ({ handleSelect }) => {
 
     console.log('load cloudinary');
 
-    loadImages();
+    // loadImages();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
