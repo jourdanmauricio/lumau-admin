@@ -22,41 +22,41 @@ const Tabs = ({ handleSelect }) => {
   };
 
   useEffect(() => {
-    const loadImages = async () => {
-      try {
-        let images = [];
-        var folderUrl = `https://res.cloudinary.com/${user.cloudName}/image/list/${user.cloudFolder}.json`;
+    // const loadImages = async () => {
+    //   try {
+    //     let images = [];
+    //     var folderUrl = `https://res.cloudinary.com/${user.cloudName}/image/list/${user.cloudFolder}.json`;
 
-        fetch(folderUrl)
-          .then(function (response) {
-            return response.json();
-          })
-          .then(function (data) {
-            data.resources.forEach(function (resource) {
-              console.log('data.resources', data.resources);
-              images.push({
-                id: resource.public_id,
-                secureUrl: `https://res.cloudinary.com/${user.cloudName}/image/upload/v${resource.version}/${resource.public_id}.${resource.format}`,
-              });
-            });
-            setImages(images);
-          })
-          .catch(function (error) {
-            console.error(error);
-          });
+    //     fetch(folderUrl)
+    //       .then(function (response) {
+    //         return response.json();
+    //       })
+    //       .then(function (data) {
+    //         data.resources.forEach(function (resource) {
+    //           console.log('data.resources', data.resources);
+    //           images.push({
+    //             id: resource.public_id,
+    //             secureUrl: `https://res.cloudinary.com/${user.cloudName}/image/upload/v${resource.version}/${resource.public_id}.${resource.format}`,
+    //           });
+    //         });
+    //         setImages(images);
+    //       })
+    //       .catch(function (error) {
+    //         console.error(error);
+    //       });
 
-        setLoading(true);
-      } catch (error) {
-        let message = 'Error obteniendo imágenes 😞';
-        if (error.response)
-          message = `${error.response.status}: ${error.response.statusText}`;
+    //     setLoading(true);
+    //   } catch (error) {
+    //     let message = 'Error obteniendo imágenes 😞';
+    //     if (error.response)
+    //       message = `${error.response.status}: ${error.response.statusText}`;
 
-        const formError = document.getElementById('form-error-del-image');
-        formError.setAttribute('errorForm', message);
-      } finally {
-        setLoading(false);
-      }
-    };
+    //     const formError = document.getElementById('form-error-del-image');
+    //     formError.setAttribute('errorForm', message);
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // };
 
     console.log('load cloudinary');
 
