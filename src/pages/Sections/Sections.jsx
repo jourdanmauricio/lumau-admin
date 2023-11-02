@@ -17,9 +17,11 @@ const Sections = () => {
               >
                 <NavLink
                   to={section.route}
-                  className="py-2 pl-4 w-fit pr-[14px] no-underline text-lg block text-left hover:text-purple-500 dark:text-slate-100 bg-slate-900 rounded"
+                  className="py-2 pl-4 w-fit pr-[14px] no-underline text-lg block text-left hover:text-purple-500  bg-slate-900 rounded"
                 >
-                  <span className="align-middle">{section.name}</span>
+                  <span className="align-middle text-slate-100">
+                    {section.name}
+                  </span>
                 </NavLink>
                 <p>{section.description}</p>
               </div>

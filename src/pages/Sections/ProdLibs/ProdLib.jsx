@@ -67,29 +67,22 @@ const ProdLib = ({ onCancelDelete }) => {
             <div className="w-full sm:w-1/2">
               {action === 'EDIT' ? (
                 <lumau-input
-                  // ref={titleRef}
                   small
                   id="id"
                   label="Artículo"
                   name="id"
                   placeholder="Id del artículo"
-                  // pattern="[A-Za-z0-9 ñáéíóúÑÁÉÍÓÚ]{0,255}$"
-                  // patternerror="Ingrese letras o espacios"
                   value={currentData.id}
                   selectOnFocus
                   disabled
-                  required
                 ></lumau-input>
               ) : (
                 <lumau-input
-                  // ref={titleRef}
                   small
                   id="id"
                   label="Artículo"
                   name="id"
                   placeholder="Id del artículo"
-                  // pattern="[A-Za-z0-9 ñáéíóúÑÁÉÍÓÚ]{0,255}$"
-                  // patternerror="Ingrese letras o espacios"
                   value={currentData.id}
                   selectOnFocus
                   required

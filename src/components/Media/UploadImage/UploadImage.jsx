@@ -57,12 +57,13 @@ const UploadImage = ({ picture, setPicture, handleAddPict }) => {
                 <img
                   className="rounded border border-solid border-gray-500 w-[220px] object-contain aspect-square"
                   name="image"
+                  id="image"
                   src={picture.secure_url}
                   alt="chosen"
                 />
               </div>
               <div>
-                <p className="h-fit text-gray-800">
+                <p className="h-fit text-gray-800 dark:text-slate-50">
                   Recuerde optimizar la imagen en{' '}
                   <a
                     href="https://tinyjpg.com/"
@@ -85,7 +86,7 @@ const UploadImage = ({ picture, setPicture, handleAddPict }) => {
         </div>
 
         <div
-          className={`relative w-[80%] mx-auto mt-5 p-8 text-center border-2 border-dotted border-black
+          className={`relative w-[80%] mx-auto mt-5 p-8 text-center border-2 border-dotted border-black dark:border-white
         ${!dragActive ? '' : 'fileover'}`}
           onDragEnter={handleDrag}
           onDragOver={handleDrag}
@@ -97,7 +98,9 @@ const UploadImage = ({ picture, setPicture, handleAddPict }) => {
             className="absolute cursor-pointer opacity-0 w-full h-full top-0 left-0"
             type="file"
           />
-          <h3 className="text-slate-900">Drag and drop file here or</h3>
+          <h3 className="text-slate-900 dark:text-slate-50">
+            Drag and drop file here or
+          </h3>
           <br />
           <label className="ml-2.5 mt-10 text-white w-[183px] h-[44px] rounded-[21.5px] bg-red-600 py-2 px-4">
             Browse file

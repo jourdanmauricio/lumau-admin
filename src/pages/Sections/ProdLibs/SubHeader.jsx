@@ -17,13 +17,15 @@ const SubHeader = () => {
       <div className="w-full">
         <label
           className="label-form"
-          htmlFor="ml-id"
+          htmlFor="sel-cat"
         >
           Categoría
         </label>
         <select
           className="input-form h-8"
           value={filter.filterCategory}
+          id="sel-cat"
+          name="sel-cat"
           onChange={(e) =>
             onSetFilter({ field: 'filterCategory', value: e.target.value })
           }
@@ -43,12 +45,14 @@ const SubHeader = () => {
       <div className="w-full">
         <label
           className="label-form"
-          htmlFor="ml-id"
+          htmlFor="sel-status"
         >
           Estado
         </label>
         <select
           className="input-form h-8"
+          id="sel-status"
+          name="sel-status"
           value={
             statusProd.find((el) => el.id === filter.filterStatus)?.id || ''
           }
@@ -71,13 +75,14 @@ const SubHeader = () => {
       <div className="w-full">
         <label
           className="label-form h-8"
-          htmlFor="ml-id"
+          htmlFor="search"
         >
           Buscar
         </label>
         <input
           className="input-form"
           id="search"
+          name="search"
           type="text"
           placeholder="Search"
           aria-label="Search Input"

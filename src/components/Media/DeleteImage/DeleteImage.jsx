@@ -17,11 +17,11 @@ const DeleteImage = ({ image, handleCancelDelete, handleDelete }) => {
       </div>
       <form className="bg-white p-10 flex flex-col justify-center items-center">
         <p className="text-center font-medium text-gray-800 my-6 mx-0">
-          Esta seguro de eliminar la imágen <i>{image?.filename}</i>?
+          Esta seguro de eliminar la imágen <i>{image?.id}</i>?
         </p>
         <div className="mt-4 flex justify-between items-center w-full">
           <button
-            className="btn__secondary"
+            className="btn-cancel"
             onClick={handleCancelDelete}
             id="cancel"
             type="button"
@@ -31,7 +31,7 @@ const DeleteImage = ({ image, handleCancelDelete, handleDelete }) => {
 
           <button
             type="button"
-            className="btn__primary"
+            className="btn-confirm"
             id="delete"
             onClick={handleSubmit}
           >

@@ -1,4 +1,5 @@
 import { axiosApi } from '../api';
+// import crypto from 'crypto';
 
 export const getImages = async (user) => {
   console.log('getImages');
@@ -50,6 +51,8 @@ export const updateImage = async (image) => {
 };
 
 export const deleteImage = async (id) => {
-  const response = await axiosApi.delete(`/images/${id}`);
+  const publicId = id.split('/')[1];
+
+  const response = await axiosApi.delete(`/images/${publicId}`);
   return response.data;
 };

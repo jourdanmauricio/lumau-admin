@@ -42,6 +42,20 @@ export const useProdLibsStore = create((set, get) => ({
       set({ error: message });
     }
   },
+  getCategoriesWeb: () => {
+    const { prodLibs } = get();
+
+    const categories = new Set();
+
+    prodLibs.forEach((producto) => {
+      if (producto.image !== null) categories.add(producto.categoryWeb);
+    });
+    const categoriesArray = Array.from(categories);
+
+    console.log('cat', categoriesArray);
+
+    return categoriesArray;
+  },
   setCurrentData: ({ payload }) => {
     set({ currentData: payload.data, action: payload.action, error: null });
   },
@@ -321,9 +335,4 @@ export const useProdLibsStore = create((set, get) => ({
     const { generateReport } = get();
     set({ generateReport: !generateReport });
   },
-  // const onCancelDelete = () => {
-  //   setCurrentData({});
-  //   closeModal();
-  //   setAction('VIEW');
-  // };
 }));

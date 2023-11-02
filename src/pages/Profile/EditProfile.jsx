@@ -159,6 +159,20 @@ const EditProfile = ({ user, handleSubmit }) => {
           </div>
         </div>
 
+        {/* CloudSecret */}
+        <div className="w-full mt-4">
+          <lumau-input
+            small
+            type="password"
+            id="cloudSecret"
+            label="Cloudinary secret"
+            name="cloudSecret"
+            placeholder=" "
+            value={user.cloudSecret}
+            selectOnFocus
+          ></lumau-input>
+        </div>
+
         {/* image / alt image */}
         <div className="mt-8">
           <AddPicture currentData={user} />

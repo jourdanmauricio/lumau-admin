@@ -1,29 +1,17 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
-import {
-  createImage,
-  createCloudImage,
-  deleteImage,
-  // getImages,
-} from '../../../services/api/images.api';
+import { createImage, createCloudImage } from '@/services/api/images.api';
 import { FaCloudUploadAlt, FaImages } from 'react-icons/fa';
-import UploadImage from '@/components/UploadImage/UploadImage';
+import UploadImage from '../UploadImage/UploadImage';
 import Gallery from '../Gallery/Gallery';
-import { useModal } from '@/hooks/useModal';
 import Spinner from '@/components/Spinner/Spinner';
-import { useNotification } from '../../Notifications/NotificationProvider';
-import '@/components/lumau-message.js';
+import { useNotification } from '@/components/Notifications/NotificationProvider';
 import { useUserStore } from '@/store/user';
 
 const Tabs = ({ handleSelect }) => {
   const [loading, setLoading] = useState(false);
   const [images, setImages] = useState(null);
-  const [selected, setSelected] = useState(null);
   const [picture, setPicture] = useState(null);
-  const [isOpenModalDelete, openModalDelete, closeModalDelete] =
-    useModal(false);
-  // const [isOpenModalDetail, openModalDetail, closeModalDetail] =
-  //   useModal(false);
   const user = useUserStore((state) => state.user);
 
   const [toggleState, setToggleState] = useState(2);
@@ -45,6 +33,7 @@ const Tabs = ({ handleSelect }) => {
           })
           .then(function (data) {
             data.resources.forEach(function (resource) {
+              console.log('data.resources', data.resources);
               images.push({
                 id: resource.public_id,
                 secureUrl: `https://res.cloudinary.com/${user.cloudName}/image/upload/v${resource.version}/${resource.public_id}.${resource.format}`,
@@ -57,9 +46,6 @@ const Tabs = ({ handleSelect }) => {
           });
 
         setLoading(true);
-        // const images = await getImages(user);
-        // console.log('IMAGES', images);
-        // setImages(images);
       } catch (error) {
         let message = 'Error obteniendo imágenes 😞';
         if (error.response)
@@ -72,24 +58,15 @@ const Tabs = ({ handleSelect }) => {
       }
     };
 
+    console.log('load cloudinary');
+
     loadImages();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleDelete = async () => {
-    try {
-      setLoading(true);
-
-      await deleteImage(selected.id);
-      const newImages = images.filter((image) => image.id === selected.id);
-      setSelected(null);
-      closeModalDelete();
-      setImages(newImages);
-    } catch (error) {
-      console.log('ERRRRORRRRR', error);
-    } finally {
-      setLoading(false);
-    }
+  const handleDelete = async (delImg) => {
+    const newImages = images.filter((image) => image.id !== delImg);
+    setImages(newImages);
   };
 
   const handleAddPict = async (file) => {
@@ -117,7 +94,12 @@ const Tabs = ({ handleSelect }) => {
 
       const upload = await createImage(obj);
 
-      setImages([upload, ...images]);
+      console.log('upload', upload);
+
+      setImages([
+        { id: upload.publicId, secureUrl: upload.secureUrl },
+        ...images,
+      ]);
       setToggleState(2);
       setPicture(null);
     } catch (error) {
@@ -187,15 +169,8 @@ const Tabs = ({ handleSelect }) => {
             <Gallery
               images={images}
               handleDelete={handleDelete}
-              selected={selected}
-              setSelected={setSelected}
-              isOpenModalDelete={isOpenModalDelete}
-              openModalDelete={openModalDelete}
-              closeModalDelete={closeModalDelete}
-              // isOpenModalDetail={isOpenModalDetail}
-              // openModalDetail={openModalDetail}
-              // closeModalDetail={closeModalDetail}
               handleSelect={handleSelect}
+              setLoading={setLoading}
             />
           </div>
         </div>
