@@ -3,7 +3,8 @@ import useProfile from './useProfile';
 import EditProfile from './EditProfile';
 import ChangePassword from './ChangePassword/ChangePassword';
 import SocialNetworks from './SocialNetworks/SocialNetworks';
-import { FaTelegramPlane, FaUserCog } from 'react-icons/fa';
+import { FaTelegramPlane, FaUserCog, FaShareAlt } from 'react-icons/fa';
+import AuthApps from './AuthApps/AuthApps';
 
 const Profile = () => {
   const {
@@ -69,6 +70,16 @@ const Profile = () => {
             />
             <span>Redes sociales</span>
           </div>
+          <div
+            onClick={() => toggleTab(3)}
+            className={toggleState === 3 ? 'tabs active__tabs' : 'tabs'}
+          >
+            <FaShareAlt
+              color="green"
+              size={20}
+            />
+            <span>Autorizaciones</span>
+          </div>
         </div>
         <div className="tabs__content">
           <div
@@ -91,6 +102,15 @@ const Profile = () => {
             }
           >
             <SocialNetworks />
+          </div>
+          <div
+            className={
+              toggleState === 3
+                ? 'tab__content active__content'
+                : 'tab__content'
+            }
+          >
+            <AuthApps />
           </div>
         </div>
       </div>

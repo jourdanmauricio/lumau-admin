@@ -23,3 +23,12 @@ export const regeneratePage = async (repo) => {
   const response = await axiosApi.post('/auth/regenerate-page', repo);
   return response;
 };
+
+export const authInstagram = async (code, state) => {
+  console.log('authInstagram', code, state);
+  const response = await axiosApi.post('/auth/auth-instagram', {
+    code: code,
+    userId: state,
+  });
+  return response;
+};

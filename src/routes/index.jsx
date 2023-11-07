@@ -12,7 +12,6 @@ const ForgotPassword = React.lazy(() =>
 const RecoveryPassword = React.lazy(() =>
   import('@/pages/auth/RecoveryPassword/RecoveryPassword')
 );
-
 const Dashboard = React.lazy(() => import('@/pages/Dashboard/Dashboard'));
 const Profile = React.lazy(() => import('@/pages/Profile/Profile'));
 const Subscribers = React.lazy(() => import('@/pages/Subscribers/Subscribers'));
@@ -28,6 +27,7 @@ const Lessons = React.lazy(() => import('@/pages/Sections/Lessons/Lessons'));
 const ProdLibs = React.lazy(() => import('@/pages/Sections/ProdLibs/ProdLibs'));
 const Slides = React.lazy(() => import('@/pages/Sections/Slides/Slides'));
 const Orders = React.lazy(() => import('@/pages/Sections/Orders/Orders'));
+const AuthInstagram = React.lazy(() => import('@/pages/auth/AuthInstagram'));
 
 const ConfigSection = React.lazy(() =>
   import('@/pages/ConfigSections/ConfigSection/ConfigSection')
@@ -50,6 +50,14 @@ function AppRoutes() {
               </AuthRoute>
             }
           >
+            <Route
+              path="/auth-instagram"
+              element={
+                <AuthRoute>
+                  <AuthInstagram />
+                </AuthRoute>
+              }
+            />
             <Route
               path="/dashboard"
               element={
