@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { authInstagram } from '@/services/api/auth.api';
+import { authInstagram } from '@/services/api/instagrams.api';
 
 const AuthInstagram = () => {
   const [searchParams] = useSearchParams();
@@ -13,7 +13,7 @@ const AuthInstagram = () => {
 
   const changeCodeForToken = async () => {
     console.log('CODE!!!!', code, state);
-    const response = await authInstagram(code, state);
+    const response = await authInstagram({ code, state });
     console.log('response', response);
   };
 
@@ -26,7 +26,7 @@ const AuthInstagram = () => {
 
   return (
     <div>
-      Estamos redirigiendo tu solicitud a Instagram
+      Estamos procesando la solicitud
       <p>Code: {code}</p>
       <p>State: {state}</p>
     </div>
