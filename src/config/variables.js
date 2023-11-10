@@ -25,6 +25,7 @@ export const sections = [
   { id: 'new', value: 'Nuevos' },
   { id: 'ofers', value: 'Ofertas' },
   { id: 'product', value: 'Product' },
+  { id: 'instagram', value: 'Instagram' },
 ];
 
 export const paginationOptions = {

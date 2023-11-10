@@ -21,6 +21,6 @@ export const updatePost = async (post) => {
 };
 
 export const deletePost = async (id) => {
-  const response = await axiosApi.delete(`/post/${id}`);
+  const response = await axiosApi.delete(`/posts/${id}`);
   return response.data;
 };

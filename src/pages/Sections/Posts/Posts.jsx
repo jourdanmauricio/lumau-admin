@@ -3,24 +3,28 @@ import { Modal } from '@/components/Modal/Modal';
 import Post from './Post';
 import DeletePost from './DeletePost';
 import usePosts from './usePosts';
+import { usePostsStore } from '@/store/posts';
+import Expanded from './Expanded';
+import { useUserStore } from '@/store/user';
+import Spinner from '@/components/Spinner/Spinner';
 import '@/components/lumau-message.js';
 import '@/styles/dataTableThemes';
 
-const Offices = () => {
+const Posts = () => {
+  const theme = useUserStore((state) => state.theme);
+  const { filteredItems, action, loading } = usePostsStore();
+
   const {
-    posts,
     POST_COLUMNS,
-    action,
-    theme,
     actionsMenu,
-    // handleDelete,
-    currentData,
-    onDelete,
+    subHeaderComponentMemo,
     isOpenModal,
-    onCancelDelete,
-    onSubmit,
-    ExpandedComponent,
+    handleDelete,
+    handleCancelDelete,
   } = usePosts();
+
+  console.log('filteredItems', filteredItems());
+
   return (
     <>
       <div className="relative">
@@ -31,36 +35,33 @@ const Offices = () => {
       </div>
 
       <div className="h-full">
-        {action === 'VIEW' && posts && (
+        {action === 'VIEW' && (
           <DataTable
             // dense
             title="Posts"
             columns={POST_COLUMNS}
-            data={posts}
+            data={filteredItems()}
             theme={theme}
             actions={actionsMenu}
+            subHeader
+            subHeaderComponent={subHeaderComponentMemo}
             expandableRows
-            expandableRowsComponent={ExpandedComponent}
+            expandableRowsComponent={Expanded}
             pagination
           />
         )}
         {(action === 'NEW' || action === 'EDIT') && (
-          <Post
-            currentData={currentData}
-            action={action}
-            onSubmit={onSubmit}
-            onCancelDelete={onCancelDelete}
-          />
+          <Post onCancelDelete={handleCancelDelete} />
         )}
+        {loading && <Spinner />}
         {isOpenModal && (
           <Modal
             isOpenModal={isOpenModal}
-            closeModal={onCancelDelete}
+            closeModal={handleCancelDelete}
           >
             <DeletePost
-              currentData={currentData}
-              onDelete={onDelete}
-              onCancelDelete={onCancelDelete}
+              handleCancelDelete={handleCancelDelete}
+              handleDelete={handleDelete}
             />
           </Modal>
         )}
@@ -68,4 +69,4 @@ const Offices = () => {
     </>
   );
 };
-export default Offices;
+export default Posts;

@@ -26,7 +26,7 @@ export const regeneratePage = async (repo) => {
 
 export const authInstagram = async (code, state) => {
   console.log('authInstagram', code, state);
-  const response = await axiosApi.post('/auth/auth-instagram', {
+  const response = await axiosApi.post('/auth/changeAuthInstagram', {
     code: code,
     userId: state,
   });

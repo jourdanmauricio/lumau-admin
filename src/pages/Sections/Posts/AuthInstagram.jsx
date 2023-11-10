@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { authInstagram } from '@/services/api/instagrams.api';
-import { importInstagram } from '../../services/api/instagrams.api';
+import { authInstagram, importInstagram } from '@/services/api/instagrams.api';
+
 // import { updateUser } from '../../services/api/users.api';
 
 const AuthInstagram = () => {

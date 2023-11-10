@@ -1,9 +1,12 @@
+import { usePostsStore } from '@/store/posts';
+
 /* eslint-disable react/prop-types */
-const DeleteHero = ({ currentData, onDelete, onCancelDelete }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onDelete(currentData.id);
-  };
+const DeletePost = ({ handleDelete, handleCancelDelete }) => {
+  const { currentData } = usePostsStore();
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   onDelete(currentData.id);
+  // };
 
   return (
     <>
@@ -19,7 +22,7 @@ const DeleteHero = ({ currentData, onDelete, onCancelDelete }) => {
       <div>
         <form
           className="p-10 bg-text-color flex justify-center items-center flex-col"
-          onSubmit={handleSubmit}
+          onSubmit={handleDelete}
         >
           <p className="text-center font-medium text-base my-5">
             Esta seguro de eliminar el post {currentData.id}?
@@ -27,7 +30,7 @@ const DeleteHero = ({ currentData, onDelete, onCancelDelete }) => {
           <div className="mt-4 flex justify-between items-center w-full">
             <button
               className="btn-cancel"
-              onClick={onCancelDelete}
+              onClick={handleCancelDelete}
               id="cancel"
               type="button"
             >
@@ -47,4 +50,4 @@ const DeleteHero = ({ currentData, onDelete, onCancelDelete }) => {
     </>
   );
 };
-export default DeleteHero;
+export default DeletePost;

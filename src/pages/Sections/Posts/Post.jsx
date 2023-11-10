@@ -6,8 +6,14 @@ import '@/components/lumau-message.js';
 import TextEditor from '@/components/TextEditor/TextEditor';
 import AddPicture from '@/components/AddPicture/AddPicture';
 import { useEffect, useRef, useState } from 'react';
+import { sections } from '@/config/variables';
+import { usePostsStore } from '@/store/posts';
+import { useNotification } from '@/components/Notifications/NotificationProvider';
 
-const Post = ({ onSubmit, action, onCancelDelete, currentData }) => {
+const Post = ({ onCancelDelete }) => {
+  const dispatchNotif = useNotification();
+  const { action, onSubmit, currentData } = usePostsStore();
+
   const [slug, setSlug] = useState(currentData.slug);
   const handleChangeTitle = (e) => {
     const slug = e.target.value
@@ -37,11 +43,37 @@ const Post = ({ onSubmit, action, onCancelDelete, currentData }) => {
     };
   });
 
+  const handleSubmit = async (e) => {
+    try {
+      await onSubmit(e);
+      if (action === 'NEW') {
+        dispatchNotif({
+          type: 'SUCCESS',
+          message: 'Post creado!',
+        });
+      } else {
+        dispatchNotif({
+          type: 'SUCCESS',
+          message: 'Post modificado!',
+        });
+      }
+      const formError = document.getElementById('form-error-posts');
+      formError.setAttribute('errorForm', '');
+    } catch (error) {
+      dispatchNotif({
+        type: 'ERROR',
+        message: 'Error modificando el Post',
+      });
+      const formError = document.getElementById('form-error-posts');
+      formError.setAttribute('errorForm', error);
+    }
+  };
+
   return (
     <form
       id="post-form"
       className="h-full flex flex-col gap-8"
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
       noValidate
     >
       <div>
@@ -100,7 +132,6 @@ const Post = ({ onSubmit, action, onCancelDelete, currentData }) => {
             patternerror="Máximo 255 caracteres"
             value={currentData.excerpt}
             selectOnFocus
-            required
           ></lumau-text-area>
         </div>
 
@@ -116,7 +147,7 @@ const Post = ({ onSubmit, action, onCancelDelete, currentData }) => {
 
         {/* Sections / Order */}
         <div className="flex flex-col sm:flex-row gap-4 w-full justify-center items-start">
-          <div className="w-full flex flex-col sm:w-1/2">
+          <div className="w-full flex flex-col sm:w-1/2 h-[150px]">
             <label
               htmlFor="sections"
               className="text-sm"
@@ -124,21 +155,30 @@ const Post = ({ onSubmit, action, onCancelDelete, currentData }) => {
               Secciones
             </label>
             <select
-              className="p-1 dark:bg-slate-700 bg-slate-100 border border-slate-600 rounded overflow-auto "
+              className="h-full p-1 dark:bg-slate-700 bg-slate-100 border border-slate-600 rounded overflow-auto"
               name="sections"
               id="sections"
               defaultValue={currentData.sections}
               multiple
             >
-              <option value="blog">Blog</option>
+              {sections.map((section) => (
+                <option
+                  key={section.id}
+                  value={section.id}
+                >
+                  {section.value}
+                </option>
+              ))}
+              {/* <option value="blog">Blog</option>
               <option value="home">Home</option>
-              <option value="gallery">Galería</option>
+              <option value="gallery">Galería</option> */}
             </select>
           </div>
 
           <div className="w-full sm:w-1/2">
             <lumau-input
               small
+              type="number"
               id="order"
               label="Orden de aparición"
               name="order"
