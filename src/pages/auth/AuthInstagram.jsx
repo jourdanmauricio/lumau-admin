@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { authInstagram } from '@/services/api/auth.api';
+import { authInsta } from '@/services/api/auth.api';
 import { importInstagram } from '../../services/api/instagrams.api';
 // import { updateUser } from '../../services/api/users.api';
 
@@ -18,7 +18,7 @@ const AuthInstagram = () => {
   // en local POST =>   auth/auth-instagram con code en body,
 
   const changeCodeForToken = async () => {
-    const response = await authInstagram({ code, state });
+    const response = await authInsta({ code, userId: state });
     if (response.data.status === 'success') setAuth(true);
   };
 

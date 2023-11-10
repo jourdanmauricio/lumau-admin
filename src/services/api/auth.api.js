@@ -24,11 +24,8 @@ export const regeneratePage = async (repo) => {
   return response;
 };
 
-export const authInstagram = async (code, state) => {
-  console.log('authInstagram', code, state);
-  const response = await axiosApi.post('/auth/changeAuthInstagram', {
-    code: code,
-    userId: state,
-  });
+export const authInsta = async (data) => {
+  console.log('authInstagram', data);
+  const response = await axiosApi.post('/auth/changeAuthInstagram', data);
   return response;
 };
