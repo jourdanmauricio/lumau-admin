@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { authInstagram } from '@/services/api/instagrams.api';
 import { importInstagram } from '../../services/api/instagrams.api';
-import { updateUser } from '../../services/api/users.api';
+// import { updateUser } from '../../services/api/users.api';
 
 const AuthInstagram = () => {
   const [auth, setAuth] = useState(false);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [devMode, setDevMode] = useState(false);
-  const [newToken, setNewToken] = useState('');
+  // const [devMode, setDevMode] = useState(false);
+  // const [newToken, setNewToken] = useState('');
 
   const code = searchParams.get('code');
   const state = searchParams.get('state');
@@ -24,10 +24,9 @@ const AuthInstagram = () => {
 
   useEffect(() => {
     changeCodeForToken();
-    console.log('import.meta.env.MODE', import.meta.env.MODE);
 
-    if (!import.meta.env.MODE || import.meta.env.MODE === 'development')
-      setDevMode(true);
+    // if (!import.meta.env.MODE || import.meta.env.MODE === 'development')
+    //  setDevMode(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code, state]);
 
@@ -37,17 +36,17 @@ const AuthInstagram = () => {
     navigate('/sections/instagram');
   };
 
-  const handleToken = async () => {
-    console.log('change', newToken);
-    // upd User => {instagramToken:newToken}
+  // const handleToken = async () => {
+  //   console.log('change', newToken);
+  //   // upd User => {instagramToken:newToken}
 
-    try {
-      const user = await updateUser({ id: state, instagramToken: newToken });
-      console.log('Token actualizado', user);
-    } catch (error) {
-      console.log('Error actualizando token', error);
-    }
-  };
+  //   try {
+  //     const user = await updateUser({ id: state, instagramToken: newToken });
+  //     console.log('Token actualizado', user);
+  //   } catch (error) {
+  //     console.log('Error actualizando token', error);
+  //   }
+  // };
 
   return (
     <div>
@@ -57,7 +56,7 @@ const AuthInstagram = () => {
         </span>
       )}
 
-      {devMode && (
+      {/* {devMode && (
         <div className="flex flex-col gap-2 border p-2 rounded mt-4">
           <label htmlFor="token">New Token</label>
           <input
@@ -73,9 +72,10 @@ const AuthInstagram = () => {
             Upd token Development
           </button>
         </div>
-      )}
+      )} */}
 
-      {(auth || devMode) && (
+      {/* {(auth || devMode) && ( */}
+      {auth && (
         <button
           onClick={handleImport}
           className="btn-confirm mt-8"
