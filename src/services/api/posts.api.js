@@ -8,7 +8,7 @@ export const getPosts = async (user) => {
 };
 
 export const importInstagram = async () => {
-  const response = await axiosApi.post('/import-instagram');
+  const response = await axiosApi.post('/posts/import-instagram');
   return response.data;
 };
 
