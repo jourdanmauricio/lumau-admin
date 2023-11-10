@@ -1,21 +1,22 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useMemo, useState } from 'react';
 import { useUserStore } from '@/store/user';
-// import { useNotification } from '@/components/Notifications/NotificationProvider';
+import { useNotification } from '@/components/Notifications/NotificationProvider';
+import { config } from '@/config/config';
 import {
-  // createLesson,
+  deletePost,
+  updatePost,
   getInstagrams,
-  // updateLesson,
 } from '@/services/api/instagrams.api';
-import checkForm from '@/utils/checkForm';
-import { config } from '../../../config/config';
 
 const useInstagram = () => {
   const [instagrams, setInstagrams] = useState([]);
-  // const [currentData, setCurrentData] = useState({});
   const theme = useUserStore((state) => state.theme);
-  // const dispatchNotif = useNotification();
+  const dispatchNotif = useNotification();
   const user = useUserStore((state) => state.user);
+  const [currentRow, setCurrentRow] = useState(null);
+
+  console.log('Instagrams USE', currentRow);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,8 +47,13 @@ const useInstagram = () => {
       ),
     },
     {
-      name: 'Título',
-      selector: (row) => row.title.slice(0, 40),
+      name: 'Descripción',
+      selector: (row) => row.content.slice(0, 40),
+      sortable: true,
+    },
+    {
+      name: 'Show',
+      selector: (row) => (row.sections.includes('instagram') ? 'Si' : 'No'),
       sortable: true,
     },
     {
@@ -81,49 +87,34 @@ const useInstagram = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onSubmit = async (e) => {
-    const { data } = checkForm(e);
-    console.log('DATA', data);
-    if (!data) return;
+  const handleSubmit = async (post, action) => {
+    if (action === 'EDIT') {
+      const updPost = await updatePost(post);
+      const newPosts = instagrams.map((post) =>
+        post.id === updPost.id ? updPost : post
+      );
+      setInstagrams(newPosts);
+      setCurrentRow({});
 
-    // try {
-    //   if (action === 'NEW') {
-    //     const resp = await createLesson(data);
+      dispatchNotif({
+        type: 'SUCCESS',
+        message: 'Publicación modificada!',
+      });
+    }
+    if (action === 'DELETE') {
+      // const resp = await updatePost(obj);
+      console.log('DELETE', post);
+      const { id } = await deletePost(post.id);
+      console.log('delPost', id);
+      const newPosts = instagrams.filter((post) => post.id !== parseInt(id));
+      setInstagrams(newPosts);
+      setCurrentRow({});
 
-    //     setLessons([...lessons, resp]);
-    //     dispatchNotif({
-    //       type: 'SUCCESS',
-    //       message: 'Clase creada!',
-    //     });
-    //   } else {
-    //     data.id = currentData.id;
-    //     const updLesson = await updateLesson(data);
-
-    //     const newLessons = lessons.map((post) =>
-    //       post.id === updLesson.id ? updLesson : post
-    //     );
-    //     setLessons(newLessons);
-
-    //     dispatchNotif({
-    //       type: 'SUCCESS',
-    //       message: 'Clase modificada!',
-    //     });
-    //   }
-    //   setCurrentData({});
-    //   onChangeAction('VIEW');
-    // } catch (error) {
-    //   console.log('error', error);
-    //   let message = `Error ${
-    //     action === 'NEW' ? 'creando' : 'modificando'
-    //   } la clase`;
-    //   if (error.response)
-    //     message = `${error.response.status}: ${error.response.statusText}`;
-
-    //   const formError = document.getElementById('form-error-lessons');
-    //   formError.setAttribute('errorForm', message);
-    // } finally {
-    //   // loading.removeAttribute('loading');
-    // }
+      dispatchNotif({
+        type: 'SUCCESS',
+        message: 'Publicación eliminada!',
+      });
+    }
   };
 
   return {
@@ -131,7 +122,9 @@ const useInstagram = () => {
     INSTAGRAM_COLUMNS,
     theme,
     actionsMenu,
-    onSubmit,
+    handleSubmit,
+    currentRow,
+    setCurrentRow,
   };
 };
 export default useInstagram;

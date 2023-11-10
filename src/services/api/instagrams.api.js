@@ -7,8 +7,8 @@ export const getInstagrams = async (user) => {
   return response.data;
 };
 
-export const importInstagram = async (data) => {
-  const response = await axiosApi.post('/instagrams', data);
+export const importInstagram = async () => {
+  const response = await axiosApi.post('/instagrams');
   return response.data;
 };
 
@@ -22,6 +22,11 @@ export const updatePost = async (post) => {
   const data = Object.assign({}, post);
   const id = data.id;
   delete data.id;
-  const response = await axiosApi.put(`/posts/${id}`, data);
+  const response = await axiosApi.put(`/instagrams/${id}`, data);
+  return response.data;
+};
+
+export const deletePost = async (id) => {
+  const response = await axiosApi.delete(`/instagrams/${id}`);
   return response.data;
 };
