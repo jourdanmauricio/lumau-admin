@@ -12,11 +12,11 @@ export const importInstagram = async () => {
   return response.data;
 };
 
-export const authInstagram = async (data) => {
-  console.log('authInstagram', data);
-  const response = await axiosApi.post('/instagrams/changeAuthInstagram', data);
-  return response;
-};
+// export const authInstagram = async (data) => {
+//   console.log('authInstagram', data);
+//   const response = await axiosApi.post('/instagrams/changeAuthInstagram', data);
+//   return response;
+// };
 
 export const updatePost = async (post) => {
   const data = Object.assign({}, post);
