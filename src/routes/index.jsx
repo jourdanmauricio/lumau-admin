@@ -28,10 +28,6 @@ const ProdLibs = React.lazy(() => import('@/pages/Sections/ProdLibs/ProdLibs'));
 const Slides = React.lazy(() => import('@/pages/Sections/Slides/Slides'));
 const Orders = React.lazy(() => import('@/pages/Sections/Orders/Orders'));
 const AuthInstagram = React.lazy(() => import('@/pages/auth/AuthInstagram'));
-const Instagrams = React.lazy(() =>
-  import('@/pages/Sections/Instagram/Instagrams')
-);
-
 const ConfigSection = React.lazy(() =>
   import('@/pages/ConfigSections/ConfigSection/ConfigSection')
 );
@@ -199,14 +195,6 @@ function AppRoutes() {
                 element={
                   <AuthRoute>
                     <Orders />
-                  </AuthRoute>
-                }
-              />
-              <Route
-                path="instagram"
-                element={
-                  <AuthRoute>
-                    <Instagrams />
                   </AuthRoute>
                 }
               />
