@@ -54,10 +54,8 @@ export const usePostsStore = create((set, get) => ({
     const { posts, onCancelDelete, currentData } = get();
     try {
       const { id } = await deletePost(currentData.id);
-      console.log('id', typeof id, typeof posts);
 
-      const newPosts = posts.filter((post) => post.id !== id);
-      console.log('newPosts', newPosts);
+      const newPosts = posts.filter((post) => post.id !== parseInt(id));
       set({ posts: newPosts, error: null, action: 'VIEW' });
       onCancelDelete();
     } catch (error) {
