@@ -75,14 +75,14 @@ const AuthInstagram = () => {
       )} */}
 
       {/* {(auth || devMode) && ( */}
-      {/* {auth && ( */}
-      <button
-        onClick={handleImport}
-        className="btn-confirm mt-8"
-      >
-        Importar Publicaciones
-      </button>
-      {/* )} */}
+      {auth && (
+        <button
+          onClick={handleImport}
+          className="btn-confirm mt-8"
+        >
+          Importar Publicaciones
+        </button>
+      )}
     </div>
   );
 };
